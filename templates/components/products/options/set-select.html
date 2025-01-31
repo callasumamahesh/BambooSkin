@@ -1,0 +1,34 @@
+<div class="form-field select-data" data-product-attribute="set-select" data-dn="{{display_name}}">
+    <label class="form-label form-label--alternate form-label--inlineSmall" for="attribute_select_{{id}}">
+        {{ this.display_name }}:
+
+<!--        {{> components/common/requireness-msg}}-->
+    </label>
+    <a href="#" class="size-chart-link">Size Guide</a>
+    <select class="form-select form-select--small {{#if display_name '==' 'Amount'}}Amount-field{{/if}}" name="attribute[{{this.id}}]" id="attribute_select_{{id}}" {{#if required}}required{{/if}}>
+        <option value="">{{lang 'products.choose_options'}}</option>
+        {{#each this.values}}
+            <option data-product-attribute-value="{{id}}" value="{{id}}" {{#if selected}}selected data-default{{/if}}>{{label}}</option>
+        {{/each}}
+    </select>
+</div>
+<!--<<<<<<< Updated upstream-->
+<!--&lt;!&ndash;<div class="form-field text-data" data-product-attribute="set-text">&ndash;&gt;-->
+<!--&lt;!&ndash;    <label class="form-label form-label&#45;&#45;alternate form-label&#45;&#45;inlineSmall" for="attribute_text_{{id}}">&ndash;&gt;-->
+<!--&lt;!&ndash;        {{ this.display_name }}:&ndash;&gt;-->
+<!--&lt;!&ndash;    </label>&ndash;&gt;-->
+<!--&lt;!&ndash;    <a href="#" class="size-chart-link">Size Guide</a>&ndash;&gt;-->
+<!--&lt;!&ndash;    <input type="text" class="form-input form-input&#45;&#45;small" name="attribute[{{this.id}}]" id="attribute_text_{{id}}" {{#if required}}required{{/if}} value="$ {{#if this.values}}{{this.values.[0].label}}{{/if}}">&ndash;&gt;-->
+<!--&lt;!&ndash;</div>&ndash;&gt;-->
+<!--=======-->
+<!--<div class="form-field text-data" data-product-attribute="set-text">-->
+<!--    <label class="form-label form-label&#45;&#45;alternate form-label&#45;&#45;inlineSmall" for="attribute_text_{{id}}">-->
+<!--        {{ this.display_name }}:-->
+<!--    </label>-->
+<!--    <a href="#" class="size-chart-link">Size Guide</a>-->
+<!--    <input type="text" class="form-input form-input&#45;&#45;small" name="attribute[{{this.id}}]" id="attribute_text_{{id}}" {{#if required}}required{{/if}} value="$ {{#if this.values}}{{this.values.[0].label}}{{/if}}">-->
+<!--</div>-->
+<!--&gt;>>>>>> Stashed changes-->
+<script>
+
+</script>

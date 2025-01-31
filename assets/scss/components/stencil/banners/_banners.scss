@@ -1,0 +1,60 @@
+// =============================================================================
+// Banners Component
+// =============================================================================
+
+
+// Banners
+// -----------------------------------------------------------------------------
+//
+// Purpose: Control the look and feel of the top and bottom site banners
+//
+// -----------------------------------------------------------------------------
+
+.banners {
+    //background-color: stencilColor("color-primary");
+    //color: stencilColor("color-white");
+    //padding: spacing("half") 0;
+    //text-align: center;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 9;
+    display: flex;
+    align-items: center;
+    height: 40px;
+    background-color: $color-black;
+    color: $color-white;
+    font-size: $fontSize__12;
+    font-family: $font-family-inter;
+    padding-left: 1.5rem;
+    @include breakpoint('medium'){
+        text-align: center;
+    }
+    @include breakpoint("large") {
+        padding: 0 5rem;
+    }
+
+
+    p:last-child {
+        margin-bottom: 0;
+    }
+
+    a {
+        color: color("whites", "bright");
+        text-decoration: none;
+    }
+    svg {
+        margin-right: 1.5rem;
+        @include breakpoint("large") {
+            margin-right: 0;
+        }
+    }
+}
+
+.banner {
+    @include grid-row;
+
+    + .banner {
+        margin-top: spacing("single");
+    }
+}

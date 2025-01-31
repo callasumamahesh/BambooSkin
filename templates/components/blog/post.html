@@ -1,0 +1,270 @@
+
+<article class="blog">
+    {{#if post.show_read_more}}
+        <div class="blog-post-figure ">
+
+            {{#if post.thumbnail}}
+            <script>
+                console.log('url', {{post.title}})
+            </script>
+
+                <figure class="blog-thumbnail">
+                    <a href="{{post.url}}">
+                        {{> components/common/responsive-img
+                            image=post.thumbnail
+                            fallback_size=theme_settings.blog_size
+                            lazyload=theme_settings.lazyload_mode
+                        }}
+                    </a>
+                </figure>
+            {{/if}}
+        </div>
+    {{/if}}
+
+    <div class="blog-post-body {{#if post.show_read_more}} list-page {{else}} detail-page {{/if}}" >
+        <header class="blog-header">
+            <p class="blog_style">STYLE</p>
+            <h{{#if is_blog_post}}1{{else}}2{{/if}} class="blog-title title" data-title='{{post.title}}'>
+                <a href="{{post.url}}">{{post.title}}</a>
+            </h{{#if is_blog_post}}1{{else}}2{{/if}}>
+<!--            <p class="blog-date">{{#if post.author}}{{lang 'blog.posted_by' name=post.author}} on {{/if}}{{post.date_published}}</p>-->
+        </header>
+
+        <div class="blog-post ">
+            {{#if post.body}}
+
+                {{{post.body}}}
+            {{else}}
+
+            <a href="{{url}}">
+                {{{post.summary}}}
+                {{#if post.show_read_more}}
+            </a>
+                    <br>
+            <a class="readMore" href="{{url}}" aria-label="{{post.title}} {{lang 'blog.read_more'}}">{{lang 'blog.read_more'}}</a>
+
+                {{/if}}
+            {{/if}}
+        </div>
+    </div>
+</article>
+<div class="main full">
+
+    {{#each categories}}
+    {{#or (if name '==' 'New Arrivals')}}
+    <div class="category-product-section new-arrivals-slider section-gap" data-prod="{{url}}">
+        <div class="category-products">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Items from the Story</h2>
+                </div>
+                <div class="category-product-list">
+                    <span class="img-loader"></span>
+                    <ul class="productGrid new-cate blogArrival"></ul>
+                </div>
+<!--                <div class="new-arrivals-btn">-->
+<!--                    <a href="" class="style-btn">Shop New Arrivals</a>-->
+<!--                </div>-->
+
+            </div>
+        </div>
+    </div>
+    {{/or}}
+    {{/each}}
+
+    <script>
+        fetch('/graphql', {
+            method: 'POST',
+            credentials: 'same-origin',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer {{ settings.storefront_api.token }}'
+            },
+            body: JSON.stringify({
+                query: `
+            query MyFirstQuery {
+              site {
+                brands(first: 10) {
+                  edges {
+                    node {
+                      name
+                      path
+                      entityId
+                      defaultImage{
+                        url(width: 320)
+                      }
+                    }
+                  }
+                }
+              }
+            }`
+            })
+        })
+
+
+            .then(response => response.json())
+            .then(data => {
+                console.log(data)
+                const brandsContainer = document.getElementById('brands-container');
+                const brands = data.data.site.brands.edges;
+
+
+                brands.forEach(brand => {
+                    // console.log(brand)
+                    const brandName = brand.node.name;
+                    const brandImage = brand.node.defaultImage;
+                    const brandPath = brand.node.path;
+                    let brandImageURL;
+
+                    if (brandImage && brandImage.url) {
+                        brandImageURL = brandImage.url;
+                    } else {
+                        brandImageURL = "/stencil/00000000-0000-0000-0000-000000000001/img/BrandDefault.gif"
+                    }
+                    const brandDiv = document.createElement('div');
+                    brandDiv.classList.add("brand-container")
+                    brandDiv.innerHTML = `
+                <a href="${brandPath}">
+                    <div class="brand-home-page-img">
+                    <img src="${brandImageURL}" />
+                    </div>
+                    <h3 class="card-title">${brandName}</h3>
+                </a>
+        `;
+                    // brandsContainer.parentElement.classList.add('act-loaded')
+                    brandsContainer.appendChild(brandDiv);
+
+
+                });
+                $('#brands-container').slick({
+                    slidesToShow: 5,
+                    slidesToScroll: 1,
+                    infinite: true,
+                    autoplay: true,
+                    autoplaySpeed: 2000,
+                    arrows: false,
+                    responsive: [
+                        {
+                            breakpoint: 768,
+                            settings: {
+                                slidesToShow: 1,
+                                slidesToScroll: 1,
+                                infinite: true,
+                                autoplay: true,
+                                autoplaySpeed: 2000,
+                                centerMode: true,
+                                arrows: false
+                            }
+                        }
+                    ]
+                });
+
+            })
+            .catch(error => console.error(error));
+
+        $('.img-loader').css('display', 'block');
+        $('.act-loaded').find('.img-loader').css('display', 'none');
+
+
+
+
+    </script>
+
+
+</div>
+<div class="relatedBlogs">
+    <p class="relatedPara">Related Stories</p>
+    <div class="MyBlog">
+
+    </div>
+
+</div>
+<script>
+    fetch('/graphql', {
+        method: 'POST',
+        credentials: 'same-origin',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + '{{ settings.storefront_api.token }}'
+        },
+        body: JSON.stringify({
+            query: `
+            query MyQuery {
+                site {
+                    content {
+                        blog {
+                            posts(first: 5) {
+                                edges {
+                                    node {
+                                        name
+                                        htmlBody
+                                        thumbnailImage {
+                                            urlOriginal
+                                        }
+                                        path
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        `
+        })
+    })
+        .then(response => response.json())
+        .then(blogData => {
+            console.log(blogData,"this is blog daata");
+            let mainHeading = document.querySelector('h1.blog-title');
+            let mainTitlte = mainHeading.getAttribute('data-title');
+            const relatedBlogsContainer = document.querySelector('.relatedBlogs > div');
+            blogData.data.site.content.blog.posts.edges.forEach(blogPost => {
+                const blogElement = document.createElement('div');
+                blogElement.setAttribute('data-title', `${blogPost.node.name}`)
+                blogElement.innerHTML = `
+                <img src="${blogPost.node.thumbnailImage.urlOriginal}" >
+                <h3>${blogPost.node.name}</h3>
+                <p>${blogPost.node.htmlBody}</p>
+                <a href="${blogPost.node.path}">Read more</a>
+            `;
+                if(blogElement.getAttribute('data-title') !== mainTitlte){
+                    relatedBlogsContainer.appendChild(blogElement);
+
+                }
+                else{
+                    relatedBlogsContainer.appendChild(blogElement);
+                    $('.MyBlog > div:last-of-type').remove();
+                }
+            });
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    const myElement = document.querySelectorAll('.blog-title.title a');
+
+   const blogSlider = setInterval(function(){
+       if($(window).width() < 700) {
+           if ($('.MyBlog > div').length > 0) {
+               $('.MyBlog').slick({
+                               slidesToShow: 1,
+                               slidesToScroll: 1,
+                               infinite: true,
+                               autoplay: false,
+                               autoplaySpeed: 2000,
+                               centerMode: true,
+                               arrows: false,
+                               mobileFirst: true,
+               });
+               clearInterval(blogSlider);
+           }
+       }
+   }, 200)
+
+    let allLi = document.querySelectorAll('[aria-label="Breadcrumb"] > ol > li  span')
+
+    allLi.forEach((li)=>{
+        if(li.textContent === "News"){
+           li.textContent = "Blog"
+        }
+    })
+</script>

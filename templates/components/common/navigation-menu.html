@@ -1,0 +1,804 @@
+<nav class="navPages">
+<!--    <div class="navPages-quickSearch">-->
+<!--        {{> components/common/quick-search name='nav-menu-quick-search'}}-->
+<!--    </div>-->
+    <ul class="navPages-list{{#if theme_settings.navigation_design '!==' 'simple'}} navPages-list-depth-max{{/if}} menu-items">
+        <li class="navPages-item static-menu mob-item">
+            {{#each categories}}
+            {{#or (if name '==' 'New Arrivals')}}
+        <li class="navPages-item mob-item dynamic-menu">
+            {{#if ../theme_settings.navigation_design '===' 'simple'}}
+            {{> components/common/navigation-list}}
+            {{/if}}
+            {{#if ../theme_settings.navigation_design '===' 'alternate'}}
+            {{> components/common/navigation-list-alternate}}
+            {{/if}}
+        </li>
+        {{/or}}
+        {{/each}}
+<!--            <a class="navPages-action has-subMenu{{#if is_active}} activePage{{/if}}"-->
+<!--               href="{{url}}"-->
+<!--               data-collapsible="navPages-new"-->
+<!--            >-->
+<!--                <span>New Arrivals</span>-->
+<!--                <i class="icon navPages-action-moreIcon" aria-hidden="true">-->
+<!--                    <svg><use href="#icon-chevron-down" /></svg>-->
+<!--                </i>-->
+<!--            </a>-->
+
+<!--            <div class="navPage-subMenu" id="navPages-new" aria-hidden="true" tabindex="-1">-->
+<!--                <ul class="navPage-subMenu-list side-categories">-->
+<!--                    <li class="navPage-subMenu-item bold-heading">-->
+<!--                        <a class="navPage-subMenu-action ak navPages-action{{#if is_active}} activePage{{/if}}"-->
+<!--                           href="/new-arrivals/"-->
+<!--                           aria-label="{{name}}"-->
+<!--                        >-->
+<!--                            Shop All-->
+<!--                        </a>-->
+<!--                    </li>-->
+<!--                    <li class="navPage-subMenu-item bold-heading">-->
+<!--                        <a class="navPage-subMenu-action ak navPages-action{{#if is_active}} activePage{{/if}}"-->
+<!--                           href="{{url}}"-->
+<!--                           aria-label="{{name}}"-->
+<!--                        >-->
+<!--                            Just In-->
+<!--                        </a>-->
+<!--                    </li>-->
+<!--                    <li class="navPage-subMenu-item bold-heading">-->
+<!--                        <a class="navPage-subMenu-action ak navPages-action{{#if is_active}} activePage{{/if}}"-->
+<!--                           href="{{url}}"-->
+<!--                           aria-label="{{name}}"-->
+<!--                        >-->
+<!--                            New Season-->
+<!--                        </a>-->
+<!--                    </li>-->
+<!--                </ul>-->
+<!--                <ul class="navPage-subMenu-list all-stories-container">-->
+<!--                    <li class="navPage-subMenu-item">-->
+<!--                        <p class="navPage-subMenu-action ak navPages-action{{#if is_active}} activePage{{/if}}">-->
+<!--                            Clothing-->
+<!--                        </p>-->
+<!--                    </li>-->
+<!--                    <li class="navPage-subMenu-item">-->
+<!--                        <p class="navPage-subMenu-action ak navPages-action{{#if is_active}} activePage{{/if}}">-->
+<!--                            Accessories-->
+<!--                        </p>-->
+<!--                    </li>-->
+<!--                    <li class="navPage-subMenu-item">-->
+<!--                        <p class="navPage-subMenu-action ak navPages-action{{#if is_active}} activePage{{/if}}">-->
+<!--                            Bags-->
+<!--                        </p>-->
+<!--                    </li>-->
+<!--                    <li class="navPage-subMenu-item">-->
+<!--                        <p class="navPage-subMenu-action ak navPages-action{{#if is_active}} activePage{{/if}}">-->
+<!--                            Shoes-->
+<!--                        </p>-->
+<!--                    </li>-->
+<!--                </ul>-->
+<!--                <div class="navPage-subMenu-list menu-image-container">-->
+<!--                    &lt;!&ndash;                    <div class="menu-image-item">&ndash;&gt;-->
+<!--                    <div class="navPage-subMenu-item">-->
+<!--                        <img src="https://store-rnjw8pihep.mybigcommerce.com/product_images/uploaded_images/menu_images/Frame%2037%20%287%29.png">-->
+<!--                        <p class="navPage-subMenu-action ak navPages-action{{#if is_active}} activePage{{/if}}">-->
+<!--                            New This Week-->
+<!--                        </p>-->
+<!--                    </div>-->
+<!--                    <div class="navPage-subMenu-item">-->
+<!--                        <img src="https://store-rnjw8pihep.mybigcommerce.com/product_images/uploaded_images/menu_images/Frame%2037%20%288%29.png">-->
+<!--                        <p class="navPage-subMenu-action ak navPages-action{{#if is_active}} activePage{{/if}}">-->
+<!--                            New Season-->
+<!--                        </p>-->
+<!--                    </div>-->
+<!--                    &lt;!&ndash;                    </div>&ndash;&gt;-->
+<!--                </div>-->
+<!--            </div>-->
+        </li>
+        {{#each categories}}
+        {{#or (if name '==' 'Shop')}}
+            <li class="navPages-item mob-item dynamic-menu">
+            {{#if ../theme_settings.navigation_design '===' 'simple'}}
+                {{> components/common/navigation-list}}
+            {{/if}}
+            {{#if ../theme_settings.navigation_design '===' 'alternate'}}
+                {{> components/common/navigation-list-alternate}}
+            {{/if}}
+            </li>
+        {{/or}}
+         {{#or (if name '==' 'Sale')}}
+        <li class="navPages-item mob-item dynamic-menu">
+            {{#if ../theme_settings.navigation_design '===' 'simple'}}
+            {{> components/common/navigation-list}}
+            {{/if}}
+            {{#if ../theme_settings.navigation_design '===' 'alternate'}}
+            {{> components/common/navigation-list-alternate}}
+            {{/if}}
+        </li>
+        {{/or}}
+        {{/each}}
+
+        <li class="navPages-item static-menu mob-item">
+            <a href="/brand/">
+            <a class="navPages-action has-subMenu{{#if is_active}} activePage{{/if}}"
+               href="/brands/"
+               data-collapsible="navPages-designer"
+            >
+                <span>Designers</span>
+                <i class="icon navPages-action-moreIcon" aria-hidden="true">
+                    <svg><use href="#icon-chevron-down" /></svg>
+                </i>
+            </a>
+            </a>
+            <div class="navPage-subMenu" id="navPages-designer" aria-hidden="true" tabindex="-1">
+                <ul class="navPage-subMenu-list side-categories">
+                    <li class="navPage-subMenu-item all-stories">
+                        <p class="navPage-subMenu-action ak navPages-action{{#if is_active}} activePage{{/if}}">
+                            <a href="/brands" style="text-decoration: none; font-weight: 600;"> Shop All Designers</a>
+                        </p>
+                    </li>
+                    <li class="navPage-subMenu-item">
+                        <a class="navPage-subMenu-action ak navPages-action{{#if is_active}} activePage{{/if}}"
+                           href="/dea-kudibal/"
+                           aria-label="{{name}}"
+                        >
+                            Dea Kudibal
+                        </a>
+                    </li>
+<!--                    <li class="navPage-subMenu-item">-->
+<!--                        <a class="navPage-subMenu-action ak navPages-action{{#if is_active}} activePage{{/if}}"-->
+<!--                           href="/faber/"-->
+<!--                           aria-label="{{name}}"-->
+<!--                        >-->
+<!--                            Faber-->
+<!--                        </a>-->
+<!--                    </li>-->
+                    <li class="navPage-subMenu-item">
+                        <a class="navPage-subMenu-action ak navPages-action{{#if is_active}} activePage{{/if}}"
+                           href="/ilse-jacobsen/"
+                           aria-label="{{name}}"
+                        >
+                            Ilse Jacobsen
+                        </a>
+                    </li>
+                    <li class="navPage-subMenu-item">
+                        <a class="navPage-subMenu-action ak navPages-action{{#if is_active}} activePage{{/if}}"
+                           href="/marc-cain/"
+                           aria-label="{{name}}"
+                        >
+                            Marc Cain
+                        </a>
+                    </li>
+<!--                    <li class="navPage-subMenu-item">-->
+<!--                        <a class="navPage-subMenu-action ak navPages-action{{#if is_active}} activePage{{/if}}"-->
+<!--                           href="/marc-cain-sports/"-->
+<!--                           aria-label="{{name}}"-->
+<!--                        >-->
+<!--                            Marc Cain Sports-->
+<!--                        </a>-->
+<!--                    </li>-->
+<!--                    <li class="navPage-subMenu-item">-->
+<!--                        <a class="navPage-subMenu-action ak navPages-action{{#if is_active}} activePage{{/if}}"-->
+<!--                           href="/madly-sweetly/"-->
+<!--                           aria-label="{{name}}"-->
+<!--                        >-->
+<!--                            Madly Sweetly-->
+<!--                        </a>-->
+<!--                    </li>-->
+                    <li class="navPage-subMenu-item">
+                        <a class="navPage-subMenu-action ak navPages-action{{#if is_active}} activePage{{/if}}"
+                           href="/monari/"
+                           aria-label="{{name}}"
+                        >
+                            Monari
+                        </a>
+                    </li>
+                    <li class="navPage-subMenu-item">
+                        <a class="navPage-subMenu-action ak navPages-action{{#if is_active}} activePage{{/if}}"
+                           href="/mos-mosh/">
+                            Mos Mosh
+                        </a>
+                    </li>
+                    <li class="navPage-subMenu-item">
+                        <a class="navPage-subMenu-action ak navPages-action{{#if is_active}} activePage{{/if}}" href="/pom/">
+                           POM
+                        </a>
+                    </li>
+                     <li class="navPage-subMenu-item">
+                        <a class="navPage-subMenu-action ak navPages-action{{#if is_active}} activePage{{/if}}" href="/luisa-cerano/">
+                            Luisa Cerano 
+                        </a>
+                    </li>
+                </ul>
+<!--                <ul class="navPage-subMenu-list all-stories-container">-->
+<!--                    <li class="navPage-subMenu-item">-->
+<!--                        <a class="navPage-subMenu-action ak navPages-action{{#if is_active}} activePage{{/if}}"-->
+<!--                            href="/mos-mosh/">-->
+<!--                            Mos Mosh-->
+<!--                        </a>-->
+<!--                    </li>-->
+<!--                    <li class="navPage-subMenu-item">-->
+<!--                        <a class="navPage-subMenu-action ak navPages-action{{#if is_active}} activePage{{/if}}"-->
+<!--                        href="/nydj/">-->
+<!--                            NYDJ-->
+<!--                        </a>-->
+<!--                    </li>-->
+<!--                    <li class="navPage-subMenu-item">-->
+<!--                        <a class="navPage-subMenu-action ak navPages-action{{#if is_active}} activePage{{/if}}" href="/pom/">-->
+<!--                            POM-->
+<!--                        </a>-->
+<!--                    </li>-->
+<!--                    <li class="navPage-subMenu-item">-->
+<!--                        <a class="navPage-subMenu-action ak navPages-action{{#if is_active}} activePage{{/if}}" href="/loobies-story/">-->
+<!--                            Loobie’s Story-->
+<!--                        </a>-->
+<!--                    </li>-->
+<!--                    <li class="navPage-subMenu-item">-->
+<!--                        <a class="navPage-subMenu-action ak navPages-action{{#if is_active}} activePage{{/if}}" href="/riani/">-->
+<!--                            Riani-->
+<!--                        </a>-->
+<!--                    </li>-->
+<!--                </ul>-->
+                <div class="navPage-subMenu-list menu-image-container">
+                    <!--                    <div class="menu-image-item">-->
+                    <div class="navPage-subMenu-item">
+                       <a href="/marc-cain/"> <img src="https://store-vk590aamuz.mybigcommerce.com/product_images/uploaded_images/Marc_Cain.jpg">
+                        <p class="navPage-subMenu-action ak navPages-action{{#if is_active}} activePage{{/if}}">
+                            MArc cain
+                        </p>
+                       </a>
+                    </div>
+                    <div class="navPage-subMenu-item">
+                        <a href="/mos-mosh/">
+                        <img src="https://store-vk590aamuz.mybigcommerce.com/product_images/uploaded_images/Mos_Mosh.jpg">
+                        <p class="navPage-subMenu-action ak navPages-action{{#if is_active}} activePage{{/if}}">
+                            Mos MOSH
+                        </p>
+                        </a>
+                    </div>
+                    <!--                    </div>-->
+                </div>
+            </div>
+        </li>
+
+        <li class="navPages-item static-menu mob-item">
+            <a class="navPages-action has-subMenu{{#if is_active}} activePage{{/if}}"
+               href="/about_us/"
+               data-collapsible="navPages-ourstory"
+            >
+                <span>About Us</span>
+                <i class="icon navPages-action-moreIcon" aria-hidden="true">
+                    <svg><use href="#icon-chevron-down" /></svg>
+                </i>
+            </a>
+
+            <div class="navPage-subMenu" id="navPages-ourstory" aria-hidden="true" tabindex="-1">
+                <ul class="navPage-subMenu-list side-categories rightText" >
+                    <li class="navPage-subMenu-item">
+                        <a class="navPage-subMenu-action ak navPages-action{{#if is_active}} activePage{{/if}}"
+                           href="/about_us/"
+                           aria-label="{{name}}"
+                        >
+                            About us
+                        </a>
+                    </li>
+                    <li class="navPage-subMenu-item">
+                        <a class="navPage-subMenu-action ak navPages-action{{#if is_active}} activePage{{/if}}"
+                           href="/blog/our-story/"
+                           aria-label="{{name}}"
+                        >
+                           Our Story
+                        </a>
+                    </li>
+                    <li class="navPage-subMenu-item">
+                        <a class="navPage-subMenu-action ak navPages-action{{#if is_active}} activePage{{/if}}"
+                           href="/contact-us/"
+                           aria-label="{{name}}"
+                        >
+                            Contact us
+                        </a>
+                    </li>
+                </ul>
+<!--                <ul class="navPage-subMenu-list all-stories-container">-->
+<!--                    <li class="navPage-subMenu-item all-stories">-->
+<!--                        <p class="navPage-subMenu-action ak navPages-action{{#if is_active}} activePage{{/if}}">-->
+<!--                            Read all stories-->
+<!--                        </p>-->
+<!--                    </li>-->
+<!--                    <li class="navPage-subMenu-item">-->
+<!--                        <p class="navPage-subMenu-action ak navPages-action{{#if is_active}} activePage{{/if}}">-->
+<!--                            Fashion Forecast: Style Staples for the Upcoming Season-->
+<!--                        </p>-->
+<!--                    </li>-->
+<!--                    <li class="navPage-subMenu-item">-->
+<!--                        <p class="navPage-subMenu-action ak navPages-action{{#if is_active}} activePage{{/if}}">-->
+<!--                            Bold & Beautiful: Your Guide to Seasonal Style-->
+<!--                        </p>-->
+<!--                    </li>-->
+<!--                    <li class="navPage-subMenu-item">-->
+<!--                        <p class="navPage-subMenu-action ak navPages-action{{#if is_active}} activePage{{/if}}">-->
+<!--                            Fresh Fashion Finesse: New Season, New Look-->
+<!--                        </p>-->
+<!--                    </li>-->
+<!--                    <li class="navPage-subMenu-item">-->
+<!--                        <p class="navPage-subMenu-action ak navPages-action{{#if is_active}} activePage{{/if}}">-->
+<!--                            Style staples making waves this upcoming season-->
+<!--                        </p>-->
+<!--                    </li>-->
+<!--                </ul>-->
+                <div class="navPage-subMenu-list menu-image-container righImages">
+                    <!--                    <div class="menu-image-item">-->
+                    <div class="navPage-subMenu-item">
+                       <a href="/about_us/">
+
+                        <img src="https://store-vk590aamuz.mybigcommerce.com/product_images/uploaded_images/1New.png">
+                        <p class="navPage-subMenu-action ak navPages-action{{#if is_active}} activePage{{/if}}">
+                            ABOUT US
+                        </p>
+                       </a>
+                    </div>
+                    <div class="navPage-subMenu-item">
+                        <a href="/blog/our-story/"> <img src="https://store-vk590aamuz.mybigcommerce.com/product_images/uploaded_images/2New.png">
+                        <p class="navPage-subMenu-action ak navPages-action{{#if is_active}} activePage{{/if}}">
+                            OUR STORY
+                        </p>
+                        </a>
+                    </div>
+                    <!--                    </div>-->
+                </div>
+            </div>
+        </li>
+
+<!--        <li class="navPages-item static-menu mob-item">-->
+<!--            <a class="navPages-action has-subMenu{{#if is_active}} activePage{{/if}}"-->
+<!--               href="{{url}}"-->
+<!--               data-collapsible="navPages-news"-->
+<!--            >-->
+<!--                <span>Blogs</span>-->
+<!--                <i class="icon navPages-action-moreIcon" aria-hidden="true">-->
+<!--                    <svg><use href="#icon-chevron-down" /></svg>-->
+<!--                </i>-->
+<!--            </a>-->
+
+<!--            <div class="navPage-subMenu" id="navPages-news" aria-hidden="true" tabindex="-1">-->
+<!--                <ul class="navPage-subMenu-list side-categories">-->
+<!--                    <li class="navPage-subMenu-item">-->
+<!--                        <a class="navPage-subMenu-action ak navPages-action{{#if is_active}} activePage{{/if}}"-->
+<!--                           href="{{url}}"-->
+<!--                           aria-label="{{name}}"-->
+<!--                        >-->
+<!--                            Fashion-->
+<!--                        </a>-->
+<!--                    </li>-->
+<!--                    <li class="navPage-subMenu-item">-->
+<!--                        <a class="navPage-subMenu-action ak navPages-action{{#if is_active}} activePage{{/if}}"-->
+<!--                           href="{{url}}"-->
+<!--                           aria-label="{{name}}"-->
+<!--                        >-->
+<!--                            Beauty-->
+<!--                        </a>-->
+<!--                    </li>-->
+<!--                    <li class="navPage-subMenu-item">-->
+<!--                        <a class="navPage-subMenu-action ak navPages-action{{#if is_active}} activePage{{/if}}"-->
+<!--                           href="{{url}}"-->
+<!--                           aria-label="{{name}}"-->
+<!--                        >-->
+<!--                            Style Guides-->
+<!--                        </a>-->
+<!--                    </li>-->
+<!--                    <li class="navPage-subMenu-item">-->
+<!--                        <a class="navPage-subMenu-action ak navPages-action{{#if is_active}} activePage{{/if}}"-->
+<!--                           href="{{url}}"-->
+<!--                           aria-label="{{name}}"-->
+<!--                        >-->
+<!--                            About the brand NYDJ-->
+<!--                        </a>-->
+<!--                    </li>-->
+<!--                    <li class="navPage-subMenu-item">-->
+<!--                        <a class="navPage-subMenu-action ak navPages-action{{#if is_active}} activePage{{/if}}"-->
+<!--                           href="{{url}}"-->
+<!--                           aria-label="{{name}}"-->
+<!--                        >-->
+<!--                            About the brand POM-->
+<!--                        </a>-->
+<!--                    </li>-->
+<!--                    <li class="navPage-subMenu-item">-->
+<!--                        <a class="navPage-subMenu-action ak navPages-action{{#if is_active}} activePage{{/if}}"-->
+<!--                           href="{{url}}"-->
+<!--                           aria-label="{{name}}"-->
+<!--                        >-->
+<!--                            About Loobie’s Story-->
+<!--                        </a>-->
+<!--                    </li>-->
+<!--                </ul>-->
+<!--                <ul class="navPage-subMenu-list all-stories-container">-->
+<!--                    <li class="navPage-subMenu-item all-stories">-->
+<!--                        <p class="navPage-subMenu-action ak navPages-action{{#if is_active}} activePage{{/if}}">-->
+<!--                        Read all stories-->
+<!--                        </p>-->
+<!--                    </li>-->
+<!--                    <li class="navPage-subMenu-item">-->
+<!--                        <p class="navPage-subMenu-action ak navPages-action{{#if is_active}} activePage{{/if}}">-->
+<!--                        Fashion Forecast: Style Staples for the Upcoming Season-->
+<!--                        </p>-->
+<!--                    </li>-->
+<!--                    <li class="navPage-subMenu-item">-->
+<!--                        <p class="navPage-subMenu-action ak navPages-action{{#if is_active}} activePage{{/if}}">-->
+<!--                        Bold & Beautiful: Your Guide to Seasonal Style-->
+<!--                        </p>-->
+<!--                    </li>-->
+<!--                    <li class="navPage-subMenu-item">-->
+<!--                        <p class="navPage-subMenu-action ak navPages-action{{#if is_active}} activePage{{/if}}">-->
+<!--                        Fresh Fashion Finesse: New Season, New Look-->
+<!--                        </p>-->
+<!--                    </li>-->
+<!--                    <li class="navPage-subMenu-item">-->
+<!--                        <p class="navPage-subMenu-action ak navPages-action{{#if is_active}} activePage{{/if}}">-->
+<!--                            Style staples making waves this upcoming season-->
+<!--                        </p>-->
+<!--                    </li>-->
+<!--                </ul>-->
+<!--                <div class="navPage-subMenu-list menu-image-container">-->
+<!--                    <div class="navPage-subMenu-item">-->
+<!--            <img src="https://store-rnjw8pihep.mybigcommerce.com/product_images/uploaded_images/menu_images/Frame%2037%20%283%29.png">-->
+<!--            <p class="navPage-subMenu-action ak navPages-action{{#if is_active}} activePage{{/if}}">-->
+<!--                Bold & Beautiful-->
+<!--            </p>-->
+<!--        </div>-->
+<!--                    <div class="navPage-subMenu-item">-->
+<!--                            <img src="https://store-rnjw8pihep.mybigcommerce.com/product_images/uploaded_images/menu_images/Frame%2037%20%284%29.png">-->
+<!--                            <p class="navPage-subMenu-action ak navPages-action{{#if is_active}} activePage{{/if}}">-->
+<!--                                About Loobie’s Story-->
+<!--                            </p>-->
+<!--                        </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </li>-->
+        {{#unless theme_settings.hide_content_navigation}}
+            {{#each pages}}
+<!--                 <li class="navPages-item navPages-item-page">-->
+<!--                     <a class="navPages-action{{#if name '==' ../page.title}} activePage{{/if}}"-->
+<!--                        href="{{url}}"-->
+<!--                        aria-label="{{name}}"-->
+<!--                     >-->
+<!--                         {{name}}-->
+<!--                     </a>-->
+<!--                 </li>-->
+             {{/each}}
+        {{/unless}}
+        <li class="blogNav navPages-item static-menu mob-item">
+            <a class="navPages-action has-subMenu{{#if is_active}} activePage{{/if}}" href="/blog/"><span class="navB">Blogs</span></a>
+        </li>
+    </ul>
+    <ul class="navPages-list navPages-list--user mobile-nav-list a">
+        {{#if currency_selector.currencies.length '>' 1}}
+            <li class="navPages-item">
+                <a class="navPages-action has-subMenu"
+                   href="#"
+                   data-collapsible="navPages-currency"
+                   aria-controls="navPages-currency"
+                   aria-expanded="false"
+                   aria-label="{{lang 'common.currency' code=currency_selector.active_currency_code}}"
+                >
+                    {{lang 'common.currency' code=currency_selector.active_currency_code}}
+                    <i class="icon navPages-action-moreIcon" aria-hidden="true">
+                        <svg>
+                            <use href="#icon-chevron-down"></use>
+                        </svg>
+                    </i>
+                </a>
+                <div class="navPage-subMenu" id="navPages-currency" aria-hidden="true" tabindex="-1">
+                    <ul class="navPage-subMenu-list">
+                        {{#each currency_selector.currencies}}
+                        <li class="navPage-subMenu-item">
+                            <a class="navPage-subMenu-action navPages-action"
+                               href="{{{switch_url}}}"
+                               aria-label="{{name}}"
+                               data-currency-code="{{{code}}}"
+                               {{#if cart_currency_switch_url.length '>' 0 }}
+                               data-cart-currency-switch-url="{{{cart_currency_switch_url}}}"
+                               {{/if}}
+                               data-warning="{{lang 'common.currency_switch_promotion'}}"
+                            >
+                                {{#if is_active}}
+                                    <strong>{{name}}</strong>
+                                {{else}}
+                                    {{name}}
+                                {{/if}}
+                            </a>
+                        </li>
+                        {{/each}}
+                    </ul>
+                </div>
+            </li>
+        {{/if}}
+        {{#if settings.gift_certificates_enabled}}
+            <li class="navPages-item">
+                <a class="navPages-action"
+                   href="{{urls.gift_certificate.purchase}}"
+                   aria-label="{{lang 'common.gift_cert'}}"
+                >
+                    {{lang 'common.gift_cert'}}
+                </a>
+            </li>
+        {{/if}}
+        {{#if customer.store_credit.value '>' 0}}
+            <li class="navPages-item">
+                <a class="navPages-action navPages-action--storeCredit">
+                    {{lang 'common.store_credit_overview' credit=customer.store_credit.formatted}}
+                </a>
+            </li>
+        {{/if}}
+        {{#if theme_settings.product_list_display_mode '==' 'list'}}
+            <li class="navPages-item">
+                <a class="navPages-action navPages-action--compare"
+                   href="{{urls.compare}}"
+                   data-compare-nav
+                   aria-label="{{lang 'common.compare'}}"
+                >
+                    {{lang 'common.compare'}}
+                    <span class="countPill countPill--positive countPill--alt"></span>
+                </a>
+            </li>
+        {{/if}}
+        {{#if customer}}
+            <li class="navPages-item">
+                <a class="navPages-action has-subMenu"
+                   href="{{urls.account.index}}"
+                   data-collapsible="navPages-account"
+                   aria-label="{{lang 'common.account'}}"
+                >
+                    <svg class="mobNavProFile" xmlns="http://www.w3.org/2000/svg" width="12" height="16" viewBox="0 0 12 16" fill="none">
+                        <path d="M5.99633 7.26883C5.92302 7.26177 5.83504 7.26177 5.7544 7.26883C4.91291 7.24129 4.11557 6.89912 3.53125 6.31477C2.94693 5.73043 2.62151 4.9498 2.6239 4.1382C2.6239 2.40682 4.07551 1.00051 5.87903 1.00051C6.30602 0.993086 6.73035 1.0668 7.12778 1.21745C7.52521 1.3681 7.88797 1.59272 8.19534 1.87851C8.50272 2.16429 8.74868 2.50563 8.9192 2.88305C9.08972 3.26046 9.18145 3.66655 9.18915 4.07814C9.19685 4.48972 9.12038 4.89874 8.96409 5.28183C8.80781 5.66493 8.57477 6.0146 8.27829 6.31088C7.98181 6.60716 7.62769 6.84426 7.23615 7.00862C6.84461 7.17299 6.42332 7.26141 5.99633 7.26883ZM2.33065 9.87651C0.556452 11.0213 0.556452 12.887 2.33065 14.0248C4.34677 15.3251 7.65323 15.3251 9.66935 14.0248C11.4435 12.8799 11.4435 11.0143 9.66935 9.87651C7.66056 8.58327 4.35411 8.58327 2.33065 9.87651Z" stroke="#212121" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    {{#if customer}}
+                    <p class="mobNavName">Hi, {{customer.name}}</p>
+                    {{/if}}
+                    <i class="icon navPages-action-moreIcon" aria-hidden="true">
+                        <svg><use href="#icon-chevron-down" /></svg>
+                    </i>
+                </a>
+                <div class="navPage-subMenu" id="navPages-account" aria-hidden="true" tabindex="-1">
+                    <ul class="navPage-subMenu-list">
+                        <li class="navPage-subMenu-item">
+                            <a class="navPage-subMenu-action navPages-action"
+                               href="{{urls.account.orders.all}}"
+                               aria-label="{{lang 'account.nav.orders'}}"
+                            >
+                                {{lang 'account.nav.orders'}}
+                            </a>
+                        </li>
+                        {{#if settings.returns_enabled}}
+                            <li class="navPage-subMenu-item">
+                                <a class="navPage-subMenu-action navPages-action"
+                                   href="{{urls.account.returns}}"
+                                   aria-label="{{lang 'account.nav.returns'}}"
+                                >
+                                    {{lang 'account.nav.returns'}}
+                                </a>
+                            </li>
+                        {{/if}}
+                        <li class="navPage-subMenu-item">
+                            <a class="navPage-subMenu-action navPages-action"
+                               href="{{urls.account.inbox}}"
+                               aria-label="{{lang 'account.mobile_nav.messages'}}"
+                            >
+                                {{lang 'account.mobile_nav.messages'}}
+                            </a>
+                        </li>
+                        <li class="navPage-subMenu-item">
+                            <a class="navPage-subMenu-action navPages-action"
+                               href="{{urls.account.addresses}}"
+                               aria-label="{{lang 'account.nav.addresses'}}"
+                            >
+                                {{lang 'account.nav.addresses'}}
+                            </a>
+                        </li>
+                        {{#if settings.show_payment_methods}}
+                            <li class="navPage-subMenu-item">
+                                <a class="navPage-subMenu-action navPages-action"
+                                   href="{{urls.account.payment_methods.all}}"
+                                   aria-label="{{lang 'account.nav.payment_methods'}}"
+                                >
+                                    {{lang 'account.nav.payment_methods'}}
+                                </a>
+                            </li>
+                        {{/if}}
+                        <li class="navPage-subMenu-item">
+                            <a class="navPage-subMenu-action navPages-action"
+                               href="{{urls.account.wishlists.all}}"
+                               aria-label="{{lang 'account.mobile_nav.wishlists'}}"
+                            >
+                                {{lang 'account.mobile_nav.wishlists'}}
+                            </a>
+                        </li>
+                        <li class="navPage-subMenu-item">
+                            <a class="navPage-subMenu-action navPages-action"
+                               href="{{urls.account.recent_items}}"
+                               aria-label="{{lang 'account.nav.recently_viewed'}}"
+                            >
+                                {{lang 'account.nav.recently_viewed'}}
+                            </a>
+                        </li>
+                        <li class="navPage-subMenu-item">
+                            <a class="navPage-subMenu-action navPages-action"
+                               href="{{urls.account.details}}"
+                               aria-label="{{lang 'account.nav.settings'}}"
+                            >
+                                {{lang 'account.nav.settings'}}
+                            </a>
+                        </li>
+                        <li class="navPage-subMenu-item">
+                            <a class="navPage-subMenu-action navPages-action"
+                               href="{{urls.auth.logout}}"
+                               aria-label="{{lang 'account.nav.settings'}}"
+                            >
+                                Logout
+                            </a>
+
+                        </li>
+                    </ul>
+                </div>
+            </li>
+        <li class="navPages-item">
+            <a class="navPages-action mobileWish"
+               href="/wishlist.php?action=add&product_id={{id}}">
+                <svg width="16" height="16px" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fill="#000000">
+                    <path d="M14.88 4.78a3.489 3.489 0 0 0-.37-.9 3.24 3.24 0 0 0-.6-.79 3.78 3.78 0 0 0-1.21-.81 3.74 3.74 0 0 0-2.84 0 4 4 0 0 0-1.16.75l-.05.06-.65.65-.65-.65-.05-.06a4 4 0 0 0-1.16-.75 3.74 3.74 0 0 0-2.84 0 3.78 3.78 0 0 0-1.21.81 3.55 3.55 0 0 0-.97 1.69 3.75 3.75 0 0 0-.12 1c0 .317.04.633.12.94a4 4 0 0 0 .36.89 3.8 3.8 0 0 0 .61.79L8 14.31l5.91-5.91c.237-.233.44-.5.6-.79A3.578 3.578 0 0 0 15 5.78a3.747 3.747 0 0 0-.12-1zm-1 1.63a2.69 2.69 0 0 1-.69 1.21l-5.21 5.2-5.21-5.2a2.9 2.9 0 0 1-.44-.57 3 3 0 0 1-.27-.65 3.25 3.25 0 0 1-.08-.69A3.36 3.36 0 0 1 2.06 5a2.8 2.8 0 0 1 .27-.65c.12-.21.268-.4.44-.57a2.91 2.91 0 0 1 .89-.6 2.8 2.8 0 0 1 2.08 0c.33.137.628.338.88.59l1.36 1.37 1.36-1.37a2.72 2.72 0 0 1 .88-.59 2.8 2.8 0 0 1 2.08 0c.331.143.633.347.89.6.174.165.32.357.43.57a2.69 2.69 0 0 1 .35 1.34 2.6 2.6 0 0 1-.06.72h-.03z"/></svg>
+                <p class="mobNavName navWishList">WISHLIST</p>
+            </a>
+        </li>
+        {{else}}
+            <li class="navPages-item mobile-account">
+                <a class="navPages-action"
+                   href="{{urls.auth.login}}"
+                   aria-label="{{lang 'common.login'}}"
+                >
+
+                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="16" viewBox="0 0 12 16" fill="none">
+                            <path d="M5.99633 7.26883C5.92302 7.26177 5.83504 7.26177 5.7544 7.26883C4.91291 7.24129 4.11557 6.89912 3.53125 6.31477C2.94693 5.73043 2.62151 4.9498 2.6239 4.1382C2.6239 2.40682 4.07551 1.00051 5.87903 1.00051C6.30602 0.993086 6.73035 1.0668 7.12778 1.21745C7.52521 1.3681 7.88797 1.59272 8.19534 1.87851C8.50272 2.16429 8.74868 2.50563 8.9192 2.88305C9.08972 3.26046 9.18145 3.66655 9.18915 4.07814C9.19685 4.48972 9.12038 4.89874 8.96409 5.28183C8.80781 5.66493 8.57477 6.0146 8.27829 6.31088C7.98181 6.60716 7.62769 6.84426 7.23615 7.00862C6.84461 7.17299 6.42332 7.26141 5.99633 7.26883ZM2.33065 9.87651C0.556452 11.0213 0.556452 12.887 2.33065 14.0248C4.34677 15.3251 7.65323 15.3251 9.66935 14.0248C11.4435 12.8799 11.4435 11.0143 9.66935 9.87651C7.66056 8.58327 4.35411 8.58327 2.33065 9.87651Z" stroke="#212121" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span>SIGN IN / CREATE ACCOUNT</span>
+
+                </a>
+
+                {{#if settings.account_creation_enabled}}
+<!--                    {{lang 'common.or'}}-->
+<!--                    <a class="navPages-action"-->
+<!--                       href="{{urls.auth.create_account}}"-->
+<!--                       aria-label="{{lang 'common.sign_up'}}"-->
+<!--                    >-->
+<!--                        {{lang 'common.sign_up'}}-->
+<!--                    </a>-->
+                {{/if}}
+            </li>
+            <li class="navPages-item mobile-wishlist">
+                <a class="navPages-action"
+               href="/wishlist.php?action=add&product_id={{id}}">
+                <svg class="wishSvg" width="16" height="16px" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fill="#000000">
+                    <path d="M14.88 4.78a3.489 3.489 0 0 0-.37-.9 3.24 3.24 0 0 0-.6-.79 3.78 3.78 0 0 0-1.21-.81 3.74 3.74 0 0 0-2.84 0 4 4 0 0 0-1.16.75l-.05.06-.65.65-.65-.65-.05-.06a4 4 0 0 0-1.16-.75 3.74 3.74 0 0 0-2.84 0 3.78 3.78 0 0 0-1.21.81 3.55 3.55 0 0 0-.97 1.69 3.75 3.75 0 0 0-.12 1c0 .317.04.633.12.94a4 4 0 0 0 .36.89 3.8 3.8 0 0 0 .61.79L8 14.31l5.91-5.91c.237-.233.44-.5.6-.79A3.578 3.578 0 0 0 15 5.78a3.747 3.747 0 0 0-.12-1zm-1 1.63a2.69 2.69 0 0 1-.69 1.21l-5.21 5.2-5.21-5.2a2.9 2.9 0 0 1-.44-.57 3 3 0 0 1-.27-.65 3.25 3.25 0 0 1-.08-.69A3.36 3.36 0 0 1 2.06 5a2.8 2.8 0 0 1 .27-.65c.12-.21.268-.4.44-.57a2.91 2.91 0 0 1 .89-.6 2.8 2.8 0 0 1 2.08 0c.33.137.628.338.88.59l1.36 1.37 1.36-1.37a2.72 2.72 0 0 1 .88-.59 2.8 2.8 0 0 1 2.08 0c.331.143.633.347.89.6.174.165.32.357.43.57a2.69 2.69 0 0 1 .35 1.34 2.6 2.6 0 0 1-.06.72h-.03z"/></svg>
+                <span>WISHLIST</span>
+            </a>
+            </li>
+        {{/if}}
+        {{#if theme_settings.social_icon_placement_top}}
+            <li class="navPages-item">
+                {{> components/common/social-links}}
+            </li>
+        {{/if}}
+    </ul>
+</nav>
+<style>
+    .righImages{
+        margin-right: 0 !important;
+    }
+    #navPages-ourstory{
+        margin-right: 0 !important;
+    }
+    .rightText{
+        align-items: end;
+        /*margin-left: 15vh !important;*/
+    }
+    @media screen and (min-width: 300px) and (max-width: 800px){
+        .rightText{
+            margin-left: 0 !important;
+        }
+    }
+
+</style>
+<script>
+    let nav1 =document.querySelector('.navPages-list >:nth-child(1)')
+    let nav2 =document.querySelector('.navPages-list >:nth-child(2)')
+    let nav3 =document.querySelector('.navPages-list >:nth-child(3)')
+    let nav4 =document.querySelector('.navPages-list >:nth-child(4)')
+    let nav5 =document.querySelector('.navPages-list >:nth-child(5)')
+    let navMobList = document.querySelector('.mobile-nav-list >:nth-child(1)')
+   navMobList.addEventListener('click',()=>{
+       console.log('clicked')
+       nav1.style.display="block"
+       nav2.style.display="block"
+       nav3.style.display="block"
+       nav4.style.display="block"
+       nav5.style.display="block"
+    })
+
+
+    var navItem = document.querySelector('.navPages-list > :nth-child(2).dynamic-menu > a ')
+        navItem.innerHTML = '<span class="navB">' + navItem.innerHTML + '</span>';
+
+    let navAll = document.querySelectorAll('.navPages-list > li > a')
+    navAll.forEach((a)=>{
+        let navPath = a.getAttribute('href')
+        if(window.location.pathname === navPath){
+            //a.querySelector('span').style.borderBottom = "1px solid #000000";
+        }
+    })
+    if ($(window).width() > 800) {
+        $('.navPages-item').hover(function () {
+            var collapsibleId = $(this).find('.navPages-action').data('collapsible');
+            $('#' + collapsibleId).addClass('is-open');
+        }, function () {
+            // Remove the is-open class when the mouse leaves
+            var collapsibleId = $(this).find('.navPages-action').data('collapsible');
+            $('#' + collapsibleId).removeClass('is-open');
+        });
+
+        $('.navPages-list.menu-items > li').each(function(){
+            $(this).find('> a').click(function(){
+                window.location.href = $(this).attr('href');
+            })
+        })
+
+    }
+    if ($(window).width() < 800) {
+        $('.navPages-list.menu-items > li').each(function () {
+            $(this).find('> a > span').click(function (e) {
+                console.log('this1', $(this));
+                // $(this).find("> span").click(function (e) {
+                    e.stopPropagation();
+                    console.log('this2', $(this));
+                    if($(this).parent().attr('href')){
+                        window.location.href = $(this).parent().attr('href');
+                    }
+
+                // })
+                if(e.target.tagName === ''){
+                   return;
+                }
+            });
+        });
+
+
+    }
+
+
+</script>
+<style>
+    .navPages-list > :nth-child(2) .navB{
+        padding-bottom: 2px;
+    }
+    .navB:hover{
+        border-bottom: 1px solid #000000;
+    }
+    .navPages-action.activePage{
+        .navB{
+            /*border-bottom: 1px solid #000000;*/
+        }
+    }
+    .dynamic-menu .navPage-subMenu.is-open .navPage-subMenu-list .navPage-subMenu-item > ul li a{
+        font-weight:  400 !important;
+
+    }
+
+    @media screen and (max-width: 768px){
+        .navPages-list.menu-items > li > a{
+            padding:0;
+        }
+        .navPages-list.menu-items > li > a > span{
+            margin: 0.78571rem 0;
+            display:inline-block;
+        }
+        .navPages-list.menu-items > li > a > span.navB{
+            margin-bottom:0.78571rem;
+        }
+    }
+
+</style>

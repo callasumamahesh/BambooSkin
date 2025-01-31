@@ -1,0 +1,33 @@
+{{inject 'passwordRequirements' settings.password_requirements}}
+{{#partial "page"}}
+<div class="account account-edit account--fixed">
+    {{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}
+    {{#if customer}}
+    <h1 class="customerName edit_name">Hello, {{customer.name}}!</h1>
+    {{/if}}
+
+    {{> components/account/navigation account_page='settings'}}
+    <h2 class="page-heading new_head edit-head">{{lang 'account.settings.heading' }}</h2>
+    {{#if forms.edit_account.error}}
+    {{> components/common/alert/alert-error forms.edit_account.error}}
+    {{/if}}
+    {{#if forms.edit_account.success}}
+    {{> components/common/alert/alert-success forms.edit_account.success}}
+    {{/if}}
+    {{> components/account/edit-account}}
+</div>
+{{/partial}}
+{{> layout/base}}
+<script>
+    let account = document.querySelector('.account-edit')
+    let accName = document.querySelector('.edit_name')
+    if(account){
+        accName.style.top="9%"
+    }
+    let parentElement = document.querySelector('.account-edit form > fieldset');
+    let accAlert = document.querySelector('.account-edit .alertBox');
+    let firstChild = parentElement.firstChild;
+    parentElement.insertBefore(accAlert, firstChild);
+
+</script>
+

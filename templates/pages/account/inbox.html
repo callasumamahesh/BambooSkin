@@ -1,0 +1,32 @@
+{{#partial "page"}}
+<p class="inbox_bread"></p>
+{{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}
+{{#if customer}}
+<h1 class="customerName inboxName">Hello, {{customer.name}}!</h1>
+{{/if}}
+{{> components/account/navigation account_page='messages'}}
+<h1 class="page-heading new_head">{{lang 'account.messages.heading' }}</h1>
+<div class="account aaa account-inbox account--fixed">
+    <div class="account-body">
+        <section class="account-content">
+            {{#if forms.inbox.error}}
+                {{> components/common/alert/alert-error forms.inbox.error}}
+            {{/if}}
+            {{#if forms.inbox.success}}
+                {{> components/common/alert/alert-success forms.inbox.success}}
+            {{/if}}
+            {{> components/account/messages-list messages=customer.inbox.messages}}
+            {{> components/account/messages-form}}
+        </section>
+    </div>
+</div>
+
+
+{{/partial}}
+{{> layout/base}}
+<script>
+    let listD = document.querySelector('.account-inbox .account-content .account-listItem')
+    if(listD){
+        document.querySelector('.inboxName').style.top= '8.5%'
+    }
+</script>

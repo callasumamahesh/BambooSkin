@@ -1,0 +1,202 @@
+---
+product_results:
+    limit: {{theme_settings.searchpage_products_per_page}}
+---
+{{inject 'categoryTree' forms.search.category_options}}
+{{inject 'searchProductsPerPage' theme_settings.searchpage_products_per_page}}
+{{inject 'searchResultsCount' (lang 'search.results.count' count=result_count search_query=(sanitize forms.search.query))}}
+{{#partial "head"}}
+    {{#if pagination.product_results.previous}}
+        <link rel="prev" href="{{pagination.product_results.previous}}">
+    {{/if}}
+    {{#if pagination.product_results.next}}
+        <link rel="next" href="{{pagination.product_results.next}}">
+    {{/if}}
+{{/partial}}
+
+{{#partial "page"}}
+{{{ stylesheet '/assets/scss/vendor/jstree/style.css' }}}
+{{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}
+<section class="nav">
+    {{#if forms.search.query}}
+        <div id="search-results-heading emptyData" >
+            {{>components/search/heading}}
+        </div>
+    {{/if}}
+
+
+<!--    <nav class="navBar navBar&#45;&#45;sub search-nav">-->
+<!--        <span id="search-tabs-widget-description" class="aria-description&#45;&#45;hidden">-->
+<!--            {{lang 'search.tabs_accesibility_hint'}}-->
+<!--        </span>-->
+<!--        <ul role="tablist" class="navBar-section account-navigation" data-search-page-tabs>-->
+<!--            <li role="presentation" class="navBar-item">-->
+<!--                <a aria-describedby="search-tabs-widget-description" role="tab" aria-controls="product-listing-container" id="search-results-product-count" class="navBar-action" href="{{forms.search.product_url}}" data-product-results-toggle>-->
+<!--                    {{>components/search/product-count}}-->
+<!--                </a>-->
+<!--            </li>-->
+<!--            <li role="presentation" class="navBar-item">-->
+<!--                <a aria-describedby="search-tabs-widget-description" role="tab" aria-controls="search-results-content" id="search-results-content-count" class="navBar-action" href="{{forms.search.content_url}}" data-content-results-toggle>-->
+<!--                    {{>components/search/content-count}}-->
+<!--                </a>-->
+<!--            </li>-->
+<!--            {{#unless product_results.faceted_search_enabled}}-->
+<!--                <li class="navBar-item navBar-item&#45;&#45;separate">-->
+<!--                    <a class="navBar-action toggleLink" data-collapsible="advanced-search-content" href="#" aria-controls="advanced-search-content" aria-expanded="false">-->
+<!--                        <span class="toggleLink-text toggleLink-text&#45;&#45;on">-->
+<!--                            {{lang 'forms.search.hide'}}-->
+<!--                        </span>-->
+<!--                        <span class="toggleLink-text toggleLink-text&#45;&#45;off">-->
+<!--                            {{lang 'forms.search.show'}}-->
+<!--                        </span>-->
+<!--                    </a>-->
+<!--                </li>-->
+<!--            {{/unless}}-->
+<!--        </ul>-->
+<!--    </nav>-->
+    {{#unless product_results.faceted_search_enabled}}
+        {{>components/search/advanced-search}}
+    {{/unless}}
+</section>
+
+<section class="page category-page search-page">
+    {{#if product_results.faceted_search_enabled}}
+        <aside class="page-sidebar{{#if forms.search.section '!=' 'product'}} u-hiddenVisually{{/if}}" id="faceted-search-container ff">
+            {{> components/faceted-search/index product_results}}
+        </aside>
+    {{/if}}
+
+    <div class="page-content">
+<!--        {{#if forms.search.has_suggestions}}-->
+<!--            <div class="panel panel&#45;&#45;large">-->
+<!--                <div class="panel-body">-->
+<!--                    {{#if forms.search.suggested_query}}-->
+<!--                        <div class="search-suggestion">-->
+<!--                            {{lang 'forms.search.did_you_mean'}} <strong>{{forms.search.suggested_query.query}}</strong>-->
+<!--                            <a href="{{forms.search.suggested_query.url}}" class="search-refine">{{lang 'forms.search.refine'}}</a>-->
+<!--                        </div>-->
+
+<!--                        {{#if result_count '===' 0}}-->
+<!--                            <div class="search-suggestion">-->
+<!--                                <p>-->
+<!--                                    {{lang 'forms.search.your_search_for'}}-->
+<!--                                    "<strong>{{{sanitize forms.search.query}}}</strong>"-->
+<!--                                    {{lang 'forms.search.no_match'}}-->
+<!--                                </p>-->
+<!--                            </div>-->
+<!--                        {{/if}}-->
+<!--                    {{/if}}-->
+
+<!--                    {{#if category_results.length}}-->
+<!--                        <div class="search-suggestion">-->
+<!--                            <h5 class="suggestion-title">{{lang 'forms.search.categories'}}</h5>-->
+<!--                            <ul class="category-suggestion-list">-->
+
+<!--                                {{#each category_results}}-->
+<!--                                <li class="category-suggestion">-->
+
+<!--                                    {{#each this}}-->
+<!--                                        <a href="{{url}}">{{name}}</a>-->
+<!--                                        {{#unless @last}} > {{/unless}}-->
+<!--                                    {{/each}}-->
+
+<!--                                </li>-->
+<!--                                {{/each}}-->
+<!--                            </ul>-->
+<!--                        </div>-->
+<!--                    {{/if}}-->
+
+<!--                    {{#if brand_results.length}}-->
+<!--                        <div class="search-suggestion">-->
+<!--                            <h5 class="suggestion-title">{{lang 'forms.search.brand'}}</h5>-->
+<!--                            {{#each brand_results}}-->
+<!--                                <a href="{{url}}">{{name}}</a>-->
+<!--                                {{#unless @last}}, {{/unless}}-->
+<!--                            {{/each}}-->
+<!--                        </div>-->
+<!--                    {{/if}}-->
+
+<!--                    {{#if result_count '===' 0}}-->
+<!--                        <div class="search-suggestion">-->
+<!--                            <h5 class="suggestion-title">{{lang 'forms.search.suggestions.title'}}</h5>-->
+<!--                            <ul>-->
+<!--                                <li>{{lang 'forms.search.suggestions.line1'}}</li>-->
+<!--                                <li>{{lang 'forms.search.suggestions.line2'}}</li>-->
+<!--                                <li>{{lang 'forms.search.suggestions.line3'}}</li>-->
+<!--                            </ul>-->
+<!--                        </div>-->
+<!--                    {{/if}}-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        {{/if}}-->
+
+<!--        <div role="tabpanel" id="search-results-content" aria-labelledby="search-results-content-count" {{#if forms.search.section '!=' 'content'}}class="u-hidden"{{/if}}>-->
+<!--            {{> components/search/content-listing}}-->
+<!--        </div>-->
+
+
+        <div role="tabpanel" id="product-listing-container" aria-labelledby="search-results-product-count" {{#if forms.search.section '!=' 'product'}}class="u-hidden"{{/if}}>
+            {{> components/search/product-listing}}
+        </div>
+
+        {{{region name="search_below_content"}}}
+    </div>
+</section>
+
+{{/partial}}
+{{> layout/base}}
+<style>
+    #faceted-search-container .navList > li{
+        display: block !important;
+    }
+
+        .search-page {
+            .u-hidden {
+                display: block !important;
+            }
+        }
+    @media screen and (min-width: 300px) and (max-width: 800px){
+        #product-listing-container>p{
+            height: 0 !important;
+        }
+    }
+
+</style>
+<script>
+    let searchResult = document.querySelector('.modifyData');
+    if (searchResult) {
+        let textContent = searchResult.innerText;
+        let newTextContent = textContent.replace(/\d+/g, '');
+        searchResult.innerText = newTextContent;
+        let bread = document.querySelector('.breadcrumb.is-active span')
+        bread.innerText = newTextContent;
+
+
+    }
+    // document.addEventListener('DOMContentLoaded', function() {
+    //     let emptyPage = document.querySelector('.search-page .productGrid > li');
+    //     if (!emptyPage) {
+    //         if(window.innerWidth > 800){
+    //         document.querySelector('.modifyData').style.height = '25.3rem';
+    //         }
+    //     }
+    // });
+    // let allNav = document.querySelectorAll('#facetedSearch #facetedSearch-navList  .accordion-block .navList-item')
+    // allNav.forEach((nav)=>{
+    //     nav.addEventListener('click',()=>{
+    //         setTimeout(()=>{
+    //             window.location.reload();
+    //         },2000)
+    //     })
+    //
+    // })
+
+
+
+
+</script>
+<style>
+    #product-listing-container .form-fieldset.actionBar-section{
+        display: none;
+    }
+</style>

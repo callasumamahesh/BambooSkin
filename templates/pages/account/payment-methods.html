@@ -1,0 +1,30 @@
+{{#partial "page"}}
+    {{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}
+{{#if customer}}
+<h1 class="customerName ">Hello, {{customer.name}}!</h1>
+{{/if}}
+{{> components/account/navigation account_page='payment_methods'}}
+    <h2 class="page-heading new_head paymentHead" >{{lang 'account.payment_methods.heading' }}</h2>
+    <div class="account aaa account-inbox account--fixed">
+        <div class="account-body" id="payment">
+            {{> components/account/payment-methods-list }}
+        </div>
+    </div>
+{{/partial}}
+{{> layout/base}}
+<style>
+    .paymentHead+.account p{
+        padding-left: 0.75rem;
+    }
+    @media screen and (min-width: 300px) and (max-width: 850px) {
+        #payment {
+            width: 100%;
+            padding: 0 3%;
+            span {
+
+                width: 100%;
+
+            }
+        }
+    }
+</style>

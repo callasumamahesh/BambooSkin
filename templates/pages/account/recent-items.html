@@ -1,0 +1,70 @@
+{{#partial "page"}}
+<div class="account">
+    <p class="inbox_bread">
+    {{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}
+    {{#if customer}}
+    <h1 class="customerName recentName">Hello, {{customer.name}}!</h1>
+    {{/if}}
+    {{> components/account/navigation account_page='recent_items'}}
+    <h2 class="page-heading new_head">{{lang 'account.recent_items.heading' }}</h2>
+    {{#unless customer.recently_viewed_products.items}}
+
+        {{> components/common/alert/alert-info (lang 'account.recent_items.no_items')}}
+    {{/unless}}
+    {{#if customer.recently_viewed_products.items}}
+    <div class="recently-viewed">
+        {{> components/products/grid products=customer.recently_viewed_products.items show_compare=customer.recently_viewed_products.show_compare}}
+    </div>
+    {{/if}}
+</div>
+{{/partial}}
+{{> layout/base}}
+<script>
+    let recent = document.querySelector('.recentName+nav+script+h2+.alertBox')
+    if(recent){
+        let positionData = document.querySelector('.recentName')
+        positionData.style.top = '12%';
+    }
+    // $(document).ready(function(){
+    //     $('.recently-viewed .productGrid  li').each(function(){
+    //         let prodID = $(this).data('id');
+    //
+    //         fetch('/graphql', {
+    //             method: 'POST',
+    //             credentials: 'same-origin',
+    //             headers: {
+    //                 'Content-Type': 'application/json',
+    //                 'Authorization': 'Bearer ' + '{{ settings.storefront_api.token }}'
+    //             },
+    //             body: JSON.stringify({
+    //                 query: `
+    //                    query MyQuery {
+    //                   site {
+    //                     product(entityId: ${prodID}) {
+    //                       brand {
+    //                         name
+    //                       }
+    //                     }
+    //                   }
+    //                 }
+    //      `
+    //             })
+    //         })
+    //             .then(response => response.json())
+    //             .then(rd => {
+    //                 const brandTitles = rd.data.site.product.brand.name;
+    //                 let createBrandHtml = '';
+    //                 createBrandHtml += `<span class="wl-brand">${brandTitles}</span><br>`
+    //                 $(this).find('.card-title a').prepend(createBrandHtml);
+    //             })
+    //             .catch(error => {
+    //                 console.error("Error fetching data:", error);
+    //             });
+    //     })
+    // })
+    let pData = document.querySelectorAll('.recently-viewed .productGrid li')
+    if(pData.length===3){
+        let recent = document.querySelector('.recentName')
+        recent.style.top="11%"
+    }
+</script>

@@ -1,0 +1,40 @@
+<div class="facetedSearch-refineFilters sidebarBlock {{#if remove_all_url}} clear-all-filter {{/if}}">
+<!--    <h2 class="sidebarBlock-heading hide">-->
+<!--        {{lang 'search.faceted.selected.title'}}-->
+<!--    </h2>-->
+
+    {{#if items}}
+    <ul class="inlineList inlineList--labels hide">
+        {{#each items}}
+        <li>
+            <a href="{{url}}"
+               class="facetLabel"
+               rel="nofollow"
+               data-faceted-search-facet
+            >
+                {{#if facet '===' 'rating'}}
+                {{lang 'search.faceted.selected.rating-label' rating=title}}
+                {{else}}
+                {{{sanitize title}}}
+                {{/if}}
+
+                <svg class="icon">
+                    <use xlink:href="#icon-close" />
+                </svg>
+            </a>
+        </li>
+        {{/each}}
+    </ul>
+    {{else}}
+<!--    <p class="hide">{{lang 'search.faceted.selected.no-filters'}}</p>-->
+    {{/if}}
+
+    {{#if remove_all_url}}
+    <a href="{{remove_all_url}}" data-faceted-search-facet class="cal">
+       <span> Clear All Filters</span>
+<!--        <svg xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 16 16" fill="none">-->
+<!--            <path d="M1.33398 14.6693L14.6673 1.33594M14.6673 14.6693L1.33398 1.33594" stroke="#212121" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>-->
+<!--        </svg>-->
+    </a>
+    {{/if}}
+</div>

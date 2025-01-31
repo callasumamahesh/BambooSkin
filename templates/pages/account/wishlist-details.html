@@ -1,0 +1,66 @@
+{{#partial "page"}}
+<div class="account wishlistpage" data-pagination-wishlist>
+
+    {{#if wishlist.is_editable}}
+    <p class="inbox_bread">
+        {{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}
+    </p>
+    {{/if}}
+    {{#if customer}}
+    <h1 class="customerName wishlistName">Hello, {{customer.name}}!</h1>
+    {{/if}}
+
+    {{#if wishlist.is_editable}}
+
+        {{> components/account/navigation account_page='wishlists'}}
+    {{/if}}
+
+    {{#if wishlist.is_editable}}
+        {{#if wishlist.is_public '>' 0}}
+            <div class="panel share-wishlist">
+                <div class="panel-body share-panel">
+                    <p class="share-title">Share wishlist</p>
+                    <div class="icons-panel">
+                        <a>
+                            <img src="https://store-rnjw8pihep.mybigcommerce.com/product_images/logo-black%201%20%281%29.png">
+                            <img src="https://store-rnjw8pihep.mybigcommerce.com/product_images/Vector%20%282%29.png">
+                            <img src="https://store-rnjw8pihep.mybigcommerce.com/product_images/Vector%20%283%29.png">
+                            <img src="https://store-rnjw8pihep.mybigcommerce.com/product_images/Group%20%281%29.png">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        {{/if}}
+    {{/if}}
+
+    {{#if wishlist.items}}
+        {{> components/account/wishlist-item-list show_remove=wishlist.is_editable}}
+    {{else}}
+    <h1 class="page-heading new_head ">My Wishlist</h1>
+    <div class="account--fixed wishlistAccount">
+        {{> components/common/alert/alert-info (lang 'account.wishlists.empty_wishlist')}}
+    </div>
+    {{/if}}
+
+</div>
+{{/partial}}
+{{> layout/base}}
+<script>
+    let panelShareWishlist = document.querySelector('.panel.share-wishlist');
+    let pannelbody = document.querySelector('.panel-body.share-panel')
+    let wishListText = document.querySelector('.wishlistAccount span')
+
+    if ($(window).width() < 800) {
+        if(wishListText){
+            panelShareWishlist.style.display="none"
+        }
+        document.querySelector('.share_wishlist_div').appendChild(panelShareWishlist);
+        pannelbody.style.marginTop='1.5rem';
+        console.log('hello')
+        $('.wishlistpage').slick('unslick');
+    }
+    if($(window).width()>800){
+        panelShareWishlist.style.display="none"
+    }
+
+</script>

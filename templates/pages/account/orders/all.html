@@ -1,0 +1,45 @@
+---
+customer:
+    orders:
+        limit: 10
+---
+
+{{#partial "page"}}
+<p class="inbox_bread"></p>
+{{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}
+
+{{#if customer}}
+<h1 class="customerName">Hello, {{customer.name}}!</h1>
+{{/if}}
+{{> components/account/navigation account_page='orders'}}
+<h1 class="page-heading new_head orderHead">{{lang 'account.orders.heading' }}</h1>
+
+
+<div class="account account-alert account--fixed">
+    <div class="account-head">
+        {{#if customer.store_credit.value '>' 0}}
+            <div class="alertBox alertBox--storeCredit">
+                {{{lang 'common.store_credit' store_credit=customer.store_credit.formatted}}}
+            </div>
+        {{/if}}
+    </div>
+    <div class="account-body">
+        <section class="account-content">
+            {{#if customer.orders.length}}
+                {{> components/account/orders-list orders=customer.orders}}
+                {{> components/common/small-paginator pagination.orders}}
+            {{else}}
+                {{> components/common/alert/alert-info (lang 'account.orders.none')}}
+            {{/if}}
+        </section>
+    </div>
+</div>
+
+{{/partial}}
+{{> layout/base}}
+<script>
+    let alertD = document.querySelector('.account-content > .alertBox')
+    if(alertD){
+       document.querySelector('.account-content').style.height="auto"
+    }
+</script>

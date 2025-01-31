@@ -1,0 +1,317 @@
+---
+categories:
+    description: true
+---
+
+{{#partial "page"}}
+
+
+
+    <main class="page static-page">
+        {{#unless theme_settings.hide_page_heading }}
+        {{/unless}}
+        {{#if page.sub_pages}}
+
+
+        <nav class="navBar navBar--sub">
+            <ul class="navBar-section account-navigation">
+                {{#each page.sub_pages}}
+                <li class="navBar-item"><a class="navBar-action" href="{{url}}">{{title}}</a></li>
+                {{/each}}
+            </ul>
+        </nav>
+        {{/if}}
+        <div class="mob_bar">
+            <a href="#" type="button" class="dropdown-toggle">
+                <span class='listname'>SELECT CATEGORY</span>
+                </a>
+            <ul class="static-sidebar-mob" >
+                <div class="mob_side_list">
+                    <li><h1>CUSTOMER SERVICE</h1></li>
+                    <li><a href="/faq/">FAQ</a></li>
+                    <li><a href="/delivery-and-shipping/">Delivery & Shipping</a></li>
+                    <li><a href="/returns-and-exchanges/">Returns & Exchanges</a></li>
+                    <li><a href="/privacy-policy/">Privacy Policy</a></li>
+                    <li><a href="/terms-and-conditions/">Terms &#38 conditions</a></li>
+                </div>
+                <div class="mob_side_list">
+                <li><h1>ABOUT</h1></li>
+                <li><a href="/about_us/">About Us</a></li>
+                <li><a href="/store-location/">Store Location</a></li>
+                <li><a href="/brands/">Designers</a></li>
+                <li><a href="/contact-us/">Contact Us</a></li>
+                </div>
+                <div class="mob_side_list">
+                <li><h1>MORE</h1></li>
+
+                <li><a href="/sizeGuide/">Size Guide</a></li>
+                <li><a href="/cutomer_promise/">Customer Promise</a></li>
+                    </div>
+            </ul>
+        </div>
+        <div class="page-main-content">
+
+            <aside class="static-sidebar">
+                <div class="MainSide">
+                    <div class="sideBar">
+                        <h1>CUSTOMER SERVICE</h1>
+                        <ul class="static-sidebar-list">
+                            <li><a href="/faq/">FAQ</a></li>
+                            <li><a href="/delivery-and-shipping/">Delivery & Shipping</a></li>
+                            <li><a href="/returns-and-exchanges/">Returns & Exchanges</a></li>
+                            <li><a href="/privacy-policy/">Privacy Policy</a></li>
+                            <li><a href="/terms-and-conditions/">Terms &#38 conditions</a></li>
+                        </ul>
+                    </div>
+                    <div class="sideBar">
+                        <h1>ABOUT</h1>
+                        <ul class="static-sidebar-list">
+                            <li><a href="/about_us/">About Us</a></li>
+                            <li><a href="/store-location/">Store Location</a></li>
+                            <li><a href="/brands/">Designers</a></li>
+                            <li><a href="/contact-us/">Contact Us</a></li>
+                        </ul>
+                    </div>
+                    <div class="sideBar">
+                        <h1>MORE</h1>
+                        <ul class="static-sidebar-list">
+                            <li><a href="/sizeGuide/">Size Guide</a></li>
+                            <li><a href="/cutomer_promise/">Customer Promise</a></li>
+
+                        </ul>
+                    </div>
+                </div>
+            </aside>
+
+
+
+    <div class="page-content page-content--centered">
+        {{#replace '%%Syndicate%%' page.content}}
+            {{> components/page/rss_feed}}
+        {{else}}
+            <p>{{{page.content}}}</p>
+
+        <div class="category-img-container shopNow">
+            <h2>Shop now</h2>
+            <div class="category-container">
+                {{#each categories}}
+                {{#or (if name '==' 'Shop')}}
+                {{#each children}}
+                {{#or (if name '==' 'Accessories')}}
+                <div class="category-name-img">
+                    <img src='{{getImage image "thumbnail"}}' alt="{{name}}">
+                    <h4>{{name}}</h4>
+                    <p>{{{truncate description 70}}}</p>
+                    <a href="https://style-hq-store-1.mybigcommerce.com/shop/accessories/" class="goto-category" ><p  style="margin: 0">EXPLORE ALL</p></a>
+                    <a href="https://style-hq-store-1.mybigcommerce.com/shop/accessories/" class="full-link"></a>
+                </div>
+                {{/or}}
+                {{#or (if name '==' 'Footwear')}}
+                <div class="category-name-img">
+                    <img src='{{getImage image "thumbnail"}}' alt="{{name}}">
+                    <h4>{{name}}</h4>
+                    <p>{{{truncate description 70}}}</p>
+                    <a href="https://style-hq-store-1.mybigcommerce.com/shop/footwear/" class="goto-category" ><p  style="margin: 0">DISCOVER ALL</p></a>
+                    <a href="https://style-hq-store-1.mybigcommerce.com/shop/footwear/" class="full-link"></a>
+                </div>
+                {{/or}}
+                {{#or (if name '==' 'Jeans & Pants')}}
+                {{#each children}}
+                {{#or (if name '==' 'Pants')}}
+                <div class="category-name-img">
+                    <img src='{{getImage image "thumbnail"}}' alt="{{name}}">
+                    <h4>{{name}}</h4>
+                    <p>{{{truncate description 70}}}</p>
+                    <a href="https://style-hq-store-1.mybigcommerce.com/shop/bottomwear/pants/" class="goto-category" ><p  style="margin: 0">SHOP NOW</p></a>
+                    <a href="https://style-hq-store-1.mybigcommerce.com/shop/bottomwear/pants/" class="full-link"></a>
+                </div>
+                {{/or}}
+                {{/each}}
+                {{/or}}
+                {{/each}}
+                {{/or}}
+                {{/each}}
+
+            </div>
+        </div>
+        {{/replace}}
+    </div>
+
+        </div>
+        <div class="brands-main-container aboutUsbrands">
+            <div class="brand-content">
+                <h2>Discover the Designers</h2>
+                <p>New arrivals are now dropping five days a week! Explore the latest launches available on our site 24/7</p>
+            </div>
+            <div class="home-rendering-brand">
+                <div id="brands-container"></div>
+
+            </div>
+            <div class="brand-btn">
+                <a href="/brands/" class="style-btn">SHOP ALL DESIGNERS</a>
+            </div>
+
+        </div>
+
+    {{#if page.feed}}
+        <ul>
+            {{#each page.feed}}
+                <li>
+                    <h6><a href="{{url}}" target="_blank">{{title}}</a></h6>
+                    <p>{{content}}</p>
+                </li>
+            {{/each}}
+        </ul>
+    {{/if}}
+
+
+
+    </main>
+
+{{/partial}}
+
+{{> layout/base}}
+<script>
+    if(window.location.pathname==="/about_us/"){
+        document.querySelector('.aboutUsbrands').style.display="block";
+    }
+    ///FOR LEFT NAV ITEMS WHEN PATH NAME MATCHES HREF THEN CLASS ACTIVE WILL BE ADDED
+    document.addEventListener('DOMContentLoaded', function () {
+        const currentPath = window.location.pathname;
+        const anchorTa = document.querySelectorAll('.static-sidebar-list li a');
+        console.log(currentPath)
+
+        anchorTa.forEach(anchor => {
+            const href = anchor.getAttribute('href');
+            if (href === currentPath) {
+                anchor.classList.add('active');
+            }
+        });
+    });
+
+    var coll = document.getElementsByClassName("dropdown-toggle");
+
+    var i;
+
+    for (i = 0; i < coll.length; i++) {
+        coll[i].addEventListener("click", function() {
+            var collapsibleContent = document.getElementsByClassName("static-sidebar-mob");
+            this.classList.toggle("active");
+
+        });
+    }
+    document.addEventListener('DOMContentLoaded', function () {
+        let currentPath = window.location.pathname;
+        let anchorTa = document.querySelectorAll('.static-sidebar-list li a');
+        let anchorSidemob = document.querySelectorAll('.static-sidebar-mob a')
+        console.log(currentPath)
+
+        anchorTa.forEach(anchor => {
+            const href = anchor.getAttribute('href');
+            if (href === currentPath) {
+                anchor.classList.add('active');
+            }
+        });
+        anchorSidemob.forEach(e =>{
+            const href = e.getAttribute('href')
+            console.log(href,"href tag");
+            if(href === currentPath){
+               e.style.color="#757575";
+            }
+        })
+
+    });
+
+    fetch('/graphql', {
+        method: 'POST',
+        credentials: 'same-origin',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer {{ settings.storefront_api.token }}'
+        },
+        body: JSON.stringify({
+            query: `
+            query MyFirstQuery {
+              site {
+                brands(first: 10) {
+                  edges {
+                    node {
+                      name
+                      path
+                      entityId
+                      defaultImage{
+                        url(width: 320)
+                      }
+                    }
+                  }
+                }
+              }
+            }`
+        })
+    })
+
+
+        .then(response => response.json())
+        .then(data => {
+            console.log("bhavanesh")
+            const brandsContainer = document.getElementById('brands-container');
+            const brands = data.data.site.brands.edges;
+
+
+            brands.forEach(brand => {
+                // console.log(brand)
+                const brandName = brand.node.name;
+                const brandImage = brand.node.defaultImage;
+                const brandPath = brand.node.path;
+                let brandImageURL;
+
+                if (brandImage && brandImage.url) {
+                    brandImageURL = brandImage.url;
+                } else {
+                    brandImageURL = "/stencil/00000000-0000-0000-0000-000000000001/img/BrandDefault.gif"
+                }
+                const brandDiv = document.createElement('div');
+                brandDiv.classList.add("brand-container")
+                brandDiv.innerHTML = `
+                <a href="${brandPath}">
+                    <img src="${brandImageURL}" />
+                    <h3 class="card-title">${brandName}</h3>
+                </a>
+        `;
+
+                // brandsContainer.parentElement.classList.add('act-loaded')
+                brandsContainer.appendChild(brandDiv);
+
+
+            });
+
+            $('#brands-container').slick({
+                slidesToShow: 5,
+                slidesToScroll: 1,
+                infinite: true,
+                autoplay: true,
+                autoplaySpeed: 2000,
+                arrows: false,
+                responsive: [
+                    {
+                        breakpoint: 768,
+                        settings: {
+                            slidesToShow: 1,
+                            slidesToScroll: 1,
+                            infinite: true,
+                            autoplay: true,
+                            autoplaySpeed: 2000,
+                            centerMode: true,
+                            arrows: false
+                        }
+                    }
+                ]
+            });
+
+        })
+        .catch(error => console.error(error));
+
+    $('.img-loader').css('display', 'block');
+    $('.act-loaded').find('.img-loader').css('display', 'none');
+    console.log(window.location.name)
+</script>

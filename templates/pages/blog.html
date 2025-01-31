@@ -1,0 +1,131 @@
+---
+blog:
+    posts:
+        limit: {{theme_settings.blogs_per_page}}
+        summary: 200
+---
+
+{{#partial "head"}}
+    {{#if pagination.blog.previous}}
+        <link rel="prev" href="{{pagination.blog.previous}}">
+    {{/if}}
+    {{#if pagination.blog.next}}
+        <link rel="next" href="{{pagination.blog.next}}">
+    {{/if}}
+{{/partial}}
+
+{{#partial "page"}}
+
+<section class="page">
+    {{#unless theme_settings.hide_blog_page_heading }}
+    <a class="blogTitleLine" href="/blog/">
+        <h1 class="page-heading blogHead">Blogs</h1>
+    </a>
+    {{/unless}}
+    <div class="blog-page-menu">
+        <ul class="blog-page-list">
+            <a href="/blog/tag/storie"><li>Stories</li></a>
+            <a href="/blog/tag/FashionIcons"><li>Fashion Icons</li></a>
+            <a href="/blog/tag/styleinspo"><li>Style Inspo</li></a>
+            <a href="/blog/tag/fashionForward"><li>Fashion Forward</li></a>
+        </ul>
+    </div>
+    <p class="popUp_blogs">No blogs available in this blog section</p>
+    <div class="blogs aa">
+
+    {{#each blog.posts}}
+        {{> components/blog/post post=this allPosts=blog.posts theme_settings=../theme_settings totalPosts=../blog.posts.length}}
+    {{/each}}
+
+
+        </div>
+    <div class="paginationBlog">
+        <div class="centerArrow"><img src="https://store-rnjw8pihep.mybigcommerce.com/product_images/Chevron%20Up%201.png"></div>
+    {{> components/common/blog-paginator pagination.blog props=(ceil (divide category.total_products theme_settings.blogs_per_page)) test=category.name }}
+    </div>
+</section>
+<style>
+    @media (min-width: 900px) {
+        .popUp_blogs{
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            display: none;
+        }
+    }
+    .popUp_blogs{
+        text-align: center;
+        margin-bottom: 0;
+        margin-top: 36px;
+        display: none;
+        font-size: 16px;
+        font-family: Inter;
+        color: #212121;
+        font-weight: 400;
+    }
+</style>
+<script>
+    let curentPath = window.location.pathname
+    let blogNav = document.querySelectorAll('.blog-page-list > a')
+    blogNav.forEach((a)=>{
+      if(curentPath == a.getAttribute("href")){
+          a.style.border = "1px solid black"
+      }
+    })
+
+        $('.blog-page-list').slick({
+            slidesToShow: 4,
+            arrows: false,
+            responsive: [
+                {
+                    breakpoint: 768,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 1,
+                        infinite: true,
+                        autoplay: false,
+                        autoplaySpeed: 2000,
+                        centerMode: true,
+                        arrows: false,
+                        mobileFirst: true,
+                    }
+                }
+            ]
+        });
+
+    // const myElement = document.querySelectorAll('.blog-title.title a');
+    // console.log(myElement.textContent)
+
+    const centerArrow = document.querySelector('.centerArrow');
+    centerArrow.addEventListener('click',()=>{
+        window.scrollTo({top: 0, behavior: 'smooth'});
+
+    })
+    const blogs = document.querySelectorAll('article.blog')
+    let lengthBlog = blogs.length;
+    let pagination = document.querySelector('.paginationBlog')
+    if(lengthBlog === 12 || lengthBlog < 12){
+        pagination.style.display = "none"
+    }else{
+        pagination.style.display = "block"
+    }
+
+    let blogD = document.querySelector('.blogs.aa article')
+    if(!blogD){
+       if(window.innerWidth > 800){
+           document.querySelector('.blogs.aa').style.height="40vh";
+        }
+    }
+
+    let blogP = document.querySelector('.popUp_blogs')
+    let bloga = document.querySelector('.blogs.aa .blog')
+    if(!bloga){
+        blogP.style.display="block"
+    }
+
+
+</script>
+
+{{/partial}}
+{{> layout/base}}

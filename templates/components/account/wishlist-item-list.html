@@ -1,0 +1,71 @@
+<h2 class="page-heading new_head wishlistHead">My Wishlist</h2>
+<div class="share_wishlist_div">
+    <a class="back_t" href="/wishlist.php">
+        <img class="left-icon" src="https://store-rnjw8pihep.mybigcommerce.com/product_images/Component%2014%20%281%29.png">
+        Back</a>
+</div>
+
+<ul class="productGrid recently-viewed wishlistContent">
+    {{#each wishlist.items}}
+
+    <li class="product" data-id="{{product_id}}">
+
+        {{> components/products/card  id=product_id theme_settings=../theme_settings }}
+
+
+        {{#if ../show_remove}}
+            <form action="{{remove_url}}" class="form" method="post">
+<!--                <img class="cross-icon" src="https://store-rnjw8pihep.mybigcommerce.com/product_images/Cross.png">-->
+                <input type="image" class="button button--primary button--small wCross" src="https://store-rnjw8pihep.mybigcommerce.com/product_images/Cross.png" />
+                <input type="submit" class="button button--primary button--small" value="{{lang 'account.wishlists.remove_item'}}" />
+
+            </form>
+        {{/if}}
+    </li>
+    {{/each}}
+</ul>
+<!--{{> components/common/paginator wishlist.pagination}}-->
+
+<script>
+
+    $(document).ready(function(){
+        $('ul.wishlistContent li').each(function(){
+            let prodID = $(this).data('id');
+            console.log('id', prodID)
+            fetch('/graphql', {
+                method: 'POST',
+                credentials: 'same-origin',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + '{{ settings.storefront_api.token }}'
+                },
+                body: JSON.stringify({
+                    query: `
+                       query MyQuery {
+                      site {
+                        product(entityId: ${prodID}) {
+                          brand {
+                            name
+                          }
+                        }
+                      }
+                    }
+        `
+                })
+            })
+                .then(response => response.json())
+                .then(wd => {
+                    const brandTitles = wd.data.site.product.brand.name;
+                    console.log('this inside', $(this))
+                    let createBrandHtml = '';
+                    createBrandHtml += `<span class="wl-brand">${brandTitles}</span><br>`
+                    $(this).find('.card-title a').prepend(createBrandHtml);
+                })
+                .catch(error => {
+                    console.error("Error fetching data:", error);
+                });
+        })
+    })
+
+
+</script>

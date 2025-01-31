@@ -1,0 +1,62 @@
+{{inject 'passwordRequirements' settings.password_requirements}}
+{{inject 'recaptchaTitle' (lang 'create_account.recaptcha_title')}}
+{{#partial "page"}}
+
+    <div class="accont_head">
+        <h1>Create an Account</h1>
+        <p>Register now to access faster checkout, save your order
+            history and manage your Wishlist.</p>
+    </div>
+
+    <div class="account account--fixed accountCreate">
+        <div class="account-body">
+            {{#if forms.create_account.error}}
+                {{> components/common/alert/alert-error forms.create_account.error}}
+            {{/if}}
+            {{#if settings.account_creation_enabled}}
+                <form action="{{urls.auth.save_new_account}}" data-create-account-form method="post" class="form">
+                    <div class="form-row form-row--half">
+                        {{#each forms.create_account.account_fields }}
+                            {{{dynamicComponent 'components/common/forms'}}}
+                        {{/each}}
+                        {{#each forms.create_account.address_fields }}
+                            {{{dynamicComponent 'components/common/forms'}}}
+                        {{/each}}
+                        <div class="form-field recaptcha">
+                            {{{ forms.create_account.recaptcha.markup}}}
+                        </div>
+                        {{inject 'required' (lang 'common.required')}}
+                        {{inject 'state_error' (lang 'errors.state_error')}}
+                    </div>
+
+                    <div class="form-actions">
+                        <input type="submit" class="button button--primary colorBorder" value="{{lang 'forms.create_account.submit_value' }}" />
+                    </div>
+                </form>
+            {{/if}}
+        </div>
+    </div>
+{{/partial}}
+{{> layout/base}}
+<script>
+let accInput = document.querySelectorAll('.accountCreate .form-field input ')
+accInput.forEach(inputValue=>{
+    let placeHolderData = inputValue.getAttribute('placeholder')
+    let modified = placeHolderData.replace('*','')
+    inputValue.setAttribute('placeholder',modified)
+})
+setTimeout(function () {
+    var selectElement = document.getElementById("FormField_12_input");
+    var newOption = document.createElement("option");
+    newOption.value = "";
+    newOption.text = "State / Province";
+    selectElement.options.add(newOption, 0);
+    selectElement.selectedIndex = 0;
+    selectElement.remove(1);
+},1000)
+
+let mobNum = document.querySelector('#FormField_7_input')
+let mobAttr = mobNum.getAttribute('placeholder')
+let modNum = mobAttr.replace('Phone Number','Mobile Number')
+mobNum.setAttribute('placeholder',modNum)
+</script>

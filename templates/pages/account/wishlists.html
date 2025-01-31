@@ -1,0 +1,35 @@
+{{#partial "page"}}
+{{#if settings.show_wishlist}}
+<p class="inbox_bread">
+{{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}
+</p>
+{{#if customer}}
+<h1 class="customerName wishlist-name">Hello, {{customer.name}}!</h1>
+{{/if}}
+
+{{> components/account/navigation account_page='wishlists'}}
+<h2 class="page-heading new_head wishlist-head">{{lang 'account.wishlists.edit' }}</h2>
+    <div class="account account--fixedLarge wishlist-change">
+        {{> components/account/wishlist-list}}
+    </div>
+{{/if}}
+{{/partial}}
+{{> layout/base}}
+<script>
+    let tableData = document.querySelector('.table-tbody tr td')
+    let tableTr = document.querySelectorAll('.table-tbody tr')
+    let tableHead = document.querySelector('.table-thead')
+    let buttonData = document.querySelector('.wishlist-change .button')
+    if(tableData){
+        console.log('table')
+    }
+    else {
+
+        tableHead.style.display="none"
+        buttonData.style.display="none"
+    }
+    let tableTrLength = tableTr.length;
+    console.log(tableTrLength)
+
+
+</script>

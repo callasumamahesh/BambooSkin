@@ -1,0 +1,71 @@
+{{inject 'noCompareMessage' (lang 'compare.no_compare')}}
+
+{{> components/products/filter sort=pagination.brand.sort}}
+<!--<p>{{JSONstringify brand}}</p>-->
+<div   data-brandid="{{entity_id}}" {{#if settings.data_tag_enabled}} data-list-name="Brand: {{brand.name}}" {{/if}}>
+<input type="hidden" class="hiddenInput" data-brandid="{{entity_id}}">
+    {{#if theme_settings.product_list_display_mode '===' 'grid'}}
+        {{> components/products/grid products=brand.products name=brand.total_products show_compare=brand.show_compare theme_settings=theme_settings event="list"}}
+    {{else}}
+        {{> components/products/list products=brand.products name=brand.total_products show_compare=brand.show_compare theme_settings=theme_settings event="list"}}
+    {{/if}}
+</div>
+
+<!--  {{JSONstringify pagination.brand.links}}-->
+
+<!--  {{JSONstringify shop_by_brand}}-->
+
+{{#each pagination.brand.links}}
+    {{#if @last}}
+    {{!-- Assign the last number value to a variable --}}
+        {{assignVar 'lastNumber' this.number}}
+    {{/if}}
+{{/each}}
+<!--<h1>{{getVar 'lastNumber'}}</h1>-->
+<!--<h1 class="ttt">{{pagination.links.next}}</h1>-->
+
+{{#each shop_by_brand}}
+
+    {{#if name '===' ../brand.name}}
+<!--        <p class="brand__count">{{count}}</p>-->
+        {{assignVar 'prodCount' count}}
+    {{/if}}
+
+{{/each}}
+
+<!--<h1>{{getVar 'prodCount'}}</h1>-->
+
+{{> components/common/paginator pagination.brand total=(getVar 'lastNumber') props=(getVar 'prodCount') total1=(ceil (divide (getVar 'prodCount') theme_settings.categorypage_products_per_page))}}
+
+
+<script>
+    $(document).ready(function(){
+        let productsCount = $('ul.productGrid').data('count');
+        console.log('productsCount', productsCount);
+        // if(!productsCount){
+        //     let brandID = $('input[type=hidden].hiddenInput').data('brandid');
+        //     console.log('brandID', typeof brandID);
+        //     let url = `https://api.bigcommerce.com/stores/vk590aamuz/v3/catalog/products?brand_id=${brandID}`;
+        //     let options = {
+        //         method: 'GET',
+        //         headers: {
+        //             Accept: 'application/json',
+        //             'Content-Type': 'application/json',
+        //             'X-Auth-Token': '{{ settings.storefront_api.token }}'
+        //         }
+        //     };
+        //     fetch(url, options)
+        //         .then(response => response.json())
+        //         .then(data => {
+        //             console.log('data', data);
+        //         })
+        // }
+        let lengthBrand = document.querySelectorAll(' ul > li.product')
+        console.log(lengthBrand.length)
+        if(lengthBrand.length == ''){
+            let notify = document.createElement('p')
+            notify.innerText = "There are no products listed under this brand."
+
+        }
+    })
+</script>

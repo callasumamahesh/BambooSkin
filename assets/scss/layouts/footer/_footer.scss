@@ -1,0 +1,362 @@
+// =============================================================================
+// FOOTER (CSS)
+// =============================================================================
+
+
+// Layout and columns
+// -----------------------------------------------------------------------------
+//
+// 1. To enable the grid's display: inline-block; to work properly, we need to
+//    remove the white-space that it creates between columns with font-size: 0;
+// 2. Re-set the font-size that was reduced to 0 in point 1 for children.
+// 3. Fix for text flickers on windows devices
+//
+// -----------------------------------------------------------------------------
+.footer-info-col.desktop-subscription #nl_email{
+    font-family: $font-family-inter;
+    font-size: 12px;
+    font-weight: 400;
+    color: #757575;
+}
+.footer-info-col.desktop-subscription [value="Subscribe"]{
+    font-family: $font-family-inter;
+    font-size: 14px;
+    font-weight: 600;
+    color: #212121;
+}
+.footer-info-col.desktop-subscription [value="Subscribe"]:hover{
+    color: #FFFFFF !important;
+}
+.footer {
+    background-color: $footer-background;
+    border-top: container("border");
+    padding: 3rem 0  0.5rem 0;
+    position: relative;
+    transform: translateZ(0); // 3
+    @include breakpoint('medium'){
+        padding: spacing("double") 0;
+    }
+}
+
+.footer-title-sr-only {
+    height: 1px;
+    left: -10000px;
+    overflow: hidden;
+    position: absolute;
+    top: auto;
+    width: 1px;
+}
+
+.footer-info {
+    @include grid-row($behavior: nest);
+    font-size: 0; // 1
+    @include breakpoint('medium'){
+        display: flex;
+    }
+}
+
+.footer-info-col {
+    @include grid-column(12);
+    //color: stencilColor("color-textSecondary");
+    display: inline-block;
+    float: none;
+    //font-size: fontSize("base"); // 2
+    margin-bottom: spacing("single");
+    overflow-wrap: break-word;
+    //text-align: center;
+    vertical-align: top;
+    color: $color-black;
+    font-size: $fontSize__12;
+    // TODO: specifically use vendor only for IE11 since overflow-wrap is not supported here
+    -ms-word-break: break-all;
+
+    & > h3{
+        position: relative;
+        text-align: left;
+        //padding: 25px;
+        //margin-bottom: 0;
+        &:before{
+            content: '';
+            width: 10px;
+            height: 10px;
+            border-bottom: solid 2px #000;
+            border-left: solid 2px #000;
+            display: inline-block;
+            position: absolute;
+            top: 16;
+            right: 5px;
+            transform: rotate(-45deg);
+        }
+        &.active{
+            &:before{
+                transform: rotate(135deg);
+                top: 27px;
+            }
+        }
+        @include breakpoint("medium") {
+            padding: 0;
+            &:before{
+                display: none;
+            }
+        }
+    }
+
+
+    @include breakpoint("small") {
+        text-align: left;
+        width: width("12/12");
+    }
+
+    @include breakpoint("medium") {
+        width: width("4/12");
+    }
+
+    > :first-child {
+        margin-top: 0;
+    }
+
+    > :last-child {
+        margin-bottom: 0;
+    }
+}
+
+.footer-info-col--small {
+    @include breakpoint("medium") {
+        width: width("2/12");
+    }
+}
+
+.footer-info-col--social {
+    width: 100%;
+}
+
+.footer-info-col--left {
+    @include breakpoint("small") {
+        padding: 0;
+    }
+}
+
+.footer-info-col--right {
+    @include breakpoint("small") {
+        left: 50%;
+        position: inherit;
+        width: 50%;
+    }
+
+    @include breakpoint("medium") {
+        left: 0;
+        padding: 0;
+        text-align: right;
+        width: 100%;
+    }
+}
+
+
+// Content
+// -----------------------------------------------------------------------------
+
+.footer-info-heading {
+    //color: $footer-heading-fontColor;
+    //font-size: fontSize("base");
+    text-transform: inherit;
+    color: $color-black;
+    font-size: $fontSize__14;
+    font-weight: $fontWeight-semibold;
+    font-family: $font-family-inter;
+}
+.subscription-para{
+    color: $color-black;
+    font-size: $fontSize__14;
+    font-weight: $fontWeight-normal;
+    font-family: $font-family-inter;
+}
+.footer-info-list {
+    list-style: none;
+    margin-left: 0;
+    display: none;
+    @include breakpoint('medium'){
+        display: block;
+    }
+
+    a {
+        //color: stencilColor("color-textSecondary");
+        text-decoration: none;
+        color: $color-black;
+        line-height: 32px;
+        font-weight: $fontWeight-normal;
+        font-family: $font-family-inter;
+        font-size: 14px;
+
+
+        //&:hover {
+        //    color: stencilColor("color-textSecondary--hover");
+        //}
+    }
+}
+
+.footer-copyright {
+    text-align: left;
+
+    @include breakpoint("small") {
+        text-align: left;
+    }
+    @include breakpoint('medium'){
+        margin-top: 25px;
+    }
+
+    > .powered-by {
+        //color: stencilColor("color-textSecondary");
+        //font-size: fontSize("tiny");
+        margin: 0;
+        color: $color-black;
+        font-size: $fontSize__14;
+        font-weight: $fontWeight-normal;
+        font-family: $font-family-inter;
+    }
+
+    a {
+        //color: stencilColor("color-textSecondary");
+        text-decoration: none;
+        color: $color-black;
+        font-size: $fontSize__12;
+        font-weight: $fontWeight-normal;
+        font-family: $font-family-inter;
+
+        //&:hover {
+        //    color: stencilColor("color-textSecondary--hover");
+        //}
+    }
+}
+
+.footer-payment-icons {
+    height: remCalc(40);
+    margin-top: spacing("single");
+
+    @include breakpoint("medium") {
+        margin-top: spacing("double");
+    }
+
+    .footer-payment-icon {
+        height: 100%;
+        margin: spacing("quarter");
+        vertical-align: middle;
+        width: remCalc(50);
+    }
+
+    svg {
+        fill: stencilColor("icon-color");
+    }
+}
+
+.footer-newsletter-summary {
+    text-align: left;
+}
+
+.mobile-subscription{
+    display: block;
+    @include breakpoint('medium'){
+        display: none;
+    }
+    .footer-info-heading{
+        border-top: none;
+    }
+    .form-prefixPostfix.wrap{
+        flex-wrap: nowrap;
+        .form-prefixPostfix-button--postfix{
+            margin-top: 0;
+            padding: 0.85714rem 1.28571rem;
+            width: 33%;
+        }
+    }
+
+
+}
+.desktop-subscription{
+    display: none;
+    @include breakpoint('medium'){
+        display: block;
+    }
+}
+@media screen and (max-width: 800px) {
+    .footer-info{
+        margin: 0;
+    }
+    .footer-info-col{
+        padding-left: 0;
+        padding-right: 0;
+    }
+    .footer-info-heading{
+        border-top: 1px solid #D4D3D3;
+        padding-top: 1.5rem;
+        margin-bottom: 0;
+    }
+    .footer-last-heading{
+        border-bottom: 1px solid #D4D3D3;
+        padding-bottom: 1.5rem;
+    }
+    .footer-info-list{
+        margin-top: 1rem;
+    }
+    //.footer-last-heading{
+    //    border-bottom: 1px solid #D4D3D3;
+    //    padding-bottom: 1.5rem;
+    //}
+    //.footer-last-heading.active{
+    //    border-bottom: none;
+    //    padding-bottom: 0.5rem;
+    //}
+    //.footer-last-heading.active + .footer-info-list{
+    //    border-bottom: 1px solid #D4D3D3;
+    //    padding-bottom: 1.5rem;
+    //}
+
+    //.footer-info-heading::after {
+    //    content: '';
+    //    border-bottom: 1px solid #D4D3D3;
+    //    position: absolute;
+    //    bottom: -16px;
+    //    left: 0;
+    //    width: 100%;
+    //}
+
+    //.footer-info-col:nth-child(2) {
+    //    .footer-info-heading::after {
+    //        content: '';
+    //        border-top: 1px solid #D4D3D3;
+    //        width: 100%;
+    //        top: -12px;
+    //    }
+    //}
+}
+
+.home-page-up-going-arrow {
+    width: 30px;
+    height: 30px;
+    background-color: #EFF1F2;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
+    .homepage-up-arrow {
+        transform: rotate(270deg);
+    }
+    @include breakpoint('medium'){
+        display: none;
+    }
+}
+
+.subscribe-mobile{
+    display: block;
+    margin-bottom: 0.5rem;
+    @include breakpoint('medium'){
+        display: none;
+    }
+}
+.subscribe-desktop{
+    display: none;
+    @include breakpoint('medium'){
+        display: block;
+        margin-top: 0;
+    }
+}

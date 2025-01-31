@@ -1,0 +1,221 @@
+<h2 class="shopping-bag-heading">Shopping bag</h2>
+<table class="cart" data-cart-quantity="{{cart.quantity}}">
+<!--    <thead class="cart-header">-->
+<!--        <tr>-->
+<!--            <th class="cart-header-item" colspan="2">{{lang 'cart.checkout.item'}}</th>-->
+<!--            <th class="cart-header-item">{{lang 'cart.checkout.price'}}</th>-->
+<!--            <th class="cart-header-item cart-header-quantity">{{lang 'cart.checkout.quantity'}}</th>-->
+<!--            <th class="cart-header-item">{{lang 'cart.checkout.total'}}</th>-->
+<!--        </tr>-->
+<!--    </thead>-->
+    <tbody class="cart-list">
+        {{#each cart.items}}
+            <tr class="cart-item" data-item-row>
+                <td class="cart-item-block cart-item-figure">
+                    {{#if type '==' 'GiftCertificate'}}
+                        <img
+                            class="cart-item-fixed-image"
+                            src="{{cdn ../theme_settings.default_image_gift_certificate}}"
+                            alt="{{lang 'cart.gift_certificates.gift_certificate'}}"
+                            title="{{lang 'cart.gift_certificates.gift_certificate'}}"
+                        >
+                    {{else}}
+                        {{> components/common/responsive-img
+                            image=image
+                            class="cart-item-image"
+                            fallback_size=../theme_settings.productthumb_size
+                            lazyload="lazyload"
+                            default_image=../theme_settings.default_image_product
+                        }}
+                    {{/if}}
+                </td>
+                <td class="cart-item-block cart-item-title">
+                    {{#if brand.name}}
+                        <p class="cart-item-brand">{{brand.name}}</p>
+                    {{/if}}
+                    <h2 class="cart-item-name">
+                        <a class="cart-item-name__label" href="{{url}}">{{{lowercase (first (split name '_'))}}}</a>
+                    </h2>
+                    {{#if release_date}}
+                        <p>({{release_date}})</p>
+                    {{/if}}
+
+                    {{#if options}}
+                        <dl class="definitionList">
+                            <dl class="productView-info">
+                                <dt class="productView-info-name">
+                                    QTY:
+                                </dt>
+                                <dd class="productView-info-value qty">
+                                    <div class="form-increment">
+                                        {{#if can_modify}}
+                                        <button class="button button--icon"
+                                                data-cart-update
+                                                data-cart-itemid="{{id}}"
+                                                data-action="dec"
+                                        >
+                                            <span class="is-srOnly">{{lang 'products.quantity_decrease' name=name}}</span>
+                                            <i class="icon" aria-hidden="true">-</i>
+                                        </button>
+                                        {{/if}}
+                                        <input class="form-input form-input--incrementTotal cart-item-qty-input"
+                                               id="qty-{{id}}"
+                                               name="qty-{{id}}"
+                                               type="tel"
+                                               value="{{quantity}}"
+                                               data-quantity-min="{{min_purchase_quantity}}"
+                                               data-quantity-max="{{max_purchase_quantity}}"
+                                               data-quantity-min-error="{{lang 'products.quantity_min' quantity=min_purchase_quantity}}"
+                                               data-quantity-max-error="{{lang 'products.quantity_max' quantity=max_purchase_quantity}}"
+                                               min="1"
+                                               pattern="[0-9]*"
+                                               data-cart-itemid="{{id}}"
+                                               data-action="manualQtyChange"
+                                               aria-label="{{name}}"
+                                               aria-live="polite"{{#unless can_modify}} disabled{{/unless}}>
+                                        {{#if can_modify}}
+                                        <button class="button button--icon"
+                                                data-cart-update
+                                                data-cart-itemid="{{id}}"
+                                                data-action="inc"
+                                        >
+                                            <span class="is-srOnly">{{lang 'products.quantity_increase' name=name}}</span>
+                                            <i class="icon" aria-hidden="true">+</i>
+                                        </button>
+                                        {{/if}}
+                                    </div>
+                                </dd>
+                            </dl>
+                            {{#each options}}
+                                <dl class="productView-info">
+                                <dt class="productView-info-name">
+                                    {{name}}:
+                                </dt>
+                                <dd class="productView-info-value">
+                                    {{{lowercase (sanitize value)}}}
+                                </dd>
+                            </dl>
+                            {{/each}}
+                        </dl>
+
+<!--                        <a href="#"-->
+<!--                           data-item-edit="{{id}}"-->
+<!--                           data-product-id="{{product_id}}"-->
+<!--                           aria-label="{{lang 'products.change_product_options' name=name}}"-->
+<!--                        >-->
+<!--                            {{lang 'common.change'}}-->
+<!--                        </a>-->
+                    {{/if}}
+
+                    {{#if type '==' 'GiftCertificate'}}
+                        <a href="{{edit_url}}"
+                           aria-label="{{lang 'cart.gift_certificates.change_gift_certificate' certificate_name=name}}"
+                        >
+                            {{lang 'common.change'}}
+                        </a>
+                    {{/if}}
+                    {{> components/cart/item-giftwrap this}}
+                    {{#if event_date}}
+                        <dl class="cart-item-options">
+                            <dt class="cart-item-option-title">
+                                {{event_date.name}}
+                            </dt>
+
+                            <dd class="cart-item-option-description">
+                                {{event_date.date}}
+                            </dd>
+                        </dl>
+                    {{/if}}
+
+                </td>
+<!--                <td class="cart-item-block cart-item-info">-->
+<!--                    <span class="cart-item-label">{{lang 'cart.checkout.price'}}</span>-->
+<!--                    {{#or ../customer (unless ../settings.hide_price_from_guests) (if type '==' 'GiftCertificate')}}-->
+<!--                        <span class="cart-item-value {{#if price_discounted}}price&#45;&#45;discounted{{/if}}">{{price.formatted}}</span>-->
+<!--                        {{#if price_discounted}}-->
+<!--                            <span class="cart-item-value">{{price_discounted.formatted}}</span>-->
+<!--                        {{/if}}-->
+<!--                    {{else}}-->
+<!--                        {{> components/common/login-for-pricing}}-->
+<!--                    {{/or}}-->
+<!--                </td>-->
+
+<!--                <td class="cart-item-block cart-item-info cart-item-quantity">-->
+
+<!--                    <label class="form-label cart-item-label" for="qty-{{id}}">{{lang 'products.quantity'}}</label>-->
+<!--                    <div class="form-increment">-->
+<!--                        {{#if can_modify}}-->
+<!--                            <button class="button button&#45;&#45;icon"-->
+<!--                                    data-cart-update-->
+<!--                                    data-cart-itemid="{{id}}"-->
+<!--                                    data-action="dec"-->
+<!--                            >-->
+<!--                                <span class="is-srOnly">{{lang 'products.quantity_decrease' name=name}}</span>-->
+<!--                                <i class="icon" aria-hidden="true"><svg><use href="#icon-keyboard-arrow-down" /></svg></i>-->
+<!--                            </button>-->
+<!--                        {{/if}}-->
+<!--                        <input class="form-input form-input&#45;&#45;incrementTotal cart-item-qty-input"-->
+<!--                               id="qty-{{id}}"-->
+<!--                               name="qty-{{id}}"-->
+<!--                               type="tel"-->
+<!--                               value="{{quantity}}"-->
+<!--                               data-quantity-min="{{min_purchase_quantity}}"-->
+<!--                               data-quantity-max="{{max_purchase_quantity}}"-->
+<!--                               data-quantity-min-error="{{lang 'products.quantity_min' quantity=min_purchase_quantity}}"-->
+<!--                               data-quantity-max-error="{{lang 'products.quantity_max' quantity=max_purchase_quantity}}"-->
+<!--                               min="1"-->
+<!--                               pattern="[0-9]*"-->
+<!--                               data-cart-itemid="{{id}}"-->
+<!--                               data-action="manualQtyChange"-->
+<!--                               aria-label="{{name}}"-->
+<!--                               aria-live="polite"{{#unless can_modify}} disabled{{/unless}}>-->
+<!--                        {{#if can_modify}}-->
+<!--                            <button class="button button&#45;&#45;icon"-->
+<!--                                    data-cart-update-->
+<!--                                    data-cart-itemid="{{id}}"-->
+<!--                                    data-action="inc"-->
+<!--                            >-->
+<!--                                <span class="is-srOnly">{{lang 'products.quantity_increase' name=name}}</span>-->
+<!--                                <i class="icon" aria-hidden="true"><svg><use href="#icon-keyboard-arrow-up" /></svg></i>-->
+<!--                            </button>-->
+<!--                        {{/if}}-->
+<!--                    </div>-->
+
+<!--                </td>-->
+
+                <td class="cart-item-block cart-item-info total-price-remove-cart-item">
+<!--                    <span class="cart-item-label">{{lang 'cart.checkout.total'}}</span>-->
+                    {{#or ../customer (unless ../settings.hide_price_from_guests) (if type '==' 'GiftCertificate')}}
+                        <strong class="cart-item-value {{#if total_discounted}}price--discounted{{/if}}">{{total.formatted}}</strong>
+                        {{#if total_discounted}}
+                            <strong class="cart-item-value">{{total_discounted.formatted}}</strong>
+                        {{/if}}
+                    {{else}}
+                        --
+                    {{/or}}
+                    {{#or can_modify (if type '==' 'GiftCertificate')}}
+                        <button class="cart-remove icon"
+                                data-cart-itemid="{{id}}"
+                                data-confirm-delete="{{lang 'cart.confirm_delete'}}"
+                                aria-label="{{lang 'cart.remove_item' name=name}}"
+                        >
+                            <svg><use href="#icon-close"></use></svg>
+                        </button>
+                    {{/or}}
+<!--                    <p class="id">{{product_id}}</p>-->
+                    <div class="cart-wishlist">
+                    <form action="/wishlist.php?action=add&product_id={{product_id}}" class="form form-wishlist form-action" data-wishlist-add method="post">
+                        <button class="button" type="submit" value="{{lang 'account.wishlists.add_to_default'}}">
+                            <div class="add-to-wishlist">
+                                <svg width="14" height="14px" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fill="#000000">
+                                    <path d="M14.88 4.78a3.489 3.489 0 0 0-.37-.9 3.24 3.24 0 0 0-.6-.79 3.78 3.78 0 0 0-1.21-.81 3.74 3.74 0 0 0-2.84 0 4 4 0 0 0-1.16.75l-.05.06-.65.65-.65-.65-.05-.06a4 4 0 0 0-1.16-.75 3.74 3.74 0 0 0-2.84 0 3.78 3.78 0 0 0-1.21.81 3.55 3.55 0 0 0-.97 1.69 3.75 3.75 0 0 0-.12 1c0 .317.04.633.12.94a4 4 0 0 0 .36.89 3.8 3.8 0 0 0 .61.79L8 14.31l5.91-5.91c.237-.233.44-.5.6-.79A3.578 3.578 0 0 0 15 5.78a3.747 3.747 0 0 0-.12-1zm-1 1.63a2.69 2.69 0 0 1-.69 1.21l-5.21 5.2-5.21-5.2a2.9 2.9 0 0 1-.44-.57 3 3 0 0 1-.27-.65 3.25 3.25 0 0 1-.08-.69A3.36 3.36 0 0 1 2.06 5a2.8 2.8 0 0 1 .27-.65c.12-.21.268-.4.44-.57a2.91 2.91 0 0 1 .89-.6 2.8 2.8 0 0 1 2.08 0c.33.137.628.338.88.59l1.36 1.37 1.36-1.37a2.72 2.72 0 0 1 .88-.59 2.8 2.8 0 0 1 2.08 0c.331.143.633.347.89.6.174.165.32.357.43.57a2.69 2.69 0 0 1 .35 1.34 2.6 2.6 0 0 1-.06.72h-.03z"/></svg>
+                                <span>Save to wishlist</span>
+                            </div>
+                        </button>
+                    </form>
+                    </div>
+                </td>
+            </tr>
+        {{/each}}
+    </tbody>
+</table>

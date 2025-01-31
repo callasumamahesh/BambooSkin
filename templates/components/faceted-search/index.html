@@ -1,0 +1,116 @@
+<div id="facetedSearch" class="facetedSearch sidebarBlock">
+
+    <div class="filter-sort">
+        <a href="#facetedSearch-navList" role="button" class="facetedSearch-toggle toggleLink" data-collapsible>
+        <span class="facetedSearch-toggle-text">
+            {{#if facets.length '>' 2}}
+                {{lang 'search.faceted.browse-by'}} {{join (pluck facets 'title') ', ' limit=2}} &amp; {{toLowerCase (lang 'search.faceted.more')}}
+            {{else}}
+                {{lang 'search.faceted.browse-by'}} {{join (pluck facets 'title') ', ' lastSeparator=' & '}}
+            {{/if}}
+        </span>
+
+            <span class="facetedSearch-toggle-indicator">
+            <span class="toggleLink-text toggleLink-text--on">
+                {{lang 'search.faceted.hide-filters'}}
+
+                <i class="icon" aria-hidden="true">
+                    <svg><use xlink:href="#icon-keyboard-arrow-up"/></svg>
+                </i>
+            </span>
+
+            <span class="toggleLink-text toggleLink-text--off">
+                {{lang 'search.faceted.show-filters'}}
+
+                <i class="icon" aria-hidden="true">
+                    <svg><use xlink:href="#icon-keyboard-arrow-down"/></svg>
+                </i>
+            </span>
+        </span>
+        </a>
+
+        <div class="toggle-filter">
+            <a href="#" class="tf button" data-single="Filter" data-multy="Filters">Filters</a>
+        </div>
+
+        <div class="sort-block" id="sort-block">
+            {{> components/products/filter sort=pagination.category.sort}}
+        </div>
+
+
+        <!--<div class="grid-style">
+            <button class="column-two">
+                <span></span>
+                <span></span>
+            </button>
+            <button class="column-four active">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>-->
+    </div>
+    {{> components/faceted-search/selected-facets selected}}
+    {{#any facets visible=true}}
+    <div id="facetedSearch-navList"
+         class="facetedSearch-navList blocker-container"
+    >
+        <div class="accordion accordion--navList">
+            <h2 class="filter-title">Filter <a href="#" class="close-filter"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M1.33398 14.6693L14.6673 1.33594M14.6673 14.6693L1.33398 1.33594" stroke="#212121" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg></a> </h2>
+
+            {{#each facets}}
+            {{#if visible}}
+            {{{dynamicComponent 'components/faceted-search/facets'}}}
+            {{/if}}
+            {{/each}}
+
+            <div class="desktop-sort">
+
+            </div>
+            {{> components/faceted-search/selected-facets selected}}
+
+        </div>
+        <div class="filter-actions">
+            <a href="#" class="clearallfilter button " disabled>Clear All</a>
+            <a href="#" class="close-filters button button-alt" disabled>Apply</a>
+
+        </div>
+
+        <div class="blocker" style="display: none;"></div>
+
+
+    </div>
+    {{/any}}
+</div>
+
+<script>
+    $(document).ready(function () {
+        if ($(window).width() > 800) {
+            $('.desktop-sort').append($(".actionBar"));
+        }
+        else {
+            $('.sort-block').append($(".actionBar"));
+        }
+
+    })
+    if(window.innerWidth<800){
+        console.log("hello")
+    }
+
+</script>
+<style>
+    /*@media screen and (min-width: 800px) {*/
+    /*    .desktop-sort > :nth-child(1){*/
+    /*        display: none;*/
+    /*    }*/
+    /*}*/
+    /*@media screen and (max-width: 800px) {*/
+    /*    .sort-block > :nth-child(1){*/
+    /*        display: none;*/
+    /*    }*/
+    /*}*/
+
+</style>

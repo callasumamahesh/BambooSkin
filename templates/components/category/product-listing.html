@@ -1,0 +1,50 @@
+{{inject 'noCompareMessage' (lang 'compare.no_compare')}}
+<!--{{assignVar 'totalAvailableProducts' category.total_products}}-->
+
+{{#if category.products}}
+    {{> components/products/filter sort=pagination.category.sort}}
+
+    <div {{#if settings.data_tag_enabled}} data-list-name="Category: {{category.name}}" {{/if}}>
+        {{#if theme_settings.product_list_display_mode '===' 'grid'}}
+            {{#if settings.data_tag_enabled}}
+                {{> components/products/grid products=category.products  name=category.total_products show_compare=category.show_compare theme_settings=theme_settings event="list"}}
+            {{else}}
+                {{> components/products/grid products=category.products   name=category.total_products show_compare=category.show_compare theme_settings=theme_settings}}
+            {{/if}}
+        {{else}}
+            {{#if settings.data_tag_enabled}}
+                {{> components/products/list products=category.products show_compare=category.show_compare theme_settings=theme_settings event="list" count=33}}
+            {{else}}
+                {{> components/products/list products=category.products show_compare=category.show_compare theme_settings=theme_settings count=4}}
+            {{/if}}
+        {{/if}}
+    </div>
+<!--{{JSONstringify pagination.category.links}}-->
+<!--<h1>{{pagination.category.start}} - {{pagination.category.end}} of {{category.total_products}}</h1>-->
+    {{> components/common/paginator pagination.category available=(getVar 'totalAvailableProducts') total1=category.total_products  total=(ceil (divide category.total_products theme_settings.categorypage_products_per_page))}}
+{{else}}
+    {{#if category.search_error}}
+        <p>{{lang 'search.errorMessage'}}</p>
+    {{else}}
+        <p class="no-product" data-no-products-notification
+           role="alert"
+           aria-live="assertive"
+           tabindex="-1"
+        >
+            {{lang 'categories.no_products'}}
+        </p>
+    {{/if}}
+{{/if}}
+<style>
+   .no-product{
+        height: 20vh;
+
+    }
+   .no-product:focus-visible{
+       outline: none !important;
+   }
+   #faceted-search-container .navList > li{
+       display: block !important;
+   }
+</style>
+

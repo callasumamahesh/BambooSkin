@@ -1,0 +1,334 @@
+<ul class="productGrid aaa" data-count="{{name}}">
+
+
+    {{#each products}}
+
+    {{#each this.custom_fields}}
+    {{#if this.name '==' 'Master Key'}}
+    {{assignVar 'cf' this.value}}
+    {{/if}}
+
+    {{#if this.name '==' 'Video'}}
+        {{#if  this.value}}
+            {{assignVar 'video' this.value}}
+        {{else}}
+              {{assignVar 'video' 'aaa'}}
+        {{/if}}
+    {{else}}
+        {{assignVar 'video' 'null'}}
+    {{/if}}
+    {{/each}}
+    <!--<script>
+        console.log('total products ', '{{JSONstringify this}}')
+
+    </script>-->
+    <!--{{JSONstringify this}}-->
+    <li class="product" data-cf="{{getVar 'cf'}}" data-video="{{getVar 'video'}}" data-title="{{url}}" data-id="{{id}}">
+        {{>components/products/card available=../this.is_visible customFields=../this.name settings=../settings show_compare=../show_compare
+        show_rating=../settings.show_product_rating dateAdded=this.date_added video=this.custom_fields.[2].value theme_settings=../theme_settings customer=../customer event=../event
+        position=(add @index 1)}}
+
+    </li>
+
+    {{/each}}
+</ul>
+
+<div class="loader-container">
+    <div class="loader"></div>
+</div>
+
+<style>
+    .active-swatch{
+        border:1px solid #000;
+    }
+    .loader-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(255, 255, 255, 0.5); /* semi-transparent white background */
+        z-index: 9999; /* Ensure it's above other elements */
+        display: none; /* Initially hide loader */
+    }
+
+    .loader {
+        border: 8px solid #f3f3f3;
+        border-top: 8px solid #3498db;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        animation: spin 1s linear infinite;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-top: -25px;
+        margin-left: -25px;
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
+</style>
+<script>
+    $(document).ready(function () {
+
+        $('ul.productGrid li.product').each(function () {
+            let that = $(this)
+            // console.log('this cf', $(this).attr('data-cf'));
+            let cf = $(this).attr('data-cf');
+            fetch('/graphql', {
+                method: 'POST',
+                credentials: 'same-origin',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer {{ settings.storefront_api.token }}'
+                },
+                body: JSON.stringify({
+                    query: `
+                    query MyFirstQuery {
+                     site {
+                    search {
+                      searchProducts(
+                        filters: {
+                          productAttributes: {
+                            attribute: "Master Key",
+                            values: "${cf}"
+                          }
+                        }
+                      ) {
+                       products(first: 10) {
+                          edges {
+                            node {
+                              entityId
+                              name
+                              prices {
+                                price {
+                                  value
+                                }
+                              }
+                              images(first: 10) {
+                                edges {
+                                  node {
+                                    urlOriginal
+                                    altText
+                                  }
+                                }
+                              }
+                              options(first: 10) {
+                                edges {
+                                  node {
+                                    values(first: 10) {
+                                      edges {
+                                        node {
+                                          label
+                                        }
+                                      }
+                                    }
+                                    displayName
+                                  }
+                                }
+                              }
+                               customFields(first: 10) {
+                                edges {
+                                  node {
+                                    name
+                                    value
+                                    entityId
+                                  }
+                                }
+                              }
+                              path
+                              variants(first: 10) {
+                                edges {
+                                node {
+                                    productOptions(first: 10) {
+                                    edges {
+                                        node {
+                                        ... on MultipleChoiceOption {
+                                            __typename
+                                            displayName
+                                            values {
+                                            edges {
+                                                node {
+                                                ... on SwatchOptionValue {
+                                                    imageUrl(height: 100, width: 100)
+                                                    label
+                                                    isSelected
+                                                }
+                                                }
+                                            }
+                                            }
+                                        }
+                                        }
+                                    }
+                                    }
+                                }
+                                }
+                            }
+                            }
+                          }
+                        }
+                      }
+                    }
+                    }
+                    }`
+                })
+            }).then(response => response.json())
+                .then(data => {
+                    const prodData = data.data.site.search.searchProducts.products.edges;
+                    if(prodData.length > 1) {
+                        let createHtml = ''
+                        prodData.map((prodItem) => {
+                            const proVariants = prodItem.node.variants.edges[0]
+                            proVariants.node?.productOptions?.edges?.map(opt => {
+                                if (opt?.node?.displayName.toLowerCase() === "color") {
+                                    createHtml += `<span data-entityid="${prodItem?.node?.entityId}" class="" data-href=${prodItem?.node?.path} data-title="${prodItem?.node?.name}" data-image2=${prodItem?.node?.images?.edges[1]?.node?.urlOriginal} data-swatch=${prodItem?.node?.images?.edges[0]?.node?.urlOriginal}><img width="25" height="25" src="${opt?.node?.values?.edges[0].node?.imageUrl}"></span>`
+                                }
+                            })
+                        })
+
+                        $(this).find(".swatches").append(createHtml);
+                        $('.productGrid li').each(function () {
+                            let prodId = $(this).data('id');
+                            $(this).find('.swatches span').each(function () {
+                                if ($(this).data('entityid') === Number(prodId)) {
+                                    $(this).addClass('active-swatch');
+                                }
+                                $(this).on('click', function () {
+                                    showLoader();
+                                    if ($(this).hasClass('active-swatch') === false) {
+                                        $(this).addClass('active-swatch');
+                                        $(this).siblings().removeClass('active-swatch');
+                                    }
+                                    setTimeout(hideLoader, 5000);
+                                })
+                            })
+                        })
+                        function showLoader() {
+                            $('.loader').show();
+                        }
+
+                        function hideLoader() {
+                            $('.loader').hide();
+                        }
+                        $(this).find(".swatches ").each((idx, item) => {
+
+
+                            $(item).on('click', (e) => {
+                                let changeSwatchWishlist = e.target.parentNode.getAttribute('data-entityid');
+                                let changedTitle = e.target.parentNode.getAttribute('data-title');
+                                let changedHref = e.target.parentNode.getAttribute('data-href');
+                                let changedImage = e.target.parentNode.getAttribute('data-swatch');
+                                let changedImage2 = e.target.parentNode.getAttribute('data-image2');
+                                let lastHyphenIndex = changedTitle.lastIndexOf('-');
+                                let textWithoutLastHyphen = changedTitle.substring(0, lastHyphenIndex);
+                                // console.log(textWithoutLastHyphen);
+                                $(this).find('.card-title a').empty();
+                                $(this).find('.card .card-figure .card-img-container img').attr('src', '');
+                                $(this).find('.card .card-figure .card-img-container img').attr('srcset', '');
+                                $(this).find('.card .card-figure .second-image img').attr('src', '');
+                                $(this).find('.card .card-figure .second-image img').attr('srcset', '');
+                                $(this).find('.card-title a').text(textWithoutLastHyphen);
+                                $(this).find('.card-title a').attr('href', changedHref);
+                                $(this).find('.card .card-figure a').attr('href', changedHref);
+
+                                $(this).find('.card .card-figure .card-img-container img').attr('src', changedImage);
+                                $(this).find('.card .card-figure .second-image img').attr('src', changedImage2);
+                                $(this).find('.card .card-figure  img:nth-of-type(2)').attr('src', changedImage2);
+                                $(this).find('.card .card-figure .plp-wishlist form').attr('action', `/wishlist.php?action=add&product_id=${changeSwatchWishlist}`)
+                                // $('.productGrid li .card-img-mobile-slide').slick('refresh')
+
+
+                            })
+                        })
+
+                    }
+
+                })
+        })
+
+        // Wishlist checking
+        fetch('/graphql', {
+            method: 'POST',
+            credentials: 'same-origin',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer {{ settings.storefront_api.token }}'
+            },
+            body: JSON.stringify({
+                query: `
+            query MyQuery {
+          customer {
+            attributes {
+              attribute(entityId: 9) {
+                name
+                entityId
+              }
+            }
+            entityId
+            wishlists(first: 10) {
+              edges {
+                node {
+                  name
+                  items(first: 30) {
+                    edges {
+                      node {
+                        product {
+                          name
+                          id
+                          entityId
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }`
+            })
+        }).then(res => res.json())
+            .then(data => {
+                const wishlistData = data?.data?.customer?.wishlists?.edges[0]?.node?.items?.edges;
+                if(wishlistData){
+                wishlistData.map(wd => {
+                    const wishlistId = wd.node.product.entityId;
+                    $('ul.productGrid li.product').each(function(){
+                        if(wishlistId === Number($(this).attr('data-id'))){
+                            $(this).addClass('wishlisted')
+                        }
+                    })
+                })
+                }
+
+            })
+
+        $('.productGrid .product iframe').each(function () {
+            var player = new Vimeo.Player($(this));
+
+            $(this).parents("figure").mouseover(function () {
+                player.play().then(function () {
+                    // Video started playing
+                }).catch(function (error) {
+                    console.log('Error playing video:', error.name);
+                });
+
+                $(this).parents("figure").mouseout(function () {
+                    player.pause().then(function () {
+                        // Video paused
+                    }).catch(function (error) {
+                        console.log('Error pausing video:', error.name);
+                    });
+                });
+            });
+        });
+
+
+
+
+    })
+
+</script>

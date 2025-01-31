@@ -1,0 +1,239 @@
+{{#partial "page"}}
+<!--{{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}-->
+<style>
+
+
+
+
+</style>
+{{#if currentBrand}}
+<meta name="description" content="{{currentBrand.description}}">
+{{else}}
+<meta name="description" content="{{lang 'brand.label'}} - Default Meta Description">
+{{/if}}
+
+<section class="page">
+
+    <div class="brand_page">
+       <div><h1>Meet Our Designers..</h1>
+        <p>At Red Parel, we celebrate the visionaries behind our extraordinary collections. Our curated ensemble of world-class designers are at the leading edge of fashion, each bringing their unique aesthetic and innovative designs to the forefront of the industry. Join us in experiencing luxury fashion, redefined by the hands of our esteemed designers.</p>
+       </div>
+       </div>
+    {{{region name="brands_below_header"}}}
+    <ul class="brand_grid">
+        {{#each brands}}
+        <li class="brand">
+            <article class="card {{#if alternate}}card--alternate{{/if}}">
+                <figure class="card-figure">
+                    <a class="card-figure__link" aria-label="{{name}}" href="{{url}}">
+                        <div class="card-img-container">
+                            {{> components/common/responsive-img
+                            image=image
+                            class="card-image"
+                            fallback_size=../theme_settings.brand_size
+                            lazyload=../theme_settings.lazyload_mode
+                            default_image=../theme_settings.default_image_brand
+                            }}
+                        </div>
+                    </a>
+                </figure>
+                <div class="card-body">
+                    <h3 class="card-title">
+                        <a href="{{url}}" class="data_names" id="{{name}}">{{name}}</a>
+                    </h3>
+                    <p class="shopTheBrand">
+                        <a href="{{url}}">SHOP THE BRAND</a>
+                    </p>
+                </div>
+
+            </article>
+        </li>
+        {{/each}}
+    </ul>
+<!--    {{> components/common/paginator pagination.brands}}-->
+    {{{region name="brands_below_content"}}}
+</section>
+<script>
+    const brands = [
+        {
+            "id":'DEA KUDIBAL',
+            "name":"DEA KUDIBAL",
+            "logo":"https://store-vk590aamuz.mybigcommerce.com/product_images/brand-logs/Dea_Kudibal.png",
+            "description":"Founded in Copenhagen in 2003, Dea Kudibal originated from a heritage of artists and bankers, blending innate design talent with sharp business sense. Initially offering exclusive scarves and shawls from vintage fabrics, the brand expanded in 2008 with its own clothing line featuring feminine patterns, vibrant hues, and sleek designs that form its core identity. Known for the signature stretch silk that ensures luxury and durability, Dea Kudibal's collections are a testament to ethnic influences with exquisite handcrafted details like embroidery and beadwork, boasting sophistication and femininity. Each season, the brand unveils unique prints, crafted lovingly in Copenhagen, inviting customers to personalize their Dea Kudibal experience, be it refined, bold, or relaxed."
+        },
+        {
+            "id":'FABER',
+            "name":"FABER",
+            "logo":"https://store-vk590aamuz.mybigcommerce.com/product_images/brand-logs/Faber.png",
+            "description":"Originating from Germany, Faber's knitwear coordinate collections are the epitome of sporty-chic elegance for the woman who prizes high-quality, comfortable, and perfectly fitting fashion. Designed for those who lead an active, emotional lifestyle, these collections provide a variety of unique and exceptional fashion pieces that do not compromise on quality. Faber, rooted in its German heritage, places a high value on superior yarn quality, using cotton and wool blends that yield a \"Best Comfort\" effect for a luxurious, soft touch. In a collaborative effort that bridges tradition and innovation, Faber's design and engineering teams develop exclusive effect yarns that not only have a visually striking appearance but also retain excellent wear and maintenance qualities.."
+        },
+        {
+            "id":'ILSE JACOBSEN',
+            "name":"ILSE JACOBSEN",
+            "logo":"https://store-vk590aamuz.mybigcommerce.com/product_images/brand-logs/Ilse_Jacobsen.png",
+            "description":"It all started with a quaint seaside resort as a muse. Since 1993, the serene beauty of Hornbæk, with its majestic forests and untamed beaches, has been the lifeblood of inspiration for the ILSE JACOBSEN HORNBÆK brand. This idyllic Danish setting is reflected in a diverse range of products including stylish rainwear and coats, footwear, accessories and the iconic rubber boots that have become synonymous with the brand.\n" +
+                "\n" +
+                "As the brand flourished, so did its reach, both domestically and internationally, with leading department stores around the globe featuring ILSE JACOBSEN HORNBÆK items, extending its presence to nearly 30 countries. The RAINWEAR collection stands as a testament to functionality and endurance, providing protection against all weather conditions, whether it be summer showers or winter gales.\n" +
+                "\n" +
+                "Each piece, from raincoats designed for nature walks and city life to handmade rain boots, represents the highest standard of Scandinavian craftsmanship. The brand is committed to a blend of fashion-forward and practical designs that support an active lifestyle, offering a palette of seasonal colors and a year-round NOS (Never Out of Stock) program to meet customer needs at any time."
+        },
+        {
+            "id":'LOOBIE’S STORY',
+            "name":"LOOBIE’S STORY",
+            "logo":"https://store-rnjw8pihep.mybigcommerce.com/product_images/a/LoobiesStory.png",
+            "description":"Loobie's Story is a fashion label that embodies the spirit of the urban chic with an exotic twist, offering a wardrobe to narrate a woman's diverse and evolving life narrative. It all began with a coincidental twist of fate when the founder was simultaneously released from a two-decade tenure as a creative director and her husband sold his menswear business. Seizing the opportunity, they embarked on an adventure to conceive a women's fashion line that encapsulates joy, color, and sustainable elegance.\n" +
+                "\n" +
+                "Designed to transition seamlessly from day to night with minimal effort, the collections are crafted in natural, luxurious fabrics with a consciousness towards environmental impact. Loobie's Story champions original prints and coherent color schemes, facilitating effortless mixing and matching across seasons. Named affectionately after the founder's nickname, Loobie's Story is inspired by stunning locales and vibrant cultures. The brand stands out for shunning transient trends and black palettes in summer collections, instead championing indigo and longevity in design. Ten years in, Loobie's Story continues to celebrate individuality and a zest for life through fashion that endures and tells a personal tale."
+        },
+        {
+            "id":'MADLY SWEETLY',
+            "name":"MADLY SWEETLY",
+            "logo":"https://store-rnjw8pihep.mybigcommerce.com/product_images/a/MadlySweetly.png",
+            "description":"Madly Sweetly is a brand that encapsulates a harmony of style, functionality, personality, and durability. Our mission is to provide versatile staple pieces crafted from a diversity of high-quality fabrics, ensuring a perfect mix of textured materials, softened silhouettes, and defined details. Our designs are conceived with the dynamic woman in mind — relaxed and modern, they offer an easy, mix-and-match wardrobe that caters to the multifaceted pace of today's life.\n" +
+                "\n" +
+                "Understanding that some days call for vibrancy and femininity, while others demand practicality — or a combination of both — our clothing is designed to adapt to a variety of settings and responsibilities while making you look and feel great. We lightly tap into trends without being beholden to them, as our focus is on timeless pieces that fit effortlessly into your lifestyle rather than fleeting fashion moments.\n" +
+                "\n" +
+                "Season after season, our design process is meticulously refined, ensuring that our cuts flatter, our prints add a touch of whimsy, and our fabrics are a delight to wear. Madly Sweetly invites you to embrace our creations and make them uniquely yours — because it's not just about what you wear, it's how you wear it."
+        },
+        {
+            "id":'Marc Cain',
+            "name":"Marc Cain",
+            "logo":"https://store-vk590aamuz.mybigcommerce.com/product_images/brand-logs/Marc_Cain.png",
+            "description":" The latest European trends and fashion for every season. Marc Cain prides itself for its attention to details with cutting edge manufacturing techniques and luxurious fabric which are made in Germany"
+        },
+        {
+            "id":'MARC CAIN SPORTS',
+            "name":"MARC CAIN SPORTS",
+            "logo":"https://store-rnjw8pihep.mybigcommerce.com/product_images/a/marc_cain.png",
+            "description":" Sport-luxe designs and high quality fabrics. Marc Cain Sports upholds the principals of the main collection, while allowing for the movement and functionality of everyday wear for our casual lives"
+        },
+        {
+            "id":'MONARI',
+            "name":"MONARI",
+            "logo":"https://store-vk590aamuz.mybigcommerce.com/product_images/brand-logs/Monari.png",
+            "description":"Beginning as a high quality knit wear label produced in Italy. Today the Monari range is design orientated fashion offering trend focused coordinated separates in feminine silhouettes with a touch of embellishment"
+        },
+        {
+            "id":'MOS MOSH',
+            "name":"MOS MOSH",
+            "logo":"https://store-vk590aamuz.mybigcommerce.com/product_images/brand-logs/Mos_Mosh.png",
+            "description":"Since the launch of first Mos Mosh collection in 2010, women all over the world have embraced the feel and fit of Mos Mosh signature jeans. The brand quickly grew and expanded their collections with raw and delicate tops, tailored jackets and fine leather garments"
+        },
+        {
+            "id":'Not Your Daughter\'s Jeans',
+            "name":"Not Your Daughter's Jeans",
+            "logo":"https://store-vk590aamuz.mybigcommerce.com/product_images/brand-logs/NYDJ.png",
+            "description":"NYDJ blends high-tech innovation with high style to redefine the denim experience. Known as the original slimming jean, each pair is designed with love and a promise to make you look one size smaller. Premium denim is chosen for its ideal stretch, ensuring no bagging even between washes. NYDJ's fabric and fit technologies are dedicated to going beyond ordinary jeans, from temperature-regulating denim that keeps you cool to designs that can stretch up to three sizes, pushing the boundaries of denim with groundbreaking technology."
+        },
+        {
+            "id":'POM',
+            "name":"POM",
+            "logo":"https://store-vk590aamuz.mybigcommerce.com/product_images/brand-logs/POM.png",
+            "description":"POM Amsterdam, founded by sisters Liesbeth and Violet Lotgering in 2011, aims to brighten lives with fashion pieces that boast a kaleidoscope of unique and stylish designs, offering everyone their treasured 'Piece Of Mine.' Specializing in scarves that can transform your look in an instant, POM Amsterdam is about finding joy and that special spark in a personal accessory.\n" +
+                "\n" +
+                "The brand offers high-quality clothing and scarfs that evoke happiness, characterized by bold and contrasting colors, distinct prints, exquisite details, and the use of fine natural fabrics. Liesbeth and Violet pour their creativity into each design, with all prints being originally hand-painted by Violet in their vibrant Amsterdam studio. These prints are not just designs but stories woven into fabric.\n" +
+                "\n" +
+                "POM Amsterdam has blossomed into a global success, with over 800 sales points worldwide, by delivering elegant, feminine styles that become beloved 'Pieces Of Mine' for their wearers."
+        },
+        {
+            "id":'RIANI',
+            "name":"RIANI",
+            "logo":"https://store-rnjw8pihep.mybigcommerce.com/product_images/staticPages_images/ilse%20logo.png",
+            "description":"RIANI is a German womenswear brand within the exquisite premium segment. The label features flawless fits and impeccable cuts, with absolute aspiration of quality, materials and designs. Vision, discipline and a great eye for fabrics, paired with passion, devotion, and dedication to quality. These immutable values have made RIANI one of the leading international womenswear premium brands."
+        },
+         {
+            "id":'LUISA CERANO',
+            "name":"LUISA CERANO",
+            "logo":"https://www.baltz.de/media/marken/Luisa_Cerano_logo.png",
+            "description":"Luisa Cerano is a global fashion label known for its unique combination of self-confidence, elegance, and nonchalance. With an unwavering commitment to quality, the brand carefully selects premium materials and emphasizes expert craftsmanship. Each design reflects refined attention to detail, a flair for trends, and a dedication to femininity, comfort, and respect for people and nature.\n" +
+                "\n" +
+                "Believing that fashion must feel as good as it looks, Luisa Cerano creates standout advertising campaigns. Collaborating with renowned photographers like Michel Comte and Roxanne Lowit, and featuring top models such as Bar Refaeli and Jessica Stam, these campaigns consistently earn acclaim for their creativity and impact.\n" +
+                "\n" +
+                "Sustainability and trust are at the heart of Luisa Cerano’s philosophy. As part of the HAUBER Group, established in 1870 and still family-owned in its fifth generation, the brand carries a tradition of social responsibility. For over 150 years, Luisa Cerano has nurtured meaningful relationships with employees, suppliers, and customers, creating fashion that embodies care, quality, and timeless style."
+        },
+
+    ]
+    console.log('brand json', brands);
+
+    function truncateText(text, maxCharacters) {
+        if (text.length > maxCharacters) {
+            return {
+                truncated: true,
+                content: text.substring(0, maxCharacters)+ '...',
+                fullContent: text
+            };
+        }
+        return {
+            truncated: false,
+            content: text,
+            fullContent: text
+        };
+    }
+
+
+    const maxCharacters = 146;
+
+    const data = document.querySelectorAll('.card');
+
+    data.forEach(cardBody => {
+        const brandId = cardBody.querySelector('.data_names').id;
+        console.log(brandId);
+
+        const brand = brands.find(b => b.id === brandId);
+
+        if (brand) {
+            const brandDiv = document.createElement('div');
+            const brandLogo = document.createElement('img');
+            brandLogo.src = brand.logo;
+            brandLogo.alt = `${brand.name} Logo`;
+            brandLogo.width = 100;
+            brandLogo.classList.add('brand-logo');
+
+            const truncationResult = truncateText(brand.description, maxCharacters);
+            const truncatedDescription = truncationResult.content;
+            const fullDescription = truncationResult.fullContent;
+            const isTruncated = truncationResult.truncated;
+
+            const contentDataElement = document.createElement('p');
+            contentDataElement.classList.add('contentData');
+            contentDataElement.textContent = truncatedDescription;
+
+            if (isTruncated) {
+                const readMoreLink = document.createElement('a');
+                readMoreLink.classList.add('RManchor')
+                readMoreLink.textContent = 'read more';
+                readMoreLink.href = '#';
+                readMoreLink.addEventListener('click', function (event) {
+                    event.preventDefault();
+                    if (contentDataElement.textContent === truncatedDescription) {
+                        contentDataElement.textContent = fullDescription;
+                        readMoreLink.textContent = 'read less';
+                    } else {
+                        contentDataElement.textContent = truncatedDescription;
+                        readMoreLink.textContent = 'read more';
+                    }
+                });
+                brandDiv.appendChild(contentDataElement);
+                brandDiv.appendChild(readMoreLink);
+            } else {
+                brandDiv.appendChild(contentDataElement);
+            }
+
+            const dataNamesElement = cardBody.querySelector('.card-title');
+            const cardFigure = cardBody.querySelector('.card-img-container');
+
+            dataNamesElement.appendChild(brandDiv);
+            cardFigure.appendChild(brandLogo);
+        }
+    });
+</script>
+<style>
+    p.contentData{
+        margin-bottom: 2px;
+    }
+   .shopTheBrand{
+       margin-top: 12px;
+   }
+</style>
+{{/partial}}
+{{> layout/base}}

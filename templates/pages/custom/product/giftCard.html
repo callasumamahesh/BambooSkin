@@ -1,0 +1,79 @@
+---
+product:
+    videos:
+        limit: {{theme_settings.productpage_videos_count}}
+    reviews:
+        limit: {{theme_settings.productpage_reviews_count}}
+    related_products:
+        limit: {{theme_settings.productpage_related_products_count}}
+    similar_by_views:
+        limit: {{theme_settings.productpage_similar_by_views_count}}
+---
+{{inject 'productId' product.id}}
+
+{{#partial "page"}}
+
+<!--{{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}-->
+
+{{#each product.shipping_messages}}
+{{> components/common/alert/alert-info message}}
+{{/each}}
+
+<div class="gift-card-template">
+    {{> components/products/product-view}}
+
+    {{{region name="product_below_content"}}}
+
+    {{#if product.videos.list.length}}
+    {{> components/products/videos product.videos}}
+    {{/if}}
+
+    {{#all settings.show_product_reviews theme_settings.show_product_reviews (if theme_settings.show_product_details_tabs '!==' true)}}
+    {{> components/products/reviews reviews=product.reviews product=product urls=urls}}
+    {{/all}}
+
+    {{> components/products/tabs}}
+</div>
+{{> components/products/schema}}
+{{/partial}}
+{{> layout/base}}
+<script>
+    let recipientData = document.querySelector('.gift-card-template .color-size > :nth-child(4) input[type="text"]')
+    let recentEmail = document.querySelector('.gift-card-template .color-size > :nth-child(5) input[type="text"]')
+    let messageData = document.querySelector('.gift-card-template .color-size > :nth-child(6) input[type="text"]')
+    // let enterValue = document.querySelector('.gift-card-template .color-size > :nth-child(2) input[type="text"]')
+    recipientData.placeholder = "Recipient’s Name"
+    recentEmail.placeholder = "Recipient’s Email"
+    messageData.placeholder = "Personal Message"
+
+
+    // let newParagraph = document.createElement('p');
+    // newParagraph.classList.add('giftCardText');
+    // newParagraph.textContent = '2. Enter Gift Card Details';
+    // let formSelect = document.querySelector('.color-size >:nth-child(2) .form-field.select-data');
+
+
+
+    $('.Amount-field').change(function(){
+        let value = $(this).val();
+        let other = document.querySelector('.gift-card-template .color-size >:nth-child(8)')
+        if(value ==="12407"){
+           other.style.display="block";
+        }
+        else {
+            other.style.display="none";
+        }
+    });
+
+    let inputText = document.querySelector('.color-size >:nth-child(6) input');
+    inputText.addEventListener('input',function(){
+        adjustHeight(this);
+    })
+    function adjustHeight(input){
+        input.style.height = '';
+        input.style.height = input.scrollHeight + 'px';
+    }
+    $('.productView-img-containers').unslick({
+
+    })
+</script>

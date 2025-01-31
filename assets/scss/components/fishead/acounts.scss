@@ -1,0 +1,2179 @@
+.customerName{
+  position: absolute;
+  //left: 3.6%;
+  top: 13%;
+}
+
+.customerAddress{
+  position: absolute;
+  left: 3.6%;
+  top: 14%;
+}
+.accountCreate{
+  margin-left: 6% !important;
+  margin-top: 2% !important;
+  width: 95% !important;
+
+  .form-row{
+    width: 98%;
+    > div{
+      padding-right: 26px;
+    }
+  }
+  .form-field--input{
+    margin-bottom: 1.8rem !important;
+    width: auto !important;
+    label{
+      margin-bottom: 1px;
+      width: 358px;
+    }
+    input{
+      width: 358px;
+    }
+  }
+  .form-field--select{
+    width: auto !important;
+    select,label{
+      width: 358px;
+    }
+    label{
+      margin-bottom: 0;
+    }
+  }
+
+}
+.account--fixedLarge{
+  width: 57%;
+  margin-left: 41.5%;
+  .panel-body{
+    background-color: #ffff;
+    border: 1px solid black;
+    min-height: 21rem;
+  }
+}
+.mobile_account.account.account--fixedLarge.accountAddress{
+  width: 550px;
+  margin-top: 4.5%;
+  .account-body{
+    height: 45vh;
+    overflow-y: scroll;
+
+  }
+  .account-body::-webkit-scrollbar {
+    display: none;
+  }
+  .addressList{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    width: fit-content;
+    gap: 14px;
+    .address{
+      width: auto;
+      .address-addNew{
+        width: 18rem;
+      }
+    }
+  }
+}
+.logoutUl{
+  margin-top: 22px !important;
+}
+.navBar--account{
+  float: left;
+  width: 20%;
+  text-align: left;
+  margin: 8% 0;
+  .navBar-section{
+    .navBar-item.is-active{
+      border-bottom: none;
+      .navBar-action {
+        color: #757575;
+      }
+    }
+    .navBar-item{
+      margin: 0;
+      .navBar-action{
+        font-family: $font-family-inter;
+        font-size: 12px;
+        font-weight: 400;
+        color: $color-black;
+      }
+    }
+  }
+
+  //margin-top: 7%;
+  .navBar-section{
+    gap: 22px;
+    display: flex;
+    flex-direction: column;
+
+  }
+}
+.new_head{
+  width: fit-content;
+  text-align: left;
+  margin-left: 41%;
+  margin-top: 4.5%;
+  font-size: 24px;
+  color: $color-black;
+  font-family: $font-family-playfair;
+  font-weight: 400;
+}
+.alertBox--info{
+  background-color: #ffffff;
+  color: $color-black;
+  padding: 0;
+}
+.alertBox-icon{
+  display: none;
+}
+.customerName,.customerAddress{
+  font-size: 32px;
+  font-family: $font-family-playfair;
+  color: $color-black;
+  margin: 0;
+}
+.menu-tooltip {
+  .navBar-section{
+    padding: 11% 0;
+    border: 1px solid #EFF1F2;
+  }
+  @include breakpoint('medium') {
+    position: absolute;
+    width: 95%;
+    top: 106%;
+    left: -5%;
+    text-align: left;
+    background-color: #ffffff;
+    //display: none;
+    .navBar--account {
+      margin: 0;
+      padding: 7% 0;
+      .navBar-item{
+        margin: 0;
+        width: 100%;
+        text-align: left;
+        padding: 7%;
+        a{
+          padding-left: 10%;
+        }
+
+        .navBar-action{
+          font-size: 12px;
+          width: fit-content;
+          color: $color-black;
+          font-weight: 400;
+          font-family: $font-family-inter;
+        }
+        .navBar-action:hover{
+          text-decoration: underline;
+        }
+        [title="Sign out"]{
+          border: none;
+          text-align: left;
+          margin: 0;
+        }
+      }
+    }
+
+  }
+}
+@include breakpoint('medium') {
+
+}
+
+.login {
+  max-width: 100%;
+  margin: 0;
+  .login-row:after{
+    display: none !important;
+  }
+  .login-row:before{
+    display: none !important;
+  }
+  .login-row {
+    display: flex;
+    align-items: start;
+    max-width: 100%;
+    justify-content: center;
+    gap: 18%;
+    height: 50vh;
+    margin-top: 13rem;
+    @media screen and (min-width: 300px) and (max-width: 800px){
+      flex-direction: column;
+      margin-top: 0;
+    }
+    .login-form{
+      margin-top: 0;
+      @media screen and (min-width: 300px) and (max-width: 800px){
+        padding: 0;
+
+      }
+    }
+    .formData{
+      width: 41%;
+      height: 50vh;
+      padding-right: 18%;
+      margin-right: -9%;
+      border-right: 1px solid #D4D3D3;
+      @media screen and (min-width: 300px) and (max-width: 800px){
+        border-right: none;
+        width: 100%;
+        padding: 0;
+        margin: 0;
+        height: 20vh;
+      }
+    }
+    .form-input{
+      border-radius: 0;
+      border: 1px solid #D4D3D3;
+      color: #757575;
+    }
+    @include breakpoint('medium') {
+      .login-form {
+        width: 100%;
+
+        .form-field--inputEmail {
+          margin-bottom: 1rem;
+        }
+
+        .form-field--inputPassword {
+          margin-bottom: 24px;
+        }
+
+        .form-field {
+          position: relative;
+          .form-input {
+            border-radius: 0;
+            font-size: $fontSize__12;
+
+
+          }
+          .showPassword{
+            position: absolute;
+            right: 2px;
+            top: 25%;
+            font-family: $font-family-inter;
+            font-weight: 400;
+            color: $color-black;
+            font-size: 12px;
+          }
+        }
+
+        .remeber_forgot {
+          display: flex;
+          margin-bottom: 24px;
+
+          .remember {
+            display: flex;
+            gap: 10px;
+            width: 100%;
+            margin: 0;
+            font-size: 12px;
+            font-family: $font-family-inter;
+            font-weight: 400;
+            color: $color-black;
+            align-items: baseline;
+
+            + div {
+              display: flex;
+              justify-content: end;
+              width: 100%;
+              margin: 0;
+              font-size: 12px;
+              font-family: $font-family-inter;
+              font-weight: 400;
+              color: $color-black;
+
+              a {
+               text-decoration: underline;
+              }
+            }
+          }
+        }
+
+        .btn_submit {
+          .button {
+            width: 100%;
+            border-radius: 1px;
+            background-color: #ffffff;
+            color: $color-black;
+            text-transform: uppercase;
+            font-weight: 600;
+            font-family: $font-family-inter;
+            border: 1px solid #212121;
+            font-size: 12px;
+
+          }
+          .button:hover{
+            color: #ffffff !important;
+            background-color: #212121 !important;
+          }
+        }
+      }
+      .new-customer {
+        width: 31%;
+        padding-right: 7%;
+        .create_btn {
+          width: 100%;
+          border-radius: 0;
+          color: $color-black;
+          background-color: #ffffff;
+          font-weight: 600;
+          font-family: $font-family-inter;
+          border: 1px solid #212121;
+          font-size: 12px;
+        }
+
+        .panel-body, .panel-header {
+          background-color: #ffffff;
+          padding: 0;
+        }
+
+        .panel-title {
+          font-size: 32px;
+          color: $color-black;
+          font-family: $font-family-playfair;
+          margin-bottom: 24px;
+        }
+
+        .new-customer-intro {
+          margin-bottom: 24px;
+          font-size: 12px;
+        }
+      }
+    }
+  }
+  @media screen and (min-width: 300px) and (max-width: 800px) {
+    .remeber_forgot{
+      display: flex;
+      flex-direction: row;
+    }
+    .remember{
+      display: flex;
+      align-items: center;
+      gap: 4%;
+      #rememberMe{
+        width: 8%;
+        height: 65%;
+        border: 1px solid #D4D3D3;
+        border-radius: 0;
+        margin-top: 2px;
+      }
+      #rememberMe:hover{
+        color: #D4D3D3;
+      }
+      #rememberMe+label{
+        font-size: 12px;
+      }
+    }
+  }
+}
+.account--fixed {
+  margin-left: 41%;
+  width: 58%;
+  margin-top: 4.5%;
+
+  @media screen and (min-width: 300px) and (max-width: 800px) {
+    margin-left: 3.4%;
+  }
+  .colorBorder{
+    border-color: #212121 !important;
+  }
+  .form-row--half {
+    .form-inlineMessage{
+      color: #E50015;
+      font-family: $font-family-inter;
+      font-size: 10px;
+      font-weight: 400;
+    }
+    .form-field {
+      margin-bottom: 2rem;
+      width: 50%;
+      @media screen and (min-width: 300px) and (max-width: 800px) {
+        width: 99%;
+      }
+      .form-label {
+        visibility: hidden;
+      }
+      .form-label > small{
+        visibility: visible;
+        text-transform: capitalize;
+        font-size: 10px;
+      }
+    }
+  }
+  .form-actions{
+    width: 358px;
+    margin: 0;
+    text-align: start;
+    margin-top: 1rem;
+    @media screen and (min-width: 300px) and (max-width: 800px) {
+       width: 96%;
+    }
+    input,.cancel-btn{
+      width: 100%;
+      margin-top: 12px;
+      color: $color-black;
+      background-color: #ffffff;
+      text-transform: uppercase;
+      font-size: 12px;
+      font-weight: 600;
+      font-family: $font-family-inter;
+      letter-spacing: 1px;
+      border-radius: 0;
+      @media screen and (min-width: 300px) and (max-width: 800px) {
+        margin-top: 17%;
+      }
+    }
+  }
+  input,select{
+    border-radius: 0;
+    width: 98%;
+    padding: 10px;
+    height: 48px;
+    border-color: #D4D3D3 !important;
+    font-size: 12px;
+    font-family: $font-family-inter;
+    color: $color-black;
+  }
+  select{
+    width: 100%;
+  }
+  select::placeholder{
+    font-size: 12px;
+    font-family: $font-family-inter;
+    color: #757575;
+    font-weight: 400;
+  }
+  input{
+    font-size: 12px;
+    font-family: $font-family-inter;
+    color: $color-black;
+    font-weight: 400;
+    width: 96%;
+  }
+  label{
+    width: 96%;
+  }
+  .recaptcha{
+    width: 228px !important;
+    height: 58px;
+  }
+  [title="reCAPTCHA"]{
+    margin-top: 7%;
+    border-radius: 0;
+    #rc-anchor-container{
+      width: 20px !important;
+      height: 20px !important;
+    }
+  }
+  .account-list{
+    margin: 0;
+    .account-orderStatus{
+      span{
+        color: $color-black;
+        font-size: 14px;
+        font-family: $font-family-inter;
+        font-weight: 400;
+      }
+    }
+    .account-product-title{
+      color: $color-black;
+      font-size: 14px;
+      font-family: $font-family-inter;
+      font-weight: 400;
+    }
+    p{
+      color: $color-black;
+      font-size: 14px;
+      font-family: $font-family-inter;
+      font-weight: 400;
+    }
+  }
+  .account-list+h2{
+    font-family: $font-family-inter;
+    font-weight: 400;
+    color: $color-black;
+    font-family: 24px;
+  }
+
+}
+.accont_head{
+  width: 80%;
+  margin-left: 5.5%;
+  margin-top: 10%;
+  @media screen and (min-width: 300px) and (max-width: 800px){
+    width: 99%;
+    margin-left: 0;
+    h1{
+      font-size: 24px !important;
+    }
+    p{
+      font-size: 12px !important;
+    }
+  }
+  h1{
+    font-family: $font-family-playfair;
+    font-size: 32px;
+    font-weight: 400;
+    color: $color-black;
+  }
+  p{
+    font-size: 12px;
+    color: $color-black;
+    font-family: $font-family-inter;
+  }
+}
+
+.account.account--fixedSmall{
+  margin-top: 9%;
+  #email{
+    font-family: $font-family-inter;
+    font-size: 12px;
+    padding: 3%;
+    margin-bottom: 3%;
+    width: 358px;
+    position: relative;
+  }
+  .form-inlineMessage{
+    position: absolute;
+  }
+
+  .forgotHeading{
+    margin: 0;
+    text-align: left;
+    font-family: $font-family-playfair;
+    font-weight: 400;
+    color: $color-black;
+    margin-bottom: 3%;
+  }
+  .msgA{
+    margin-top: 5%;
+  }
+  p,signInOptin{
+    font-family: $font-family-inter;
+    font-weight: 400;
+    color: $color-black;
+    margin-bottom: 3%;
+  }
+  @include breakpoint('medium'){
+    width: 34%;
+    margin-left: 6%;
+
+    .forgotHeading{
+      font-size: 32px;
+    }
+    p{
+      font-size: 12px;
+      width: 60%;
+    }
+
+  }
+  .form-prefixPostfix-button--postfix{
+    height: 3.8rem !important;
+    width: 358px;
+  }
+  .form-prefixPostfix .button:hover{
+    background-color: #ffffff;
+    color: $color-black;
+  }
+}
+.msgHead{
+  font-family: $font-family-playfair;
+  font-size: 32px;
+  color: $color-black;
+}
+.msgP,.msgP2,.msgA{
+  font-family: $font-family-inter;
+  font-size: 12px;
+  color: $color-black;
+  font-weight: 400;
+}
+input#login_email:hover{
+  color: #212121;
+  border-color: #212121;
+  cursor: pointer;
+}
+input#login_pass:hover{
+  cursor: pointer;
+  color: #212121;
+  border-color: #212121;
+}
+input#login_pass{
+  cursor: pointer;
+}
+input#login_email:focus{
+  color: #212121;
+  border-color: #212121;
+}
+#login_pass:focus{
+  color: #212121;
+  border-color: #212121;
+}
+.adress-page.addressData{
+  margin-top: 1.6%;
+  margin-left: 41.6%;
+  label{
+    display: none;
+  }
+  .form-row{
+    width: 74%;
+  }
+  select{
+    width: 96%;
+  }
+
+}
+.page-heading.new_head.edit_page{
+  margin-bottom: 0;
+  margin-left: 40.8%;
+}
+.page-heading.new_head.edit_page+.back_div{
+  margin-bottom: 1.5%;
+  margin-top: 1.5%;
+}
+.wl-brand{
+  font-size: 12px;
+  font-family: $font-family-inter;
+  color: $color-black;
+  font-weight: 600;
+}
+.wishlistContent{
+  .product .card .card-figure .card-img-container .card-image{
+
+    object-fit: contain;
+  }
+  > li .card{
+    margin-left: -5px !important;
+  }
+}
+.forgot-password-form{
+  .alertBox.alertBox--error{
+    margin: 0;
+    border-radius: 0;
+    margin-top: 10px;
+    width: 358px !important;
+  }
+  .alertBox+br+input+span{
+    top: 34.5%;
+  }
+}
+.recently-viewed{
+  .card-figure{
+    span{
+      display: none !important;
+    }
+  }
+  .card-body {
+    .swatches {
+      display: none !important;
+    }
+  }
+}
+@media screen and (min-width: 300px) and (max-width: 800px){ /////////////////////////////////////////////////////////////////////////////////////////////
+  .recentName+nav+script+h2{
+    font-size: 18px;
+  }
+  .accountCreate .form-row > div{
+    padding-right: 0.75rem;
+  }
+
+  .wishlistpage{
+    li.product{
+      display: block !important;
+      form {
+        margin-top: 5px !important;
+        .wCross {
+          position: absolute;
+          top: 19px;
+        }
+      }
+      .slick-track{
+        width: 85px !important;
+        margin: 0;
+      }
+    }
+  }
+
+
+
+
+  .forgot-password-form{
+    .alertBox.alertBox--error{
+      width: 99% !important;
+    }
+    .alertBox+br+input+span{
+      top: 31.5%;
+    }
+  }
+  .accountCreate{
+    margin-left: 10px !important;
+    width: 97%;
+    input{
+      width: 100% !important;
+    }
+    .form-field--input{
+      width: 105% !important;
+      label{
+        width: auto !important;
+      }
+    }
+    .form-label{
+      width: 100%;
+    }
+    .form-field--select{
+      width: 105% !important;
+      select{
+        width: 100%;
+      }
+      .form-label{
+        width: 100%;
+      }
+    }
+    .form-actions{
+      width: 97%;
+    }
+    .form-field {
+      select{
+        width: 100%;
+      }
+    }
+  }
+  .account.account--fixedSmall .form-prefixPostfix-button--postfix{
+    width: 344px;
+  }
+  .mobile_account.account.account--fixedLarge.accountAddress {
+    .account-body {
+      height: 55vh;
+    }
+  }
+  .page-heading.new_head.edit_page+.back_div{
+    margin-bottom: 5.5%;
+    margin-top: 5.5%;
+  }
+
+  .account--fixed input{
+    width: 336px;
+  }
+  .adress-page.addressData {
+    margin-left: 3%;
+    .form-row{
+      width: 100%;
+    }
+    select{
+      width: 105%;
+    }
+  }  .login-row {
+    height: auto !important;
+    .signInTitle {
+      font-family: $font-family-playfair;
+      font-size: 24px;
+      margin-bottom: 8%;
+    }
+    .form-actions.btn_submit{
+      margin-top: 4%;
+      .button {
+        width: 100%;
+        border-radius: 1px;
+        background-color: #ffffff;
+        color: #212121;
+        text-transform: uppercase;
+        font-weight: 600;
+        font-family: "Inter", sans-serif;
+        border: 1px solid #212121;
+        font-size: 12px;
+      }
+
+    }
+    .remember+div{
+      text-align: right;
+    }
+    .new-customer{
+      padding: 0;
+      .panel{
+        .panel-header{
+          background: none;
+          padding: 0;
+          h1{
+            font-size: 24px;
+            font-family: $font-family-playfair;
+            font-weight: 400;
+            margin-bottom: 4%;
+            color: $color-black;
+          }
+        }
+        .panel-body{
+          padding: 0;
+          background:none;
+          p{
+            font-family: $font-family-inter;
+            font-weight: 400;
+            font-size: 12px;
+            margin-bottom: 4%;
+          }
+          .create_btn{
+            border-radius: 0;
+            color: $color-black;
+            background-color: #ffffff;
+            font-weight: 600;
+            font-family: $font-family-inter;
+            border: 1px solid #212121;
+            width: 100%;
+            font-size: 12px;
+          }
+        }
+      }
+    }
+
+
+  }
+  .account.account--fixedSmall {
+    #email{
+      padding: 5%;
+      width: 344px;
+    }
+    .forgotHeading{
+      font-size: 24px;
+    }
+    .signInOptin{
+      font-size: 12px;
+    }
+    p{
+      font-size: 12px;
+    }
+  }
+  .aaa.navBar--account{
+    display: block;
+  }
+  .customerName+.aaa.navBar--account{
+    width: 100%;
+    margin: 8% 0 10% 0;
+    .navBar-section{
+      flex-direction: row;
+      overflow: scroll;
+      gap: 0;
+      margin-left: 0;
+    }
+    .navBar-section::-webkit-scrollbar {
+      display: none;
+    }
+    .navBar-item{
+      padding-right: 5%;
+      a{
+        width: max-content;
+      }
+    }
+  }
+  .navBar-item.order_history {
+    border: none !important;
+    padding-top: 0 !important;
+
+  }
+  .account-settings{
+    border: none !important;
+    padding-bottom: 0 !important;
+
+  }
+  .customerName{
+    font-size: 24px;
+    position: static;
+  }
+  .new_head{
+    font-size: 24px;
+    margin: 0;
+
+  }
+  .account--fixed.account-alert{
+    margin: 0;
+    width: 100%;
+    margin-top: -24px;
+    .alert-bar{
+      width: 100%;
+    }
+    .alertBox-message{
+      font-size: 12px;
+      font-family: $font-family-inter;
+      color: $color-black;
+    }
+  }
+  .inbox_bread+nav{
+    display: none;
+  }
+.account-inbox{
+  width: 100%;
+  margin: 0;
+  margin-top: 16px;
+  .alert-bar{
+    width: 100%;
+  }
+  .alertBox-message{
+    font-size: 12px;
+    font-family: $font-family-inter;
+    color: $color-black;
+  }
+}
+  .mobile_account{
+    width:100% !important;
+    margin: 0;
+    .addressList{
+      display: flex !important;
+      flex-direction: column;
+      margin-top: 6%;
+      width: 100% !important;
+      .address{
+        width: 100%;
+        .panel-body{
+          height: 7rem;
+          padding-left: 9%;
+          width: 100%;
+          margin-left: 3%;
+          form{
+            width: 35%;
+            button.removeBtn{
+              padding-left: 10%;
+              padding-bottom: 3px;
+              padding-top: 3px
+            }
+          }
+        }
+      }
+      .new-address{
+        .panel-body{
+          min-height: 7rem;
+          padding: 0;
+        }
+      }
+    }
+  }
+  .new_head+.recently-viewed{
+    width: 100%;
+    margin: 0;
+    margin-top: 6%;
+    //.card-body{
+    //  padding-left: 0.45rem;
+    //  padding-right: 0.45rem;
+    //}
+    .productGrid{
+      padding-top: 3%;
+      width: 100%;
+      margin: auto;
+      li{
+        padding: 0;
+        width: 156px;
+
+        img{
+          width: 156px;
+        }
+        .card-figure span{
+          display: none;
+        }
+        .slick-dots{
+          padding: 1px 8px;
+          >:nth-child(2){
+            button{
+              border-color: #D4D3D3;
+              background-color: #D4D3D3;
+            }
+          }
+          li{
+            button{
+              border-color: #D4D3D3;
+              background-color: #D4D3D3;
+            }
+          }
+        }
+      }
+     //> :nth-child(even){
+     //   margin-left: 35px;
+     // }
+      .swatches{
+        display: none !important;
+      }
+      >:nth-child(odd){
+        margin-right: 36px;
+      }
+    }
+    img+img{
+      display: block !important;
+    }
+  }
+  .account-edit{
+    width: 100%;
+    .new_head.edit-head{
+      margin-left: 0;
+    }
+    form{
+      width: 100%;
+      margin-top: 5%;
+      margin-left: 0;
+      .form-fieldset{
+        margin-left: 0;
+        width: 100%;
+        .form-field{
+          width: 101%;
+          padding:0;
+          margin-left: 3%;
+        }
+      }
+    }
+    .form-actions.update-form{
+      margin: 0;
+      width: 99%;
+      button{
+        padding: 5%;
+        width: 100%;
+      }
+    }
+    .breadcrumb{
+      display: none;
+    }
+  }
+  .addressData{
+    width: 96%;
+
+    .back_div{
+      margin: 8% 0 8% -4%;
+    }
+    .edit_actions{
+      flex-direction: column;
+      input.button.button--primary{
+        width: 100%;
+        margin-bottom: 2rem;
+      }
+      a.button.cancel-btn{
+        width: 100%;
+        margin-left: 0;
+      }
+    }
+    .form-actions.edit_actions{
+      width: 98%;
+    }
+  }
+  .customerName.editName, .customerName.editName+nav {
+    display: none;
+  }
+  .account.account--fixedLarge.wishlist-change{
+    width: 100%;
+    margin: 0;
+  }
+  .wishlistHead+div+.productGrid.recently-viewed{
+    width: 100%;
+    margin-left: 0;
+    margin-top: 15px;
+    height: 56vh;
+    .card-title{
+      width: 100% !important;
+    }
+    .product {
+      position: relative;
+      .card-body {
+        justify-content: normal;
+        gap: 30%;
+      }
+      .card-figure{
+        width: 100px;
+        .plp-wishlist{
+          display: none;
+        }
+
+      }
+      .card-img-container >:nth-child(2){
+          display: none;
+      }
+      .card-img-container::after{
+        padding-bottom: 0 !important;
+      }
+    }
+    form{
+      [type="submit"]{
+        width: 71%;
+        text-align: left;
+      }
+    }
+  }
+  .wishlistHead+div{
+    margin: 10% 0;
+    display: block !important;
+    .back_t{
+      text-decoration: none;
+      color: $color-black !important;
+      font-family: $font-family-inter;
+      font-size: 12px;
+    }
+    +.recently-viewed {
+      .slick-dots{
+        display: none !important;
+      }
+    }
+  }
+  .wishlistHead{
+    margin-bottom: 15px;
+  }
+.add-wishlist {
+  + div {
+    padding: 10% 0;
+    display: block !important;
+    a{
+      text-decoration: none;
+      font-size: 12px;
+      font-family: $font-family-inter;
+      color: $color-black;
+
+    }
+    + .wishlist-add {
+      form {
+        margin: 0;
+        width: 100%;
+        .form-actions{
+          width: 98%;
+          input{
+            margin: 0;
+            border-color: #212121 !important;
+
+          }
+        }
+
+      }
+      .form-label{
+        font-size: 12px;
+        padding-top: 2px;
+        font-family: $font-family-inter;
+      }
+
+    }
+  }
+}
+.share-wishlist{
+  margin: 0 !important;
+}
+.variantImg{
+  height: 96px !important;
+}
+  .new_head+.back_div{
+    margin-left: -4px;
+    margin: 8% 0;
+  }
+  .account--fixed.account-edit{
+    .form-input{
+      width: 99%;
+    }
+  }
+  .last_three.navBar-item.account-settings{
+    border-bottom: none !important;
+  }
+  .account--fixed.wishlistAccount{
+    width: auto;
+    margin-left: 0;
+    height: 5vh;
+    span {
+      font-size: 12px;
+      color: $color-black;
+      font-family: $font-family-inter;
+    }
+    .alertBox{
+      width: auto;
+    }
+  }
+  .mobile-nav-list{
+    padding: 6%;
+    .is-open {
+      li {
+        padding: 3% 0;
+
+        a {
+          font-size: 12px;
+          text-transform: capitalize;
+        }
+      }
+    }
+  }
+  .mobile-nav-list >li a{
+    font-size: 16px;
+  }
+  .navPages-list [aria-label="Gift Certificates"]{
+    display: none;
+  }
+  .mobile-nav-list >li+li a{
+    font-size: 16px;
+  }
+  .accountAddress {
+    .alertBox{
+      margin-left: 3%;
+    }
+  }
+  .recentName+nav+script+h2+.alertBox{
+    width: auto;
+    margin-left: 0 !important;
+    height: 5vh !important;
+  }
+  .alertBox--success,.alertBox--error{
+    width: 100% !important;
+  }
+  .wishlist-change{
+    .table.wishlists-table{
+
+      .table-thead tr >:nth-child(2){
+          text-align: center;
+        padding-left: 0;
+      }
+      .table-thead tr >:nth-child(3){
+        text-align: center;
+      }
+      .table-tbody {
+        tr {
+          >:nth-child(2){
+            text-align: center;
+            padding-left: 0;
+          }
+          >:nth-child(3){
+            text-align: center;
+          }
+          td {
+            padding-top: 16px;
+            padding-bottom: 16px;
+          }
+        }
+        .table-actions{
+          input{
+            margin-bottom: 0;
+          }
+        }
+      }
+    }
+  }
+  .pdp_sizeGuide{
+    padding: 0 1.5rem;
+    width: 100%;
+  }
+  .login .login-row .formData{
+    height: 50vh;
+  }
+  .login_pass{
+    position: relative;
+  }
+  .form-field--inputPassword{
+    position: relative;
+  }
+  .showPassword{
+    position: absolute;
+    right: 1px;
+    top: 8px;
+  }
+  .blogs>:nth-child(13),.blogs >:nth-child(21),.blogs >:nth-child(37),.blogs >:nth-child(45){
+    width: 95%;
+    margin-left: 2%;
+  }
+  .blogs >:nth-child(9),.blogs >:nth-child(17),.blogs >:nth-child(33),.blogs >:nth-child(41){
+    width: 95%;
+    margin-left: 4%;
+  }
+  .temporary{
+    margin-top: 5%;
+    font-size: 12px;
+    font-family: $font-family-inter;
+    color: $color-black;
+  }
+  .size-slide+.tabs-contents+.pElement{
+    font-size: 14px;
+    color: $color-black;
+    font-family: $font-family-inter;
+  }
+  .static-page .sectionsCollab .collapsible{
+    line-height: 19px;
+  }
+  .static-page .collapsible{
+    line-height: 19px !important;
+  }
+
+}/////////////////////////////////////////////////////////////////////////////////
+.account-edit form fieldset .alertBox{
+  margin-left: 0;
+  border-radius: 0;
+  margin-bottom: 10px;
+  p{
+    span{
+      font-family: $font-family-inter;
+      color: #212121;
+      font-weight: 400;
+    }
+  }
+}
+.temporary{
+  margin-top: 1%;
+  color: $color-black;
+}
+
+.createdAccount{
+  height: 37vh;
+  h1{
+    font-size: 32px;
+    font-family: $font-family-playfair;
+    color: $color-black;
+  }
+  p{
+    font-size: 14px;
+    font-family: $font-family-inter;
+    color: $color-black;
+  }
+  .button{
+    border-radius: 0;
+    color: $color-black;
+    background: #FFFFFF;
+    font-family: $font-family-inter;
+    font-size: 15px;
+    font-weight: 600;
+  }
+}
+.new-password-page {
+  .new_pass {
+    text-align: left;
+    font-size: 32px;
+    font-family: $font-family-playfair;
+    color: $color-black;
+  }
+  .alertBox--error{
+    width: 100%;
+    margin: 0;
+  }
+  input{
+    border-radius: 0;
+  }
+  .button{
+    width: 100%;
+    color: $color-black;
+    background: #FFFFFF;
+    font-family: $font-family-inter;
+    font-weight: 600;
+    font-size: 14px;
+
+  }
+}
+
+.wishlists-table{
+  .table-tbody{
+    tr{
+      border-color: #D4D3D3;
+    }
+  }
+}
+.recentName+nav+script+h2+.alertBox{
+  height: 50vh;
+  margin-left: 41%;
+  margin-top: 4.5%;
+}
+.customerName.recentName{
+  top: 6%;
+}
+.variantImg{
+  //height: 100px !important;
+}
+.share-wishlist {
+  margin-left: 41%;
+  .share-panel {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 1.5rem;
+
+    .share-title {
+      margin-bottom: 0;
+      font-family: $font-family-inter;
+      font-size: 12px;
+      color: $color-black;
+
+    }
+
+    .icons-panel {
+      width: 45%;
+
+      a {
+        display: flex;
+        justify-content: space-between;
+      }
+    }
+  }
+}
+
+.add-wishlist {
+  + div {
+    display: none;
+    a {
+      text-decoration: none;
+    }
+
+    + .wishlist-add {
+      form {
+        .form-actions{
+          width: 100%;
+        }
+        .form-field {
+          padding: 0;
+
+          #wishlistname {
+            border-radius: 0;
+            font-size: 12px;
+            font-family: $font-family-inter;
+            color: #757575;
+            width: 100%;
+          }
+
+          .form-checkbox {
+            + label::before {
+              border-radius: 0;
+              font-family: $font-family-inter;
+            }
+            label{
+              font-size: 12px !important;
+              font-family: $font-family-inter !important;
+              color: $color-black;
+            }
+          }
+        }
+
+      }
+      .form-actions{
+        input{
+          border-radius: 0;
+          color: $color-black;
+          background-color: #FFFFFF;
+          font-weight: 600;
+          font-size: 12px;
+          font-family: $font-family-inter;
+        }
+      }
+    }
+  }
+}
+.wishlistHead+div{
+  display: none;
+}
+.wishlists-table{
+  .table-thead {
+    tr {
+      th {
+        font-family: $font-family-inter;
+        font-size: 12px;
+        font-weight: 700;
+        color: $color-black;
+      }
+    }
+  }
+  .table-tbody{
+
+    a,td{
+      font-size: 12px !important;
+      font-family: $font-family-inter;
+      font-weight: 400;
+      color: $color-black;
+    }
+    td{
+      text-decoration: none;
+    }
+    .table-actions{
+      a,input{
+        font-family: $font-family-inter;
+        font-size: 12px !important;
+        border: none;
+        background: none;
+        text-decoration: underline;
+        text-align: left;
+        padding:0;
+      }
+      input{
+        color: #D4D3D3;
+      }
+    }
+  }
+}
+.wishlists-table+form{
+  .button{
+    background: none;
+    border-radius: 0;
+    font-family: $font-family-inter;
+    font-size: 12px;
+    color: $color-black;
+    font-weight: 600;
+    text-transform: uppercase;
+    border-color: $color-black;
+  }
+  a{
+    color: #FFFFFF !important;
+    background-color: $color-black !important;
+  }
+ }
+.account--fixedSmall{
+  visibility: visible;
+}
+.login-row{
+  input[type=password]::-ms-reveal,
+  input[type=password]::-ms-clear {
+    display: none;
+  }
+  input[type=password]::after {
+    content: 'Show';
+    display: inline-block;
+    position: relative;
+    top: -1px;
+    padding-left: 5px;
+    cursor: pointer;
+  }
+}
+.customerAddress+h2+.navBar--account{
+  margin: 0;
+}
+.inboxName{
+
+  +.navBar--account{
+    +.account-inbox{
+      margin-top: 3%;
+    }
+  }
+}
+.logoutUl{
+  .navBar-item{
+    margin: 0;
+    .navBar-action{
+      font-size: 12px;
+      color: $color-black;
+      font-weight: 400;
+      font-family: $font-family-inter;
+    }
+  }
+}
+.address-title{
+  font-family: $font-family-inter;
+  font-size: 12px;
+  font-weight: 600;
+  color: $color-black;
+}
+.address{
+  width: 29%;
+  .panel--address{
+    .panel-body{
+      padding: 2.5rem 2.5rem 4.5rem;
+      width: 261px;
+      height: 260px;
+      .form-actions{
+        top: 73%;
+        display: flex;
+        align-items: baseline;
+        .removeBtn{
+          border: 0;
+          padding: 0;
+          margin-bottom: 0;
+          font-size: 12px;
+          font-family: $font-family-inter;
+          font-weight: 400;
+          color: $color-black;
+          text-decoration: underline;
+          padding-left: 10%;
+          padding-top: 5%;
+          padding-bottom: 5%;
+          border-left: 1px solid black;
+          border-radius: 0;
+
+        }
+      }
+    }
+  }
+  .address-details,.address-label,.address-description{
+    font-size: 12px;
+    font-family: $font-family-inter;
+    font-weight: 400;
+    color: $color-black;
+    line-height: 20px;
+  }
+  .address-details{
+    margin: 0;
+  }
+}
+.address-addNew{
+  text-decoration: underline;
+  line-height: 2px;
+}
+.editBtn{
+  font-size: 12px;
+  font-family: $font-family-inter;
+  color: $color-black;
+  font-weight: 400;
+}
+.navMenu{
+  width: 100%;
+  padding: 0 !important;
+  .navBar-section{
+    gap: 0;
+  }
+}
+input[type="checkbox"] {
+  -webkit-appearance: none;
+  appearance: none;
+  background-color: #fff;
+  margin: 0;
+}
+
+input[type="checkbox"] {
+  appearance: none;
+  background-color: #fff;
+  margin: 0;
+  font: inherit;
+  color: currentColor;
+  width: 1.15em;
+  height: 1.15em;
+  border: 0.15em solid currentColor;
+  transform: translateY(-0.075em);
+}
+.form-control + .form-control {
+  margin-top: 1em;
+}
+input[type="checkbox"] {
+  display: grid;
+  place-content: center;
+  color: #D4D3D3;
+}
+input[type="checkbox"]:active{
+  color: #212121;
+}
+
+input[type="checkbox"]:hover{
+ cursor: pointer;
+  color: $color-black;
+}
+
+input[type="checkbox"]::before {
+  content: "";
+  width: 0.65em;
+  height: 0.65em;
+  transform: scale(0);
+  transition: 120ms transform ease-in-out;
+  box-shadow: inset 1em 1em var(--form-control-color);
+}
+
+input[type="checkbox"]:checked::before {
+  transform: scale(1);
+}
+input[type="checkbox"]::before {
+  background-color: CanvasText;
+}
+
+.remember input+label:focus-visible,
+.remeber_forgot:focus-visible,
+.remember:focus-visible{
+  border: none;
+  outline: none;
+}
+.wishlist-change{
+  margin-left: 41%;
+  width: 57%;
+  padding-top: 1.5%;
+  .wishlists-table{
+    margin: 0;
+  }
+}
+.wishlist-head{
+  margin-top: 4%;
+}
+.recently-viewed{
+  width: 58%;
+  margin-left: 41%;
+  .productGrid{
+    padding-top: 3%;
+  }
+  .second-image{
+    display: none !important;
+  }
+  .form-wishlist{
+    display: none !important;
+  }
+}
+.recentName+h2+.navBar--account{
+  margin: 2% 0;
+}
+.alert-bar{
+  width: 58%;
+}
+.back_div{
+  width: fit-content;
+  margin-left: 40.7%;
+
+  .back_t{
+    text-decoration: none;
+    color: $color-black;
+    font-size: 12px;
+    font-family: $font-family-inter;
+    font-weight: 400;
+  }
+}
+.cancel-btn{
+  margin-left: 0;
+}
+.edit_actions{
+  display: flex;
+  flex-direction: row;
+}
+
+  .account-edit{
+    margin: 0;
+    .form-account {
+     width: 100%;
+      .form-field{
+        width: auto;
+        margin-bottom: 3rem;
+      }
+    }
+    .form-fieldset{
+      //margin-left: 70%;
+      //width: 80%;
+      width: auto;
+    }
+    .edit-head{
+      margin-left: 70%;
+    }
+    .update-form{
+      margin: 0;
+      width: 41%;
+      button{
+
+        border-radius: 0;
+        text-transform: uppercase;
+        font-size: 12px;
+        font-family: $font-family-inter;
+        font-weight: 600;
+        background-color: $color-black;
+        width: 320px;
+      }
+    }
+    .form-input{
+      font-size: 12px;
+      font-family: $font-family-inter;
+      font-weight: 400;
+      color: #757575;
+      width: 320px;
+    }
+    small,label{
+      display: none;
+    };
+  }
+  .navBar-item.order_history{
+    border-top: 1px solid #D4D3D3;
+    padding-top: 3%;
+  }
+  .navBar-item.account-settings{
+    border-bottom: 1px solid #D4D3D3 !important;
+    padding-bottom: 3%;
+  }
+label[for="FormField_12_select"]{
+  display: none;
+}
+.form-actions.edit_actions{
+  width: 71% ;
+  margin-top: 0;
+  .button--primary{
+   width: 50%;
+    margin-top: 0;
+    background-color: $color-black;
+    color:#ffffff;
+    font-family: $font-family-inter;
+    font-weight: 600;
+  }
+  .button.cancel-btn{
+    width: 50%;
+    margin-left: 3.9%;
+    margin-top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+.productGrid.recently-viewed{
+  display: flex;
+  flex-direction: column;
+  margin-top: 4.5%;
+  width: 54%;
+  height: 52vh;
+  overflow-y: scroll;
+  -ms-overflow-style: none;
+  >:nth-child(1){
+    border-top: 1px solid #D4D3D3;
+  }
+  .product {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #D4D3D3;
+    padding: 20px 0 20px 0;
+    overflow: visible;
+    .card {
+      display: flex;
+      flex-direction: row;
+      margin: 0;
+      .card-figure {
+        width: 100px;
+      }
+      .card-body{
+        display: flex;
+        flex-direction: column;
+        gap: 40%;
+        margin-top: -5px;
+        padding-top: 0;
+        .card-text{
+          .price-section{
+            font-size: 12px;
+            font-family: $font-family-inter;
+            color: $color-black;
+          }
+          .price-section::before{
+            content: 'PRICE:';
+
+          }
+        }
+        .card-title{
+          width: 213%;
+        }
+      }
+    }
+    form{
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: end;
+      margin-bottom: 0;
+      .button{
+        background: none;
+        border-radius: 0;
+        border: none;
+        color: $color-black;
+        text-decoration: underline;
+        text-transform: uppercase;
+        padding: 0;
+        margin: 0;
+        font-family: $font-family-inter;
+        font-size: 12px;
+        font-weight: 600;
+      }
+    }
+  }
+  .card-img-container{
+    img{
+      width: 78px !important;
+      height: 116px;
+      margin: 0;
+    }
+  }
+  .card-img-container::after{
+    padding-bottom: 95% !important;
+    width: 70%;
+  }
+}
+.productGrid.recently-viewed::-webkit-scrollbar{
+  display: none;
+}
+.wishlistHead+nav{
+  margin: 0;
+}
+.wishlistAccount{
+  height: 50vh;
+}
+.recently-viewed img+img{
+  display: none !important;
+}
+.forgotPass {
+  height: 50vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  .g-recaptcha{
+    margin: 0;
+  }
+}
+.back_t{
+  .left-icon{
+    color: $color-black;
+    padding-bottom: 1.5px;
+  }
+}
+.wishlist-add [for="publicwishlist"]{
+  color: $color-black;
+}
+.alertBox--success,.alertBox--error{
+  text-align: -webkit-center;
+  width: 45%;
+  margin: 0 auto;
+  position: relative;
+  background: lightgray;
+
+}
+.login_close{
+  position: absolute;
+  top: 40%;
+  right: 1%;
+  cursor: pointer;
+}
+.login-form {
+  #rememberMe:checked {
+    border: 1px solid #212121 !important;
+  }
+}
+.subscribe_page{
+  height: 40vh;
+  >h1{
+    font-size: 32px;
+    font-family: $font-family-playfair;
+    color: $color-black;
+  }
+}
+.subscribe_page > h1:focus-visible{
+  border: none;
+  outline: none;
+}
+.wishlistName{
+  top: 12%;
+}
+.account-inbox {
+  .account-content {
+    .form-label{
+      color: #757575;
+      font-family: $font-family-inter;
+      width: 100%;
+    }
+    .form-select{
+      color: $color-black;
+      font-family: $font-family-inter;
+    }
+    textarea{
+      border-radius: 0;
+      font-family: $font-family-inter;
+      color: $color-black;
+      font-weight: 400;
+    }
+    #message_subject{
+      width: 100%;
+    }
+    .form-actions{
+     display: flex;
+      width: 100%;
+      align-items: baseline;
+      justify-content: center;
+      input{
+        font-size: 12px;
+        color: $color-black;
+        font-family: $font-family-inter;
+        font-weight: 600;
+      }
+      input:hover{
+        color: #FFFFFF;
+        background-color: $color-black;
+        border-color: $color-black !important;
+      }
+    }
+    .form-field--success {
+      textarea {
+        border-color: #D4D3D3;
+      }
+    }
+  }
+}
+.account-detail-Page{
+  width: 54%;
+  margin-left: 24.6%;
+  .account-orderTotal{
+    width: 100%;
+    dt,dd{
+      font-family: $font-family-inter;
+      font-weight: 400;
+      font-size: 14px;
+      color: $color-black;
+    }
+    >:nth-child(6){
+      font-size: 18px;
+      font-weight: 600;
+    }
+  }
+  h3{
+    font-size: 24px;
+  }
+  h5,
+  .definitionList-key,
+  .definitionList-value{
+    font-size: 14px;
+  }
+  .account-product-price{
+    font-family: $font-family-inter;
+    color: $color-black;
+    font-weight: 600;
+    font-size: 14px;
+  }
+  h5,
+  h3,
+  .definitionList-key,
+  .definitionList-value{
+    font-family: $font-family-inter;
+    color: $color-black;
+    font-weight: 400;
+  }
+  .account-product-figure::after{
+    padding-bottom: 0 !important;
+  }
+}
+.account-detail-Page+.account-details{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  justify-content: center;
+  align-items: baseline;
+  width: 55%;
+  column-gap: 6%;
+  section{
+     h3{
+       font-size: 24px;
+       font-weight: 400;
+       font-family: $font-family-inter;
+       color: $color-black;
+     }
+    dl{
+      dt,dd{
+        font-family: $font-family-inter;
+        font-size: 14px;
+        color: $color-black;
+        font-weight: 400;
+      }
+    }
+    li,button,.button{
+      font-family: $font-family-inter;
+      font-size: 14px;
+      color: $color-black;
+      font-weight: 400;
+    }
+    button,.button{
+      border-radius: 0;
+      font-weight: 600;
+      width: 190px;
+    }
+    button:hover,.button:hover{
+      color: #FFFFFF;
+      background-color: $color-black;
+      border-color: $color-black;
+    }
+  }
+}
+.title-orders{
+  font-family: $font-family-playfair;
+  font-size: 32px;
+  color: $color-black;
+  font-weight: 400;
+  text-align: left;
+}
+.orderName{
+  top: 9%;
+}
+section.account-content{
+  height: 40vh;
+  overflow: scroll;
+  margin-top: -12px;
+  a,p,span{
+    font-family: $font-family-inter;
+    color: $color-black;
+    font-size: 14px;
+    font-weight: 400;
+  }
+  h6{
+    font-family: $font-family-inter;
+  }
+  .account-heading{
+    display: none;
+  }
+
+  .account-list{
+    >:nth-child(1){
+      border-top: 1px solid #e5e5e5;
+    }
+  }
+}
+section.account-content::-webkit-scrollbar{
+  display: none;
+}
+@media screen and (min-width: 300px) and (max-width: 800px){
+  .account-inbox{
+    .account-content{
+      .form-actions{
+        flex-direction: column;
+        >:nth-child(1){
+          margin-top: 10px;
+        }
+      }
+    }
+  }
+
+}
+.inboxName+nav+script+h1+.account-inbox{
+  .account-content{
+    height: auto;
+  }
+}
+@media screen and (min-width: 300px) and (max-width: 1000px) {
+  .account-detail-Page{
+    width: 100%;
+    margin: 0;
+  }
+  .title-orders{
+    text-align: left;
+  }
+  .account-detail-Page + .account-details{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding-top: 6%;
+    section{
+      width: 100%;
+    }
+  }
+}
+@-moz-document url-prefix() {
+  .account-edit{
+    .form-fieldset {
+      margin-left: 0;
+    }
+    form.form{
+      margin-left: 70%;
+    }
+}
+  .forgotPass .form-inlineMessage{
+    top: 42.5%;
+  }
+  .account-edit .form-account{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    margin-top: 6px;
+    >div{
+      order: -1;
+    }
+    .form-field{
+      width: 100%;
+    }
+  }
+
+  @media screen and (min-width: 300px) and (max-width: 800px) {
+    .account-edit{ .form-account {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+    form.form{
+      margin-left:0 !important;
+    }
+    .forgotPass {
+      #email {
+        margin: 10% 0 !important;
+      }
+      .g-recaptcha{
+        margin: 0 0 6% 0 !important;
+      }
+    }
+    .forgotPass .form-inlineMessage{
+      top: 41.5%;
+    }
+  }
+  html{
+    scrollbar-width: none;
+  }
+}
+

@@ -1,0 +1,72 @@
+<!--<a href="#main-content" class="skip-to-main-link">{{lang 'header.skip_to_main'}}</a>-->
+<script async type="text/javascript" src="https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=U8XjRm"></script>
+{{#if banners.top}}
+
+<div class="banners" data-banner-location="top">
+    {{#each (limit banners.top_metadata 1)}}
+    <div class="banner" data-event-type="promotion" data-entity-id="{{this.id}}" data-name="{{this.banner-name}}" data-position="{{this.location}}" data-banner-id="{{this.banner-name}}">
+        <div data-event-type="promotion-click">
+            {{{this.content}}}
+        </div>
+    </div>
+    {{/each}}
+    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
+        <path d="M1 11L11 1M11 11L1 1" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+</div>
+{{else}}
+<div class="banners static-banner" data-banner-location="top">
+    <div class="banner" data-event-type="promotion">
+        <div data-event-type="promotion-click ak">
+            <p>Free shipping over $250 Australia wide <a href="/delivery-and-shipping/"><strong>Learn More</strong></a></p>
+        </div>
+    </div>
+    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
+        <path d="M1 11L11 1M11 11L1 1" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+</div>
+{{/if}}
+<header class="header" role="banner">
+
+
+    {{#if page_type '===' 'default'}}
+        <h1 class="header-logo header-logo--{{theme_settings.logo-position}}">
+            {{> components/common/store-logo}}
+        </h1>
+    {{else}}
+        <div class="header-logo header-logo--{{theme_settings.logo-position}}">
+            {{> components/common/store-logo}}
+        </div>
+    {{/if}}
+    <div class="navPages-container" id="menu" data-menu>
+        {{> components/common/navigation-menu}}
+    </div>
+
+    <a href="#" class="mobileMenu-toggle" data-mobile-menu-toggle="menu">
+        <span class="mobileMenu-toggleIcon">Toggle menu</span>
+    </a>
+    <li class="navUser-item search-mob">
+        <button class="navUser-action navUser-action--quickSearch"
+                type="button"
+                id="quick-search-expand"
+                data-search="quickSearch"
+                aria-controls="quickSearch"
+                aria-label="{{lang 'common.search'}}"
+        >
+            <!--                {{lang 'common.search'}}-->
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M15.2178 15.0366L15.2179 15.0365C15.426 14.826 15.4268 14.4864 15.2185 14.2758L15.2181 14.2754L11.3327 10.4459C13.226 8.12445 13.1033 4.67138 10.9605 2.49862C9.85842 1.37926 8.39095 0.7625 6.83051 0.7625C5.27005 0.7625 3.80261 1.37923 2.69988 2.49729C0.423338 4.80396 0.423356 8.55739 2.69988 10.8653C3.80263 11.9834 5.27013 12.5989 6.83057 12.5989C8.22043 12.5989 9.5333 12.1069 10.5837 11.2104L14.464 15.0358C14.464 15.0359 14.4641 15.0359 14.4642 15.036C14.568 15.1409 14.7051 15.1938 14.8416 15.1938C14.9782 15.1938 15.114 15.1408 15.2178 15.0366ZM3.45523 3.25724L3.45524 3.25724C4.35741 2.34263 5.55583 1.83974 6.83057 1.83974C8.1052 1.83974 9.30366 2.34263 10.2059 3.25724L10.2059 3.25724C12.0687 5.14484 12.0687 8.21668 10.2059 10.1042L10.2059 10.1043C9.30372 11.0189 8.10532 11.5218 6.83057 11.5218C5.55591 11.5218 4.35747 11.0189 3.45524 10.1043L3.45523 10.1042C1.59246 8.21668 1.59246 5.14484 3.45523 3.25724Z" fill="#212121" stroke="#212121" stroke-width="0.1"/>
+            </svg>
+        </button>
+    </li>
+    {{> components/common/navigation}}
+
+<!--    {{{region name="header_navigation_bottom&#45;&#45;global"}}}-->
+</header>
+{{{region name="header_bottom--global"}}}
+{{{region name="header_bottom"}}}
+<style>
+    [data-testid="POPUP"] > div > div > :nth-child(2){
+        display: none !important;
+    }
+</style>

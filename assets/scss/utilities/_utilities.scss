@@ -1,0 +1,23 @@
+// =============================================================================
+// UTILITIES
+// =============================================================================
+
+
+$exportCSS--displayUtilities:           true;
+
+$exportCSS--textUtilities:              true;
+.u-textAlignCenter{
+  display: flex;
+  justify-content: center;
+  color: #212121 !important;
+  font-family: $font-family-inter;
+  font-weight: 400;
+}
+.page-heading{
+  color: #212121;
+  font-family: $font-family-inter;
+  font-weight: 400;
+}
+[for="search_query_adv"]{
+  font-family: $font-family-inter;
+}

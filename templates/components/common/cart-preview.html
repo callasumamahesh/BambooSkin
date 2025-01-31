@@ -1,0 +1,141 @@
+<div class="previewCartWrapper mini-cart">
+  <div class="previewCart">
+    {{#if cart.items.length}}
+      <h2 class="mini-cart-heading">My bag ({{cart.quantity}}) | {{cart.sub_total.formatted}}</h2>
+      <svg class="mini-cart-close-icon" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 16 16" fill="none">
+                <path d="M1.33398 14.6693L14.6673 1.33594M14.6673 14.6693L1.33398 1.33594" stroke="#212121" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        <ul class="previewCartList">
+            {{#each (limit cart.items 50)}}
+                <li class="previewCartItem">
+                    <div class="previewCartItem-image">
+                        {{#if type '==' 'GiftCertificate'}}
+                            <img
+                                alt="GiftCertificate"
+                                title="GiftCertificate"
+                                src="{{cdn ../theme_settings.default_image_gift_certificate}}"
+                            >
+                        {{else}}
+                            {{> components/common/responsive-img
+                                image=image
+                                fallback_size=../theme_settings.productthumb_size
+                                lazyload=../theme_settings.lazyload_mode
+                                default_image=../theme_settings.default_image_product
+                            }}
+                        {{/if}}
+                    </div>
+                        <div class="previewCartItem-content">
+                            <div class="preview-title">
+                            <span class="previewCartItem-brand">
+                                {{brand.name}}
+                            </span>
+
+                            <h6 class="previewCartItem-name">
+                                <a href="{{url}}" alt="{{name}}" title="{{name}}">{{{lowercase (first (split name '_'))}}}</a>
+                            </h6>
+
+                            <span class="previewCartItem-price">
+
+                                {{#or ../customer (unless ../settings.hide_price_from_guests) (if type '==' 'GiftCertificate')}}
+                                    <span{{#if price_discounted}} class="price--discounted"{{/if}}>{{price.formatted}}</span>
+                                    {{#if price_discounted}}
+                                        {{price_discounted.formatted}}
+                                    {{/if}}
+                                {{else}}
+                                    {{> components/common/login-for-pricing}}
+                                {{/or}}
+                            </span>
+                        </div>
+                            {{#each options}}
+                                <dl class="productView-info">
+                        <dt class="productView-info-name">
+                            {{name}}:
+                        </dt>
+                        <dd class="productView-info-value">
+                            {{{lowercase (sanitize value)}}}
+                        </dd>
+                    </dl>
+                            {{/each}}
+                            <dl class="productView-info">
+                                <dt class="productView-info-name">
+                                    QTY:
+                                </dt>
+                                <dd class="productView-info-value">
+                                    {{quantity}}
+                                </dd>
+                            </dl>
+<!--                            <button class="cart-remove icon ak"-->
+<!--                                    data-cart-itemid="{{id}}"-->
+<!--                                    data-confirm-delete="{{lang 'cart.confirm_delete'}}"-->
+<!--                                    aria-label="{{lang 'cart.remove_item' name=name}}"-->
+<!--                            >-->
+<!--                                <svg><use href="#icon-close"></use></svg>-->
+<!--                                Remove-->
+<!--                            </button>-->
+<!--                            <a href="/brands" class="remove-mini-cart-item">Remove</a>-->
+                            <form action="/cart.php?action=remove&item={{id}}" method="post" class="mini-cart-remove-item">
+                                <button class="button" type="submit">
+                                    Remove
+                                    </button>
+                            </form>
+
+                     </div>
+                  </li>
+                {{/each}}
+            </ul>
+            <div class="previewCartAction">
+                {{#if cart.additional_checkout_buttons}}
+                    <div data-cart-accelerated-checkout-buttons class="previewCart-acceleratedCheckoutButtons"></div>
+                {{/if}}
+                {{#if cart.show_primary_checkout_button}}
+                    <div class="previewCartAction-checkout">
+                        <a
+                                href="{{urls.checkout.single_address}}"
+                                class="button button--small button--primary"
+                                data-primary-checkout-now-action
+                        >
+                            {{lang 'cart.preview.checkout_now'}}
+                        </a>
+                    </div>
+                {{/if}}
+
+                <div class="previewCartAction-viewCart{{#unless cart.show_primary_checkout_button}} previewCartAction-viewCart--sole{{/unless}}">
+                    <a href="{{urls.cart}}" class="button button--small button--action">
+                        {{lang 'cart.preview.view_cart'}}
+                    </a>
+                </div>
+
+                {{#if cart.show_multiple_address_shipping}}
+                    <div class="previewCartAction-checkoutMultiple">
+                        <a href="{{urls.checkout.multiple_address}}">
+                            {{lang 'cart.preview.checkout_multiple'}}
+                        </a>
+                    </div>
+                {{/if}}
+            </div>
+<!--            {{#if cart.additional_checkout_buttons}}-->
+<!--                <div class="previewCart-additionalCheckoutButtons">-->
+<!--                    {{#each cart.additional_checkout_buttons}}-->
+<!--                        {{{this}}}-->
+<!--                    {{/each}}-->
+<!--                </div>-->
+<!--            {{/if}}-->
+        {{else}}
+            <svg class="empty-mini-cart-close-icon" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 16 16" fill="none">
+                <path d="M1.33398 14.6693L14.6673 1.33594M14.6673 14.6693L1.33398 1.33594" stroke="#212121" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <div role="alert" aria-live="polite" aria-atomic="false" class="previewCart-emptyBody new-empty-cart">
+<!--                {{lang 'cart.checkout.empty_cart'}}-->
+                <h6>Your Cart is Empty</h6>
+                <p>Don’t forget to check our latest arrivals</p>
+                <div class="new-arrivals-btn">
+                    <a href="/new-arrivals/" class="style-btn">Shop New Arrivals</a>
+                </div>
+            </div>
+        {{/if}}
+    </div>
+</div>
+
+<style>
+
+</style>

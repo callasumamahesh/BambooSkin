@@ -1,0 +1,57 @@
+{{#partial "page"}}
+<p class="inbox_bread"></p>
+    {{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}
+
+
+    {{#if customer}}
+    <h1 class="customerName editName">Hello, {{customer.name}}!</h1>
+    {{/if}}
+
+    {{> components/account/navigation account_page='addresses'}}
+{{#if forms.address.address_id}}
+<h2 class="page-heading new_head edit_page">{{lang 'forms.address.edit.heading'}}</h2>
+{{else}}
+<h2 class="page-heading new_head">{{lang 'forms.address.add.heading'}}</h2>
+{{/if}}
+<div class="back_div h">
+    <a class="back_t" href="/account.php?action=address_book">
+        <img class="left-icon" src="https://store-rnjw8pihep.mybigcommerce.com/product_images/Component%2014%20%281%29.png">
+        Back</a>
+</div>
+    <div class="account addressData account--fixed adress-page">
+
+
+        {{#if forms.address.error}}
+            {{> components/common/alert/alert-error forms.address.error}}
+        {{/if}}
+
+        <div class="account-body">
+
+            <form action="{{forms.address.action}}" data-address-form class="form" method="post">
+                {{#if forms.address.address_id }}
+                    <input type="hidden" name="shipid" value="{{forms.address.address_id}}">
+                {{/if}}
+                <fieldset class="form-fieldset">
+                    <div class="form-row form-row--half">
+                        {{#each forms.address.shipping_fields }}
+                            {{{dynamicComponent 'components/common/forms'}}}
+
+                        {{/each}}
+
+                    </div>
+                    <div class="form-actions edit_actions">
+                        <input type="submit" class="button button--primary" value="{{lang 'forms.address.submit_value'}}">
+                        <a href="{{urls.account.addresses}}" class="button cancel-btn">{{lang 'common.cancel'}}</a>
+                        {{inject 'required' (lang 'common.required')}}
+                        {{inject 'state_error' (lang 'errors.state_error')}}
+                    </div>
+                </fieldset>
+
+            </form>
+
+        </div>
+    </div>
+
+{{/partial}}
+{{> layout/base}}
+

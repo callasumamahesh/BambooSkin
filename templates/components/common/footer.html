@@ -1,0 +1,188 @@
+{{#if banners.bottom}}
+    {{#if settings.data_tag_enabled}}
+        <div class="banners" data-banner-location="bottom">
+            {{#each (limit banners.bottom_metadata 1)}}
+                <div class="banner" data-event-type="promotion" data-entity-id="{{this.id}}" data-name="{{this.banner-name}}" data-position="{{this.location}}" data-name="{{this.banner-name}}">
+                    <div data-event-type="promotion-click">
+                        {{{this.content}}}
+                    </div>
+                </div>
+            {{/each}}
+        </div>
+    {{else}}
+        <div class="banners" data-banner-location="bottom">
+            <div class="banner">
+                {{{limit banners.bottom 1}}}
+            </div>
+        </div>
+    {{/if}}
+
+{{/if}}
+<footer class="footer" role="contentinfo">
+    <h2 class="footer-title-sr-only">{{lang 'footer.title'}}</h2>
+    <div class="container">
+        {{#if theme_settings.social_icon_placement_bottom '!==' 'bottom_none'}}
+            <article class="footer-info-col
+                footer-info-col--social
+                footer-info-col--{{#if theme_settings.social_icon_placement_bottom '===' 'bottom_left'}}left{{else}}right{{/if}}"
+                data-section-type="footer-webPages">
+                    <h3 class="footer-info-heading">{{lang 'social.connect'}}</h3>
+                    {{> components/common/social-links}}
+            </article>
+        {{/if}}
+        <section class="footer-info">
+<!--            <article class="footer-info-col footer-info-col&#45;&#45;small" data-section-type="footer-webPages">-->
+<!--                <h3 class="footer-info-heading">{{lang 'footer.navigate'}}</h3>-->
+<!--                <ul class="footer-info-list">-->
+<!--                    {{#each pages}}-->
+<!--                        <li>-->
+<!--                            <a href="{{url}}">{{name}}</a>-->
+<!--                        </li>-->
+<!--                    {{/each}}-->
+<!--                    <li>-->
+<!--                        <a href="">{{lang 'sitemap.page_title'}}</a>-->
+<!--                    </li>-->
+<!--                </ul>-->
+<!--            </article>-->
+
+<!--            <article class="footer-info-col footer-info-col&#45;&#45;small" data-section-type="footer-categories">-->
+<!--                <h3 class="footer-info-heading">{{lang 'footer.categories'}}</h3>-->
+<!--                <ul class="footer-info-list">-->
+<!--                    {{#each categories}}-->
+<!--                        <li>-->
+<!--                            <a href="{{url}}">{{name}}</a>-->
+<!--                        </li>-->
+<!--                    {{/each}}-->
+<!--                </ul>-->
+<!--            </article>-->
+
+<!--            {{#and theme_settings.shop_by_brand_show_footer shop_by_brand.length}}-->
+<!--            <article class="footer-info-col footer-info-col&#45;&#45;small" data-section-type="footer-brands">-->
+<!--                <h3 class="footer-info-heading">{{lang 'footer.brands'}}</h3>-->
+<!--                <ul class="footer-info-list">-->
+<!--                    {{#each shop_by_brand}}-->
+<!--                        <li>-->
+<!--                            <a href="{{url}}">{{name}}</a>-->
+<!--                        </li>-->
+<!--                    {{/each}}-->
+<!--                    <li><a href="{{urls.brands}}">{{lang 'common.view_all'}}</a></li>-->
+<!--                </ul>-->
+<!--            </article>-->
+<!--            {{/and}}-->
+
+<!--            {{#if settings.address}}-->
+<!--            <article class="footer-info-col footer-info-col&#45;&#45;small" data-section-type="storeInfo">-->
+<!--                <h3 class="footer-info-heading">{{lang 'footer.info'}}</h3>-->
+<!--                <address>{{nl2br settings.address}}</address>-->
+<!--                {{#if settings.phone_number}}-->
+<!--                    <strong>{{lang 'footer.call_us' phone_number=settings.phone_number}}</strong>-->
+<!--                {{/if}}-->
+<!--            </article>-->
+<!--            {{/if}}-->
+            <article class="footer-info-col mobile-subscription" data-section-type="newsletterSubscription">
+                {{#if settings.show_newsletter_box}}
+                {{> components/common/subscription-form}}
+                {{/if}}
+                {{> components/common/payment-icons}}
+            </article>
+
+            <article class="footer-info-col footer-info-col--small" data-section-type="footer-webPages">
+                <h3 class="footer-info-heading">CUSTOMER SERVICE</h3>
+                <ul class="footer-info-list">
+                    <li>
+                        <a href="/faq/">FAQ</a>
+                    </li>
+                    <li>
+                        <a href="/delivery-and-shipping/">Delivery & Shipping</a>
+                    </li>
+                    <li>
+                        <a href="/returns-and-exchanges/">Returns & Exchanges</a>
+                    </li>
+                    <li>
+                        <a href="/privacy-policy/">Privacy Policy</a>
+                    </li>
+                    <li>
+                        <a href="/terms-and-conditions/">Terms & Conditions</a>
+                    </li>
+                </ul>
+            </article>
+            <article class="footer-info-col footer-info-col--small" data-section-type="footer-webPages">
+                <h3 class="footer-info-heading">ABOUT</h3>
+                <ul class="footer-info-list">
+                    <li>
+                        <a href="/about_us/">About Us</a>
+                    </li>
+                    <li>
+                        <a href="/store-location/">Store Location</a>
+                    </li>
+                    <li>
+                        <a href="/brands/">Designers</a>
+                    </li>
+                    <li>
+                        <a href="/blog/">Blogs</a>
+                    </li>
+                    <li>
+                        <a href="/contact-us/">Contact Us</a>
+                    </li>
+                </ul>
+            </article>
+            <article class="footer-info-col footer-info-col--small" data-section-type="footer-webPages">
+                <h3 class="footer-info-heading">MORE</h3>
+                <ul class="footer-info-list">
+<!--                    <li>-->
+<!--                        <a href="/gift-card/">Gift Card</a>-->
+<!--                    </li>-->
+                    <li>
+                        <a href="/sizeGuide/">Size Guide</a>
+                    </li>
+                    <li>
+                        <a href="/cutomer_promise/">Customer Promise</a>
+                    </li>
+                </ul>
+            </article>
+            <article class="footer-info-col footer-info-col--small footer-last-heading" data-section-type="footer-webPages">
+                <h3 class="footer-info-heading">STAY SOCIAL</h3>
+                <ul class="footer-info-list">
+                    <li>
+                        <a href="https://www.facebook.com/profile.php?id=61561279313416" target="_blank">Facebook</a>
+                    </li>
+                    <li>
+                        <a href="https://www.instagram.com/designer_luxe_/" target="_blank">Instagram</a>
+                    </li>
+
+                </ul>
+            </article>
+
+            <article class="footer-info-col desktop-subscription" data-section-type="newsletterSubscription">
+                {{#if settings.show_newsletter_box}}
+                    {{> components/common/subscription-form}}
+                {{/if}}
+                {{> components/common/payment-icons}}
+            </article>
+        </section>
+<!--        {{#if theme_settings.show_powered_by}}-->
+<!--            <div class="footer-copyright">-->
+<!--                <p class="powered-by">{{lang 'footer.powered_by'}} <a href="https://www.bigcommerce.com?utm_source=merchant&amp;utm_medium=poweredbyBC" rel="nofollow">BigCommerce</a></p>-->
+<!--            </div>-->
+<!--        {{/if}}-->
+        <div class="home-page-up-going-arrow">
+        <svg class="homepage-up-arrow" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+            <g clip-path="url(#clip0_1015_31583)">
+                <path d="M10.3556 8.35167L6.35557 12.3517C6.25557 12.4517 6.12891 12.4983 6.00224 12.4983C5.87557 12.4983 5.74891 12.4517 5.64891 12.3517C5.45557 12.1583 5.45557 11.8383 5.64891 11.645L9.29557 7.99833L5.64891 4.35167C5.45557 4.15833 5.45557 3.83833 5.64891 3.645C5.84224 3.45167 6.16224 3.45167 6.35557 3.645L10.3556 7.645C10.5489 7.83833 10.5489 8.15833 10.3556 8.35167Z" fill="#212121"></path>
+            </g>
+            <defs>
+                <clipPath id="clip0_1015_31583">
+                    <rect width="16" height="16"></rect>
+                </clipPath>
+            </defs>
+        </svg>
+        </div>
+        {{#if theme_settings.show_copyright_footer}}
+            <div class="footer-copyright">
+<!--                <p class="powered-by">&copy; {{moment format="YYYY"}} {{settings.store_name}} </p>-->
+                <p class="powered-by">&copy; {{moment format="YYYY"}} Red Pearl </p>
+            </div>
+        {{/if}}
+    </div>
+    {{{region name="ssl_site_seal--global"}}}
+</footer>

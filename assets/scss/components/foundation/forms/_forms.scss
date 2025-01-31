@@ -1,0 +1,71 @@
+// =============================================================================
+// FORMS (CSS)
+// =============================================================================
+
+
+// Select boxes
+// -----------------------------------------------------------------------------
+
+.form-select {
+    appearance: none;
+    background-image: $select-backgroundImage;
+    background-position: $select-backgroundPosition;
+    border-radius: $select-borderRadius;
+    padding: $select-padding;
+
+    &:hover {
+        border-color: $select-hover-borderColor;
+    }
+}
+
+
+// Form labels
+// -----------------------------------------------------------------------------
+
+.form-label {
+    small {
+        float: $opposite-direction;
+        margin-top: $form-label-small-marginTop;
+    }
+}
+
+
+// Form labels (inline small text)
+// -----------------------------------------------------------------------------
+
+.form-label--inlineSmall {
+    small {
+        color: stencilColor("color-textSecondary");
+        float: none;
+        font-size: inherit;
+        font-weight: fontWeight("normal");
+        margin-left: spacing("quarter");
+        text-transform: none;
+    }
+}
+.forgotPass {
+    .form-inlineMessage {
+        width: auto;
+        //position: absolute;
+        top: 40%;
+        color: #E50015 !important;
+    }
+}
+@media screen and (min-width: 300px) and (max-width: 800px) {
+    .forgotPass {
+        .form-inlineMessage {
+            width: auto;
+            position: absolute;
+            top: 37%;
+            color: #E50015 !important;
+            line-height: 15px;
+        }
+    }
+    .forgotPass #email+span{
+        top: 31% !important;
+    }
+
+}
+.forgotPass #email+span{
+    top: 37% ;
+}

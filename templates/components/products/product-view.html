@@ -1,0 +1,825 @@
+{{inject 'outOfStockDefaultMessage' (lang 'products.out_of_stock_default_message')}}
+
+{{#each product.custom_fields}}
+    {{#if this.name '==' 'Master Key'}}
+        {{assignVar 'cf' this.value}}
+    {{/if}}
+    {{#if this.name '==' 'Video'}}
+        {{assignVar 'video' this.value}}
+    {{/if}}
+{{/each}}
+<!--<section class="loader">
+    <div class="loader-icon"></div>
+</section>-->
+<style>
+    div[data-content-region="product_below_price"],.add-to-cart-wallet-buttons{
+        display: none !important;
+    }
+    .loader {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh; /* adjust as needed */
+        position: relative;
+    }
+
+    .loader-icon {
+        width: 80px;
+        height: 80px;
+        border: 5px solid #f3f3f3;
+        border-top: 5px solid lightgray;
+        border-radius: 50%;
+        animation: spin 2s linear infinite;
+        position: absolute;
+        z-index: 1;
+        top: 20%;
+        right: 50%;
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+    .loader.unVisible{
+       display: none;
+    }
+    @media screen and (min-width: 300px) and (max-width: 800px){
+        .loader-icon{
+            top: 33%;
+            right: 40%;
+
+        }
+
+    }
+</style>
+<script>
+    // document.addEventListener('DOMContentLoaded', function() {
+    //     setTimeout(function() {
+    //         document.querySelector('.loader').classList.add('unVisible')
+    //     }, 3000);
+    // });
+
+</script>
+<div class="productView delayed-render"
+     data-id="{{product.id}}"
+     data-cf="{{getVar 'cf'}}"
+     data-video="{{getVar 'video'}}"
+    {{#if settings.data_tag_enabled}}
+    data-event-type="product"
+    data-entity-id="{{product.id}}"
+    data-name="{{product.title}}"
+    data-product-category="
+    {{#each product.category}}
+        {{#if @last}}{{this}}{{else}}{{this}}, {{/if}}
+    {{/each}}"
+    data-product-brand="{{product.brand.name}}"
+    data-product-price="
+    {{#or customer (unless settings.hide_price_from_guests)}}
+        {{#if product.price.with_tax}}
+            {{product.price.with_tax.value}}
+        {{else}}
+            {{product.price.without_tax.value}}
+        {{/if}}
+    {{else}}
+        {{lang 'common.login_for_pricing'}}
+    {{/or}}"
+    data-product-variant="single-product-option"{{/if}}>
+
+    {{#each product.reviews.messages}}
+        {{#if error}}
+            {{> components/common/alert/alert-error error}}
+        {{/if}}
+        {{#if success}}
+            {{> components/common/alert/alert-success success}}
+        {{/if}}
+    {{/each}}
+    {{#each product.custom_fields}}
+        {{#if this.name '==' 'Video by STYLE-COLOUR'}}
+            {{assignVar 'key' this.name}}
+            {{assignVar 'videoVal' this.value}}
+        {{/if}}
+    {{/each}}
+
+
+
+
+
+<section class="productView-images " data-image-gallery >
+        <ul class="productView-thumbnails side-images-height">
+        {{#each product.images}}
+        <li class="productView-thumbnail" data-index="{{@index}}">
+            <a
+                    class="productView-thumbnail-link"
+                    href="{{getImageSrcset this (cdn ../theme_settings.default_image_product) 1x=../theme_settings.zoom_size}}"
+                    data-image-gallery-item>
+<!--                    data-image-gallery-new-image-url="{{getImageSrcset this (cdn ../theme_settings.default_image_product) 1x=../theme_settings.product_size}}"-->
+<!--                    data-image-gallery-new-image-srcset="{{getImageSrcset this use_default_sizes=true}}"-->
+<!--                    data-image-gallery-zoom-image-url="{{getImageSrcset this (cdn ../theme_settings.default_image_product) 1x=../theme_settings.zoom_size}}"-->
+
+                {{> components/common/responsive-img
+                image=this
+                fallback_size=../theme_settings.productview_thumb_size
+                lazyload=../theme_settings.lazyload_mode
+                }}
+            </a>
+        </li>
+        {{/each}}
+            {{#if (getVar 'videoVal') }}
+                {{#each product.custom_fields}}
+                    {{#if this.name '==' 'Video by STYLE-COLOUR'}}
+                        {{assignVar 'video' this.value}}
+                        <li>
+                            <a style="position: absolute; bottom: 0; left: 0; width: 100%; height: 90px" target="thumbnail-target"></a>
+                            <iframe style="width: 100%" name="thumbnail-target" src="https://player.vimeo.com/video/{{getVar 'video'}}?loop=1&rel=0&muted=1&controls=0" playsinline="playsinline"  frameborder="0" allowfullscreen></iframe>
+                        </li>
+                    {{/if}}
+                {{/each}}
+            {{else}}
+                {{#each product.custom_fields}}
+                    {{#if this.name '==' 'Video by STYLE'}}
+                        {{assignVar 'video' this.value}}
+                        <li>
+                            <a style="position: absolute; bottom: 0; left: 0; width: 100%; height: 90px" target="thumbnail-target"></a>
+                            <iframe style="width: 100%" name="thumbnail-target" src="https://player.vimeo.com/video/{{getVar 'video'}}?loop=1&rel=0&muted=1&controls=0" playsinline="playsinline"  frameborder="0" allowfullscreen></iframe>
+                        </li>
+                    {{/if}}
+                {{/each}}
+            {{/if}}
+        </ul>
+        {{!--
+            Note that these image sizes are coupled to image sizes used in /assets/js/theme/common/product-details.js
+            for variant/rule image replacement
+        --}}
+        {{#if product.images.length '>' 1 }}
+        {{> components/carousel-content-announcement}}
+        {{/if}}
+        <figure class="productView-image"
+                data-image-gallery-main
+                {{#if product.main_image}}
+                data-zoom-image="{{getImageSrcset product.main_image (cdn theme_settings.default_image_product) 1x=theme_settings.zoom_size }}"
+                {{/if}}
+                >
+
+            {{#if product.price.rrp_with_tax}}
+                <span class="pdp-percentage-label">-{{round (divide (multiply product.price.saved.value 100) product.price.non_sale_price_with_tax.value)}}%</span>
+            {{/if}}
+
+            <div class="productView-img-containers">
+                {{!-- Remove the surrounding a-element if there is no main image. --}}
+
+                {{#each product.images}}
+                <div class="productView-img-slide">
+                {{> components/common/responsive-img
+                    image=this
+                    class="productView-image--default"
+                    fallback_size=theme_settings.product_size
+                    lazyload=theme_settings.lazyload_mode
+                    default_image=theme_settings.default_image_product
+                    otherAttributes="data-main-image"
+                }}
+                </div>
+                {{/each}}
+                {{!-- Remove the surrounding a-element if there is no main image. --}}
+
+                {{#if (getVar 'videoVal') }}
+                    {{#each product.custom_fields}}
+                        {{#if this.name '==' 'Video by STYLE-COLOUR'}}
+                            {{assignVar 'video' this.value}}
+                            <div class="pdp-main-video">
+                                <iframe style="pointer-events: none; width: 100%" src="https://player.vimeo.com/video/{{getVar 'video'}}?loop=1&rel=0&muted=1&controls=0" allow="autoplay" playsinline="playsinline"  frameborder="0" allowfullscreen></iframe>
+                            </div>
+                        {{/if}}
+                    {{/each}}
+                {{else}}
+                    {{#each product.custom_fields}}
+                        {{#if this.name '==' 'Video by STYLE'}}
+                            {{assignVar 'video' this.value}}
+                            <div class="pdp-main-video">
+                                <iframe style="pointer-events: none; width: 100%" src="https://player.vimeo.com/video/{{getVar 'video'}}?loop=1&rel=0&muted=1&controls=0" allow="autoplay" playsinline="playsinline"  frameborder="0" allowfullscreen></iframe>
+                            </div>
+                        {{/if}}
+                    {{/each}}
+                {{/if}}
+
+            </div>
+        </figure>
+
+
+<!--        mobile view-->
+        {{#if product.price.rrp_with_tax}}
+            <span class="pdp-percentage-label-mob">-{{round (divide (multiply product.price.saved.value 100) product.price.non_sale_price_with_tax.value)}}%</span>
+        {{/if}}
+        <ul class="productView-thumbnails mobile-productView-images" >
+
+
+        {{#each product.images}}
+
+        <li class="productView-thumbnail" data-index=" " data-length="{{../product.images.length}}">
+
+                {{> components/common/responsive-img
+                image=this
+                fallback_size=../theme_settings.productview_thumb_size
+                lazyload=../theme_settings.lazyload_mode
+                }}
+        </li>
+        {{/each}}
+
+            {{#if (getVar 'videoVal') }}
+                {{#each product.custom_fields}}
+                    {{#if this.name '==' 'Video by STYLE-COLOUR'}}
+                        {{assignVar 'video' this.value}}
+                        <li data-index=" " class="pdp-mobile-iframe">
+                            <iframe src="https://player.vimeo.com/video/{{getVar 'video'}}?loop=1&rel=0&muted=1&controls=0" allow="autoplay" playsinline="playsinline"  frameborder="0" allowfullscreen></iframe>
+                        </li>
+                    {{/if}}
+                {{/each}}
+            {{else}}
+                {{#each product.custom_fields}}
+                    {{#if this.name '==' 'Video by STYLE'}}
+                        {{assignVar 'video' this.value}}
+                        <li data-index=" " class="pdp-mobile-iframe">
+                            <iframe src="https://player.vimeo.com/video/{{getVar 'video'}}?loop=1&rel=0&muted=1&controls=0" allow="autoplay" playsinline="playsinline"  frameborder="0" allowfullscreen></iframe>
+                        </li>
+                    {{/if}}
+                {{/each}}
+            {{/if}}
+
+
+
+        </ul>
+
+
+
+    </section>
+    <script>
+        // document.addEventListener('DOMContentLoaded', function() {
+        //     setTimeout(function() {
+        //         document.querySelector('.productView').classList.add('visible');
+        //     }, 3000);
+        // });
+    </script>
+<style>
+
+    /*.productView{*/
+    /*    visibility: hidden;*/
+    /*}*/
+    /*.productView.visible.delayed-render{*/
+    /*    visibility: visible;*/
+    /*}*/
+</style>
+
+
+    <section class="productView-details product-data">
+        <div class="productView-product">
+            {{#if product.brand}}
+                <h2 class="productView-brand">
+                    <a href="{{product.brand.url}}"><span>{{product.brand.name}}</span></a>
+                </h2>
+            {{/if}}
+            <!--<h1 class="productView-title">{{{before (split product.title '_') 1}}}</h1>-->
+            <h1 class="productView-title">{{product.title}}</h1>
+            {{#if product.call_for_price}}
+                <p class="productView-price">
+                    <span>{{product.call_for_price}}</span>
+                </p>
+            {{/if}}
+            <div class="productView-price">
+                {{#or customer (unless settings.hide_price_from_guests)}}
+                    {{> components/products/price price=product.price}}
+                {{else}}
+                    {{> components/common/login-for-pricing}}
+                {{/or}}
+            </div>
+            {{{region name="product_below_price"}}}
+            <div class="productView-rating">
+                {{#if settings.show_product_rating}}
+                    {{> components/products/ratings rating=product.rating}}
+                    {{#if product.num_reviews '>' 0}}
+                        <a href="{{product.url}}{{#if is_ajax}}#product-reviews{{/if}}" id="productReview_link">
+                            {{lang 'products.reviews.link_to_review' total=product.num_reviews}}
+                        </a>
+                    {{else}}
+                        <span>{{lang 'products.reviews.link_to_review' total=product.num_reviews}}</span>
+                    {{/if}}
+                {{/if}}
+                {{#if settings.show_product_reviews}}
+                    <a href="{{product.url}}{{#if is_ajax}}#write_review{{/if}}"
+                       class="productView-reviewLink productView-reviewLink--new"
+                       {{#unless is_ajax}}data-reveal-id="modal-review-form"{{/unless}}
+                       role="button"
+                    >
+                       {{lang 'products.reviews.new'}}
+                    </a>
+                    {{#unless is_ajax}}
+                        {{> components/products/modals/writeReview}}
+                    {{/unless}}
+                {{/if}}
+            </div>
+            {{product.detail_messages}}
+            <dl class="productView-info">
+                <dt class="productView-info-name sku-label"{{#unless product.sku}} style="display: none;"{{/unless}}>{{lang 'products.sku'}}</dt>
+                <dd class="productView-info-value" data-product-sku>{{product.sku}}</dd>
+                <dt class="productView-info-name upc-label"{{#unless product.upc}} style="display: none;"{{/unless}}>{{lang 'products.upc'}}</dt>
+                <dd class="productView-info-value" data-product-upc>{{product.upc}}</dd>
+                {{#if product.condition}}
+                    <dt class="productView-info-name">{{lang 'products.condition'}}</dt>
+                    <dd class="productView-info-value">{{product.condition}}</dd>
+                {{/if}}
+                {{#if product.availability}}
+                    <dt class="productView-info-name">{{lang 'products.availability'}}</dt>
+                    <dd class="productView-info-value">{{product.availability}}</dd>
+                {{/if}}
+                {{#all product.weight theme_settings.show_product_weight}}
+                    <dt class="productView-info-name">{{lang 'products.weight'}}</dt>
+                    <dd class="productView-info-value" data-product-weight>{{product.weight}}</dd>
+                {{/all}}
+                {{#all product.width product.height product.depth theme_settings.show_product_dimensions}}
+                    <dt class="productView-info-name">{{lang 'products.width'}}</dt>
+                    <dd class="productView-info-value" data-product-width>
+                        {{product.width}}
+                        {{#if settings.measurements.length '==' 'Centimeters'}}
+                        ({{lang 'products.measurement.metric'}})
+                        {{else}}
+                        ({{lang 'products.measurement.imperial'}})
+                        {{/if}}
+                    </dd>
+                    <dt class="productView-info-name">{{lang 'products.height'}}</dt>
+                    <dd class="productView-info-value" data-product-height>
+                        {{product.height}}
+                        {{#if settings.measurements.length '==' 'Centimeters'}}
+                        ({{lang 'products.measurement.metric'}})
+                        {{else}}
+                        ({{lang 'products.measurement.imperial'}})
+                        {{/if}}
+                    </dd>
+                    <dt class="productView-info-name">{{lang 'products.depth'}}</dt>
+                    <dd class="productView-info-value" data-product-depth>
+                        {{product.depth}}
+                        {{#if settings.measurements.length '==' 'Centimeters'}}
+                        ({{lang 'products.measurement.metric'}})
+                        {{else}}
+                        ({{lang 'products.measurement.imperial'}})
+                        {{/if}}
+                    </dd>
+                {{/all}}
+                {{#if product.min_purchase_quantity}}
+                    <dt class="productView-info-name">{{lang 'products.min_purchase_quantity'}}</dt>
+                    <dd class="productView-info-value">{{lang 'products.purchase_units' quantity=product.min_purchase_quantity}}</dd>
+                {{/if}}
+                {{#if product.max_purchase_quantity}}
+                    <dt class="productView-info-name">{{lang 'products.max_purchase_quantity'}}</dt>
+                    <dd class="productView-info-value">{{lang 'products.purchase_units' quantity=product.max_purchase_quantity}}</dd>
+                {{/if}}
+                {{#if product.gift_wrapping_available}}
+                    <dt class="productView-info-name">{{lang 'products.gift_wrapping'}}</dt>
+                    <dd class="productView-info-value">{{lang 'products.gift_wrapping_available'}}</dd>
+                {{/if}}
+                {{#if product.shipping}}
+                    {{#if product.shipping.calculated}}
+                        <dt class="productView-info-name">{{lang 'products.shipping'}}</dt>
+                        <dd class="productView-info-value">{{lang 'products.shipping_calculated'}}</dd>
+                    {{else}}
+                        {{#if product.shipping.price.value '===' 0}}
+                            <dt class="productView-info-name">{{lang 'products.shipping'}}</dt>
+                            <dd class="productView-info-value">{{lang 'products.shipping_free'}}</dd>
+                        {{else}}
+                            <dt class="productView-info-name">{{lang 'products.shipping'}}</dt>
+                            <dd class="productView-info-value">{{lang 'products.shipping_fixed' amount=product.shipping.price.formatted}}</dd>
+                        {{/if}}
+                    {{/if}}
+                {{/if}}
+
+                {{#if settings.bulk_discount_enabled}}
+                    <div class="productView-info-bulkPricing">
+                        {{> components/products/bulk-discount-rates bulk_discount_rates=product.bulk_discount_rates}}
+                    </div>
+                {{/if}}
+
+                {{#if theme_settings.show_custom_fields_tabs '!==' true}}
+                    {{> components/products/custom-fields }}
+                {{/if}}
+            </dl>
+        </div>
+    </section>
+
+    <section class="productView-details product-options">
+        <div class="productView-options">
+            {{#if product.release_date }}
+                <p>{{product.release_date}}</p>
+            {{/if}}
+            <form class="form" method="post" action="{{product.cart_url}}" enctype="multipart/form-data"
+                  data-cart-item-add>
+                <input type="hidden" name="action" value="add">
+                <input type="hidden" name="product_id" value="{{product.id}}"/>
+                <div class="color-size" data-product-option-change style="display:none;">
+                    <div class="color-swatchs">
+                        <p>Color: <span class="active-color-name"></span></p>
+                        <div class="pdp-swatches"></div>
+                    </div>
+                    {{inject 'showSwatchNames' theme_settings.show_product_swatch_names}}
+                    {{#each product.options}}
+                        {{{dynamicComponent 'components/products/options'}}}
+                    {{/each}}
+
+                </div>
+<!--                {{#if product.description}}-->
+<!--                <section class="productView-details product-description mobileView">-->
+<!--                    <div class="description-container">-->
+<!--                        <h4 class="description-title active">Description-->
+<!--                            <svg class="description-arrow" xmlns="http://www.w3.org/2000/svg" width="14" height="8" viewBox="0 0 14 8" fill="none">-->
+<!--                                <path d="M13.5314 1.5275L7.53141 7.5275C7.38141 7.6775 7.19141 7.7475 7.00141 7.7475C6.81141 7.7475 6.62141 7.6775 6.47141 7.5275L0.471406 1.5275C0.181406 1.2375 0.181406 0.7575 0.471406 0.4675C0.761406 0.1775 1.24141 0.1775 1.53141 0.4675L7.00141 5.9375L12.4714 0.4675C12.7614 0.1775 13.2414 0.1775 13.5314 0.4675C13.8214 0.7575 13.8214 1.2375 13.5314 1.5275Z" fill="#212121"/>-->
+<!--                            </svg>-->
+<!--                        </h4>-->
+<!--                        <div class="description-content" style="display: block">-->
+<!--                            {{{ product.description }}}-->
+<!--                        </div>-->
+<!--                        <h4 class="description-title">Refunds & Exchanges-->
+<!--                            <svg class="description-arrow" xmlns="http://www.w3.org/2000/svg" width="14" height="8" viewBox="0 0 14 8" fill="none">-->
+<!--                                <path d="M13.5314 1.5275L7.53141 7.5275C7.38141 7.6775 7.19141 7.7475 7.00141 7.7475C6.81141 7.7475 6.62141 7.6775 6.47141 7.5275L0.471406 1.5275C0.181406 1.2375 0.181406 0.7575 0.471406 0.4675C0.761406 0.1775 1.24141 0.1775 1.53141 0.4675L7.00141 5.9375L12.4714 0.4675C12.7614 0.1775 13.2414 0.1775 13.5314 0.4675C13.8214 0.7575 13.8214 1.2375 13.5314 1.5275Z" fill="#212121"/>-->
+<!--                            </svg>-->
+<!--                        </h4>-->
+<!--                        <div class="description-content">-->
+<!--                            We offer refund and/or exchange within the first 30 days of your purchase, if 30 days have passed since your purchase, you will not be offered a refund and/or exchange of any kind.-->
+<!--                        </div>-->
+<!--                        <h4 class="description-title"> Delivery-->
+<!--                            <svg class="description-arrow" xmlns="http://www.w3.org/2000/svg" width="14" height="8" viewBox="0 0 14 8" fill="none">-->
+<!--                                <path d="M13.5314 1.5275L7.53141 7.5275C7.38141 7.6775 7.19141 7.7475 7.00141 7.7475C6.81141 7.7475 6.62141 7.6775 6.47141 7.5275L0.471406 1.5275C0.181406 1.2375 0.181406 0.7575 0.471406 0.4675C0.761406 0.1775 1.24141 0.1775 1.53141 0.4675L7.00141 5.9375L12.4714 0.4675C12.7614 0.1775 13.2414 0.1775 13.5314 0.4675C13.8214 0.7575 13.8214 1.2375 13.5314 1.5275Z" fill="#212121"/>-->
+<!--                            </svg></h4>-->
+<!--                        <div class="description-content">-->
+<!--                            All orders are subject to product availability. If an item is not in stock at the time you place your order, we will notify you and refund you the total amount of your order, using the original method of payment.-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </section>-->
+<!--                {{/if}}-->
+<!--                <div class="pdp-swatches"></div>-->
+                <div class="form-field form-field--stock{{#unless product.stock_level}} u-hiddenVisually{{/unless}}">
+                    <label class="form-label form-label--alternate">
+                        {{lang 'products.current_stock'}}
+                        <span data-product-stock>{{product.stock_level}}</span>
+                    </label>
+                </div>
+
+                {{> components/products/add-to-cart with_wallet_buttons=true}}
+                {{#if product.out_of_stock}}
+                    {{#if product.out_of_stock_message}}
+                        {{> components/common/alert/alert-error product.out_of_stock_message}}
+                    {{else}}
+                        {{> components/common/alert/alert-error (lang 'products.sold_out')}}
+                    {{/if}}
+                {{/if}}
+            </form>
+            {{#if settings.show_wishlist}}
+<!--            <a class="pdp-wishlist"-->
+<!--               href="/wishlist.php?action=add&product_id={{id}}">-->
+<!--                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="19" viewBox="0 0 20 19" fill="none">-->
+<!--                    <mask id="path-1-outside-1_273_12183" maskUnits="userSpaceOnUse" x="0.679688" y="1" width="19" height="17" fill="black">-->
+<!--                        <rect fill="white" x="0.679688" y="1" width="19" height="17"/>-->
+<!--                        <path fill-rule="evenodd" stroke="#212121" clip-rule="evenodd" d="M10.5881 3.42189C12.2802 1.51955 15.2244 1.53565 16.997 3.41252C18.7614 5.28067 18.7614 8.18808 16.997 10.0562L16.9947 10.0587C15.9178 11.1824 14.8643 12.2827 13.8108 13.3831L13.7997 13.3946C12.7597 14.4809 11.7195 15.5673 10.6568 16.6762C10.5064 16.9049 10.2573 17 10.0352 17C9.79511 17 9.56142 16.8962 9.38729 16.7221L9.38014 16.7149L3.00862 10.0622C1.23549 8.28487 1.23671 5.27225 3.01229 3.49667C3.92799 2.58098 5.07354 2.04688 6.25 2.04688C7.30483 2.04688 8.54115 2.46577 9.56358 3.38596L9.58191 3.40246L10.0938 3.97117L10.5872 3.42296L10.5881 3.42189ZM16.3155 4.05623C14.9009 2.55845 12.5959 2.57421 11.2878 4.0458L11.2859 4.04796L10.0938 5.37259L8.91849 4.06674C8.06967 3.31086 7.06443 2.98438 6.25 2.98438C5.36396 2.98438 4.44701 3.38778 3.67521 4.15958C2.26451 5.57027 2.26451 7.99223 3.67521 9.40292L3.68236 9.41007L10 16.0066C11.057 14.9036 12.0918 13.8228 13.1267 12.7419L13.1378 12.7304C14.1895 11.6319 15.2414 10.5332 16.3166 9.41129C17.7386 7.9044 17.7382 5.56267 16.3155 4.05623ZM10.0591 16.0661L10.058 16.0656Z"/>-->
+<!--                    </mask>-->
+<!--                    <path fill-rule="evenodd" clip-rule="evenodd" d="M10.5881 3.42189C12.2802 1.51955 15.2244 1.53565 16.997 3.41252C18.7614 5.28067 18.7614 8.18808 16.997 10.0562L16.9947 10.0587C15.9178 11.1824 14.8643 12.2827 13.8108 13.3831L13.7997 13.3946C12.7597 14.4809 11.7195 15.5673 10.6568 16.6762C10.5064 16.9049 10.2573 17 10.0352 17C9.79511 17 9.56142 16.8962 9.38729 16.7221L9.38014 16.7149L3.00862 10.0622C1.23549 8.28487 1.23671 5.27225 3.01229 3.49667C3.92799 2.58098 5.07354 2.04688 6.25 2.04688C7.30483 2.04688 8.54115 2.46577 9.56358 3.38596L9.58191 3.40246L10.0938 3.97117L10.5872 3.42296L10.5881 3.42189ZM16.3155 4.05623C14.9009 2.55845 12.5959 2.57421 11.2878 4.0458L11.2859 4.04796L10.0938 5.37259L8.91849 4.06674C8.06967 3.31086 7.06443 2.98438 6.25 2.98438C5.36396 2.98438 4.44701 3.38778 3.67521 4.15958C2.26451 5.57027 2.26451 7.99223 3.67521 9.40292L3.68236 9.41007L10 16.0066C11.057 14.9036 12.0918 13.8228 13.1267 12.7419L13.1378 12.7304C14.1895 11.6319 15.2414 10.5332 16.3166 9.41129C17.7386 7.9044 17.7382 5.56267 16.3155 4.05623ZM10.0591 16.0661L10.058 16.0656Z" fill="#212121"/>-->
+<!--                    <path d="M16.997 3.41252L16.27 4.09914L16.27 4.09914L16.997 3.41252ZM10.5881 3.42189L9.84091 2.75728L9.84079 2.75741L10.5881 3.42189ZM16.997 10.0562L17.7217 10.7453L17.7241 10.7429L16.997 10.0562ZM16.9947 10.0587L17.7167 10.7506L17.7194 10.7478L16.9947 10.0587ZM13.8108 13.3831L14.533 14.0748L14.5331 14.0747L13.8108 13.3831ZM13.7997 13.3946L13.0775 12.703L13.0774 12.7031L13.7997 13.3946ZM10.6568 16.6762L9.93479 15.9843L9.87159 16.0503L9.82138 16.1266L10.6568 16.6762ZM9.38729 16.7221L8.68014 17.4291L8.68019 17.4292L9.38729 16.7221ZM9.38014 16.7149L8.65793 17.4066L8.66538 17.4144L8.67299 17.422L9.38014 16.7149ZM3.00862 10.0622L3.73083 9.37048L3.72377 9.36311L3.71656 9.35588L3.00862 10.0622ZM3.01229 3.49667L2.30519 2.78956L2.30519 2.78956L3.01229 3.49667ZM9.56358 3.38596L10.2325 2.64267L10.2325 2.64266L9.56358 3.38596ZM9.58191 3.40246L10.3252 2.7335L10.29 2.69438L10.2509 2.65917L9.58191 3.40246ZM10.0938 3.97117L9.35046 4.64013L10.0937 5.466L10.837 4.64014L10.0938 3.97117ZM10.5872 3.42296L11.3305 4.09194L11.3345 4.08744L10.5872 3.42296ZM11.2878 4.0458L12.0353 4.71016L12.0353 4.71016L11.2878 4.0458ZM16.3155 4.05623L15.5885 4.74285L15.5885 4.74285L16.3155 4.05623ZM11.2859 4.04796L12.0292 4.71694L12.0333 4.71232L11.2859 4.04796ZM10.0938 5.37259L9.35046 6.04155L10.0937 6.86743L10.837 6.04155L10.0938 5.37259ZM8.91849 4.06674L9.66178 3.39778L9.62481 3.35669L9.58353 3.31993L8.91849 4.06674ZM3.67521 9.40292L2.9681 10.11L2.96811 10.11L3.67521 9.40292ZM3.68236 9.41007L4.40457 8.7184L4.3971 8.71059L4.38946 8.70296L3.68236 9.41007ZM10 16.0066L9.27781 16.6983L9.9998 17.4521L10.722 16.6985L10 16.0066ZM13.1267 12.7419L12.4045 12.0503L12.4044 12.0503L13.1267 12.7419ZM13.1378 12.7304L13.8601 13.422L13.8601 13.4219L13.1378 12.7304ZM16.3166 9.41129L17.0386 10.1032L17.0439 10.0976L16.3166 9.41129ZM17.7241 2.7259C15.5701 0.445203 11.9432 0.393741 9.84091 2.75728L11.3353 4.08649C12.6171 2.64535 14.8788 2.62611 16.27 4.09914L17.7241 2.7259ZM17.7241 10.7429C19.8524 8.48931 19.8524 4.97944 17.7241 2.7259L16.27 4.09914C17.6704 5.5819 17.6704 7.88685 16.27 9.36961L17.7241 10.7429ZM17.7194 10.7478L17.7217 10.7453L16.2724 9.36714L16.27 9.36961L17.7194 10.7478ZM14.5331 14.0747C15.5867 12.9743 16.64 11.8741 17.7167 10.7506L16.2727 9.3668C15.1956 10.4907 14.142 11.5912 13.0885 12.6915L14.5331 14.0747ZM11.3788 17.3681C12.4417 16.259 13.482 15.1725 14.522 14.0862L13.0774 12.7031C12.0373 13.7894 10.9973 14.8756 9.93479 15.9843L11.3788 17.3681ZM10.0352 18C10.5211 18 11.1201 17.7914 11.4922 17.2259L9.82138 16.1266C9.85375 16.0774 9.89837 16.0424 9.93933 16.0227C9.97571 16.0052 10.0076 16 10.0352 16V18ZM8.68019 17.4292C9.02529 17.7743 9.50736 18 10.0352 18V16C10.0596 16 10.076 16.0053 10.0839 16.0087C10.0914 16.012 10.0941 16.0147 10.0944 16.015L8.68019 17.4292ZM8.67299 17.422L8.68014 17.4291L10.0944 16.015L10.0873 16.0079L8.67299 17.422ZM2.28642 10.7538L8.65793 17.4066L10.1023 16.0233L3.73083 9.37048L2.28642 10.7538ZM2.30519 2.78956C0.139303 4.95545 0.137906 8.60059 2.30069 10.7684L3.71656 9.35588C2.33307 7.96915 2.33412 5.58906 3.7194 4.20378L2.30519 2.78956ZM6.25 1.04688C4.7635 1.04688 3.37415 1.7206 2.30519 2.78956L3.7194 4.20378C4.48182 3.44136 5.38357 3.04688 6.25 3.04688V1.04688ZM10.2325 2.64266C9.02893 1.55942 7.55514 1.04688 6.25 1.04688V3.04688C7.05451 3.04688 8.05336 3.37212 8.89461 4.12925L10.2325 2.64266ZM10.2509 2.65917L10.2325 2.64267L8.8946 4.12924L8.91294 4.14575L10.2509 2.65917ZM9.84387 2.75398L9.35046 3.30219L10.837 4.64014L11.3304 4.09193L9.84387 2.75398ZM9.84079 2.75741L9.83985 2.75847L11.3345 4.08744L11.3354 4.08637L9.84079 2.75741ZM12.0353 4.71016C12.9348 3.69814 14.5571 3.65086 15.5885 4.74285L17.0425 3.36961C15.2447 1.46604 12.257 1.45029 10.5404 3.38143L12.0353 4.71016ZM12.0333 4.71232L12.0353 4.71016L10.5404 3.38143L10.5385 3.3836L12.0333 4.71232ZM6.25 3.98438C6.81576 3.98438 7.58518 4.21845 8.25345 4.81355L9.58353 3.31993C8.55416 2.40328 7.3131 1.98438 6.25 1.98438V3.98438ZM4.38231 4.86669C5.00038 4.24862 5.67343 3.98438 6.25 3.98438V1.98438C5.05449 1.98438 3.89364 2.52693 2.9681 3.45248L4.38231 4.86669ZM4.38231 8.69581C3.36215 7.67565 3.36215 5.88686 4.38231 4.86669L2.9681 3.45248C1.16688 5.25369 1.16688 8.30881 2.9681 10.11L4.38231 8.69581ZM4.38946 8.70296L4.3823 8.6958L2.96811 10.11L2.97526 10.1172L4.38946 8.70296ZM10.7222 15.3149L4.40457 8.7184L2.96015 10.1017L9.27781 16.6983L10.7222 15.3149ZM12.4044 12.0503C11.3695 13.1313 10.3348 14.2119 9.27802 15.3147L10.722 16.6985C11.7792 15.5953 12.8142 14.5143 13.849 13.4335L12.4044 12.0503ZM15.5946 8.71939C14.5193 9.84153 13.4672 10.9403 12.4155 12.0388L13.8601 13.4219C14.9119 12.3234 15.9636 11.2249 17.0386 10.1032L15.5946 8.71939ZM15.5885 4.74285C16.6473 5.864 16.6476 7.6035 15.5893 8.72498L17.0439 10.0976C18.8296 8.2053 18.8291 5.26133 17.0425 3.36961L15.5885 4.74285ZM10.4996 15.1684L10.4985 15.1678L9.61753 16.9634L9.61858 16.9639L10.4996 15.1684ZM14.5219 14.0863L14.533 14.0748L13.0886 12.6914L13.0775 12.703L14.5219 14.0863ZM10.837 3.3022L10.3252 2.7335L8.83862 4.07143L9.35046 4.64013L10.837 3.3022ZM10.837 6.04155L12.0292 4.71693L10.5426 3.37899L9.35046 4.70362L10.837 6.04155ZM8.1752 4.73571L9.35046 6.04155L10.837 4.70362L9.66178 3.39778L8.1752 4.73571ZM12.4155 12.0388L12.4045 12.0503L13.849 13.4335L13.8601 13.422L12.4155 12.0388Z" fill="white" mask="url(#path-1-outside-1_273_12183)"/>-->
+<!--                </svg>-->
+<!--                <span>ADD TO WISHLIST</span>-->
+<!--            </a>-->
+            <div class="pdp-wishlist">
+                        <form action="{{product.add_to_wishlist_url}}" class="form form-wishlist form-action" data-wishlist-add method="post">
+                            <button class="button" type="submit" value="{{lang 'account.wishlists.add_to_default'}}">
+                                <div class="add-to-wishlist">
+                                <svg width="16" height="16px" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fill="#000000">
+                                    <path d="M14.88 4.78a3.489 3.489 0 0 0-.37-.9 3.24 3.24 0 0 0-.6-.79 3.78 3.78 0 0 0-1.21-.81 3.74 3.74 0 0 0-2.84 0 4 4 0 0 0-1.16.75l-.05.06-.65.65-.65-.65-.05-.06a4 4 0 0 0-1.16-.75 3.74 3.74 0 0 0-2.84 0 3.78 3.78 0 0 0-1.21.81 3.55 3.55 0 0 0-.97 1.69 3.75 3.75 0 0 0-.12 1c0 .317.04.633.12.94a4 4 0 0 0 .36.89 3.8 3.8 0 0 0 .61.79L8 14.31l5.91-5.91c.237-.233.44-.5.6-.79A3.578 3.578 0 0 0 15 5.78a3.747 3.747 0 0 0-.12-1zm-1 1.63a2.69 2.69 0 0 1-.69 1.21l-5.21 5.2-5.21-5.2a2.9 2.9 0 0 1-.44-.57 3 3 0 0 1-.27-.65 3.25 3.25 0 0 1-.08-.69A3.36 3.36 0 0 1 2.06 5a2.8 2.8 0 0 1 .27-.65c.12-.21.268-.4.44-.57a2.91 2.91 0 0 1 .89-.6 2.8 2.8 0 0 1 2.08 0c.33.137.628.338.88.59l1.36 1.37 1.36-1.37a2.72 2.72 0 0 1 .88-.59 2.8 2.8 0 0 1 2.08 0c.331.143.633.347.89.6.174.165.32.357.43.57a2.69 2.69 0 0 1 .35 1.34 2.6 2.6 0 0 1-.06.72h-.03z"/></svg>
+                                <span>ADD TO WISHLIST</span>
+                                </div>
+                                <div class="remove-from-wishlist">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 19 19" fill="none">
+                                        <path d="M9.7145 3.08959L9.71449 3.0896L9.71354 3.09067L9.59375 3.22375L9.45356 3.06798L9.43596 3.04842L9.4164 3.03081L9.39806 3.01431C8.28504 2.01259 6.92999 1.54688 5.75 1.54688C4.41852 1.54688 3.15107 2.15079 2.15874 3.14312C0.189239 5.11262 0.186699 8.43856 2.15097 10.4116L8.51904 17.0608L8.51895 17.0608L8.52656 17.0685L8.53372 17.0756L8.53374 17.0756C8.79336 17.3353 9.15123 17.5 9.53516 17.5C9.87628 17.5 10.2825 17.359 10.5453 16.9935C11.5985 15.8944 12.6298 14.8173 13.6608 13.7405C13.6608 13.7405 13.6608 13.7405 13.6609 13.7404L13.6719 13.7289L13.6719 13.7289C14.7255 12.6285 15.7789 11.5283 16.8557 10.4047L16.857 10.4033L16.8593 10.4008L16.8605 10.3995C18.8069 8.33869 18.8069 5.13006 16.8605 3.06921C14.8973 0.990429 11.6117 0.956643 9.7145 3.08959Z" fill="#212121" stroke="white" stroke-miterlimit="10"/>
+                                    </svg>
+                                    <span>REMOVE FROM WISHLIST</span>
+                                </div>
+
+
+                            </button>
+                        </form>
+<!--            <form action="/wishlist.php?action=add&product_id={{id}}" class="form form-wishlist form-action" data-wishlist-add method="post">-->
+<!--                <div class="addtowishlist">-->
+<!--                    <button class="button" type="submit" value="{{lang 'account.wishlists.add_to_default'}}">-->
+<!--                        <svg width="16" height="16px" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fill="#000000">-->
+<!--                            <path d="M14.88 4.78a3.489 3.489 0 0 0-.37-.9 3.24 3.24 0 0 0-.6-.79 3.78 3.78 0 0 0-1.21-.81 3.74 3.74 0 0 0-2.84 0 4 4 0 0 0-1.16.75l-.05.06-.65.65-.65-.65-.05-.06a4 4 0 0 0-1.16-.75 3.74 3.74 0 0 0-2.84 0 3.78 3.78 0 0 0-1.21.81 3.55 3.55 0 0 0-.97 1.69 3.75 3.75 0 0 0-.12 1c0 .317.04.633.12.94a4 4 0 0 0 .36.89 3.8 3.8 0 0 0 .61.79L8 14.31l5.91-5.91c.237-.233.44-.5.6-.79A3.578 3.578 0 0 0 15 5.78a3.747 3.747 0 0 0-.12-1zm-1 1.63a2.69 2.69 0 0 1-.69 1.21l-5.21 5.2-5.21-5.2a2.9 2.9 0 0 1-.44-.57 3 3 0 0 1-.27-.65 3.25 3.25 0 0 1-.08-.69A3.36 3.36 0 0 1 2.06 5a2.8 2.8 0 0 1 .27-.65c.12-.21.268-.4.44-.57a2.91 2.91 0 0 1 .89-.6 2.8 2.8 0 0 1 2.08 0c.33.137.628.338.88.59l1.36 1.37 1.36-1.37a2.72 2.72 0 0 1 .88-.59 2.8 2.8 0 0 1 2.08 0c.331.143.633.347.89.6.174.165.32.357.43.57a2.69 2.69 0 0 1 .35 1.34 2.6 2.6 0 0 1-.06.72h-.03z"/></svg>-->
+<!--                        <span>ADD TO WISHLIST</span>-->
+<!--                    </button>-->
+<!--                </div>-->
+<!--            </form>-->
+            </div>
+<!--                {{> components/common/wishlist-dropdown}}-->
+            {{/if}}
+
+
+        </div>
+<!--        {{> components/common/share url=product.url}}-->
+    </section>
+
+    {{#if product.description}}
+        <section class="productView-details product-description">
+        <div class="description-container">
+            <button class="description-title active">Description
+                <svg class="description-arrow" xmlns="http://www.w3.org/2000/svg" width="14" height="8" viewBox="0 0 14 8" fill="none">
+                    <path d="M13.5314 1.5275L7.53141 7.5275C7.38141 7.6775 7.19141 7.7475 7.00141 7.7475C6.81141 7.7475 6.62141 7.6775 6.47141 7.5275L0.471406 1.5275C0.181406 1.2375 0.181406 0.7575 0.471406 0.4675C0.761406 0.1775 1.24141 0.1775 1.53141 0.4675L7.00141 5.9375L12.4714 0.4675C12.7614 0.1775 13.2414 0.1775 13.5314 0.4675C13.8214 0.7575 13.8214 1.2375 13.5314 1.5275Z" fill="#212121"/>
+                </svg>
+            </button>
+            <div class="description-content" style="display: block">
+                {{{ product.description }}}
+            </div>
+            <button class="description-title">Refunds & Exchanges
+                <svg class="description-arrow" xmlns="http://www.w3.org/2000/svg" width="14" height="8" viewBox="0 0 14 8" fill="none">
+                    <path d="M13.5314 1.5275L7.53141 7.5275C7.38141 7.6775 7.19141 7.7475 7.00141 7.7475C6.81141 7.7475 6.62141 7.6775 6.47141 7.5275L0.471406 1.5275C0.181406 1.2375 0.181406 0.7575 0.471406 0.4675C0.761406 0.1775 1.24141 0.1775 1.53141 0.4675L7.00141 5.9375L12.4714 0.4675C12.7614 0.1775 13.2414 0.1775 13.5314 0.4675C13.8214 0.7575 13.8214 1.2375 13.5314 1.5275Z" fill="#212121"/>
+                </svg>
+            </button>
+            <div class="description-content">
+                We offer refund and/or exchange within the first 14 days of your purchase, if 14 days have passed since your purchase, you will not be offered a refund and/or exchange of any kind.
+            </div>
+            <button class="description-title"> Delivery
+                <svg class="description-arrow" xmlns="http://www.w3.org/2000/svg" width="14" height="8" viewBox="0 0 14 8" fill="none">
+                <path d="M13.5314 1.5275L7.53141 7.5275C7.38141 7.6775 7.19141 7.7475 7.00141 7.7475C6.81141 7.7475 6.62141 7.6775 6.47141 7.5275L0.471406 1.5275C0.181406 1.2375 0.181406 0.7575 0.471406 0.4675C0.761406 0.1775 1.24141 0.1775 1.53141 0.4675L7.00141 5.9375L12.4714 0.4675C12.7614 0.1775 13.2414 0.1775 13.5314 0.4675C13.8214 0.7575 13.8214 1.2375 13.5314 1.5275Z" fill="#212121"/>
+            </svg></button>
+            <div class="description-content">
+                All orders are subject to product availability. If an item is not in stock at the time you place your order, we will notify you and refund you the total amount of your order, using the original method of payment
+            </div>
+        </div>
+    </section>
+    {{/if}}
+
+</div>
+<div id="sizeModal" class="modal modal--large" data-reveal>
+    {{> components/common/modal/modal-close-btn }}
+<!--    <button class="close_Guide">X</button>-->
+    <div class="modal-content">
+        {{> components/common/size-guid brand=product.brand.name}}
+    </div>
+
+</div>
+
+<script>
+    $(document).ready(function(){
+        setTimeout(function(){
+            let pdpMainImgHeight = $('.productView-img-slide img').height();
+            $('.productView-thumbnails.side-images-height').css({'height': pdpMainImgHeight})
+        },3000)
+        $('.productView-thumbnails li').each(function(){
+            $(this).click(function(){
+                $('.productView-img-containers').slick('slickGoTo', $(this).data('index'));
+            })
+        })
+
+        let lenOfProductMainImages = $('.productView-img-slide').length;
+        if (lenOfProductMainImages === 0){
+            $('.pdp-main-video').css({"position": "relative", "padding-top": "140%"});
+            $('.pdp-main-video iframe').css({"position": "absolute", "top": "0", "left": "0", "width": "100%", "height": "100%"});
+        }
+
+        // Swatches Implementation
+        let cf = $('.productView').attr('data-cf');
+        let pid = $('.productView').attr('data-id');
+        // console.log('pid', pid)
+        fetch('/graphql', {
+            method: 'POST',
+            credentials: 'same-origin',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer {{ settings.storefront_api.token }}'
+            },
+            body: JSON.stringify({
+                query: `
+                    query MyFirstQuery {
+                     site {
+                    search {
+                      searchProducts(
+                        filters: {
+                          productAttributes: {
+                            attribute: "Master Key",
+                            values: "${cf}"
+                          }
+                        }
+                      ) {
+                       products(first: 10) {
+                          edges {
+                            node {
+                              entityId
+                              name
+                              prices {
+                                price {
+                                  value
+                                }
+                              }
+                              images(first: 10) {
+                                edges {
+                                  node {
+                                    urlOriginal
+                                    altText
+                                  }
+                                }
+                              }
+                              options(first: 10) {
+                                edges {
+                                  node {
+                                    values(first: 10) {
+                                      edges {
+                                        node {
+                                          label
+                                        }
+                                      }
+                                    }
+                                    displayName
+                                  }
+                                }
+                              }
+                               customFields(first: 10) {
+                                edges {
+                                  node {
+                                    name
+                                    value
+                                    entityId
+                                  }
+                                }
+                              }
+                              path
+                              variants(first: 10) {
+                                edges {
+                                node {
+                                    productOptions(first: 10) {
+                                    edges {
+                                        node {
+                                        ... on MultipleChoiceOption {
+                                            __typename
+                                            displayName
+                                            values {
+                                            edges {
+                                                node {
+                                                ... on SwatchOptionValue {
+                                                    imageUrl(height: 100, width: 100)
+                                                    label
+                                                    isSelected
+                                                }
+                                                }
+                                            }
+                                            }
+                                        }
+                                        }
+                                    }
+                                    }
+                                }
+                                }
+                            }
+                            }
+                          }
+                        }
+                      }
+                    }
+                    }
+                    }`
+            })
+        }).then(response => response.json())
+            .then(data => {
+                const prodData = data.data.site.search.searchProducts.products.edges;
+
+                let createHtml = ''
+                prodData.map((prodItem) => {
+
+                    const proVariants = prodItem?.node?.variants?.edges[0];
+
+                    proVariants?.node?.productOptions?.edges?.map(opt => {
+                        if(opt?.node?.displayName?.toLowerCase() === "color") {
+                            createHtml += `<a href=${prodItem?.node?.path} class="${pid == prodItem?.node?.entityId ? 'active-swatch' : ''}" data-title="${prodItem?.node?.name}" data-color ="${opt?.node?.values?.edges[0]?.node?.label}" data-swatch=${prodItem?.node?.images?.edges[0]?.node?.urlOriginal}><img  src="${opt?.node?.values?.edges[0]?.node?.imageUrl}"></a>`
+                        }
+                    })
+                })
+
+                $(this).find(".pdp-swatches").append(createHtml);
+                let swatchColor = $('body .color-swatchs .pdp-swatches a.active-swatch').attr("data-color");
+                var formattedText = swatchColor.toLowerCase().replace(/\b\w/g, function(match) {
+                    return match.toUpperCase();
+                });
+                $('.active-color-name').text(formattedText);
+
+            })
+
+
+        // Wishlist checking
+        fetch('/graphql', {
+            method: 'POST',
+            credentials: 'same-origin',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer {{ settings.storefront_api.token }}'
+            },
+            body: JSON.stringify({
+                query: `
+            query MyQuery {
+          customer {
+            attributes {
+              attribute(entityId: 9) {
+                name
+                entityId
+              }
+            }
+            entityId
+            wishlists(first: 10) {
+              edges {
+                node {
+                  name
+                  items(first: 30) {
+                    edges {
+                      node {
+                        product {
+                          name
+                          id
+                          entityId
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }`
+            })
+        }).then(res => res.json())
+            .then(data => {
+                const wishlistData = data.data.customer.wishlists.edges[0].node.items.edges;
+                    let pdpProdId = $('.productView').attr('data-id');
+                wishlistData.map(wd => {
+                    const wishlistId = wd.node.product.entityId;
+                    if(wishlistId === Number(pdpProdId)){
+                        $('.productView').addClass('pdp-wishlisted');
+                    }
+                })
+            })
+
+
+        let countOfProd = $('.side-images-height .productView-thumbnail').length
+
+
+        $('.productView-image .productView-img-containers iframe').css({'height': pdpMainImgHeight})
+        if ($(window).width() < 800)  {
+            let pdpMobileImgHeight = $('.mobile-productView-images .productView-thumbnail').height();
+            // console.log('pdpMobileImgHeight', pdpMobileImgHeight)
+        }
+
+
+
+    })
+
+
+    let productBrand = document.querySelector('.productView-brand > a > span').textContent.toLowerCase().replace(/\s/g, '');
+    console.log(productBrand)
+
+    let sizeGuide = document.querySelector('.size-chart-link')
+    sizeGuide.addEventListener('click',()=>{
+        let slickSizes = document.querySelectorAll('.tabs.size-slide  .slick-track > li > a > img')
+        setTimeout(function(){
+            slickSizes.forEach((size)=>{
+                let altText = size.getAttribute('alt').toLowerCase().replace(/\s/g, '');
+                if(altText === productBrand) {
+                    size.closest('li').classList.add('is-active');
+                }
+            })
+            let tabSize = document.querySelectorAll('.tab.size-tab.slick-slide.slick-cloned.is-active > a > img')
+            tabSize.forEach((tab)=>{
+                let tabAlt = tab.getAttribute('alt').toLowerCase().replace(/\s/g, '');
+                let tabContent = document.querySelectorAll('.tabs.size-slide + .tabs-contents > div')
+                tabContent.forEach((content)=>{
+                    if (tabAlt === content.getAttribute('id').toLowerCase().replace(/\s/g, '')) {
+                        content.classList.add('is-active');
+                    }
+                })
+            })
+        },800)
+    })
+
+
+
+
+
+
+
+</script>
+
+<style>
+    .active-swatch{
+        border:1px solid #000;
+
+    }
+    .pdp-swatches a{
+        display: inline-block;
+        width: 30px;
+        height: 30px;
+    }
+
+    .pdp-swatches img{
+        object-fit: contain;
+        display: block;
+        width: 100%;
+        height: 100%;
+        border: 3px solid #fff;
+    }
+
+</style>

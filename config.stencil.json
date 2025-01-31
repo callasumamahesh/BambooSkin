@@ -1,0 +1,11 @@
+{
+  "customLayouts": {
+    "brand": {},
+    "category": {},
+    "page": {},
+    "product": {}
+  },
+  "normalStoreUrl": "https://designerluxe.com.au/",
+  "port": "3000",
+  "packageManager": "npm"
+}

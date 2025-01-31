@@ -1,0 +1,24 @@
+{{#partial "page"}}
+<p class="inbox_bread">{{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}</p>
+
+{{#if customer}}
+<h1 class="customerName">Hello, {{customer.name}}!</h1>
+
+
+{{/if}}
+
+    {{> components/account/navigation account_page='addresses'}}
+<h2 class="page-heading new_head">{{lang 'account.addresses.heading' }}</h2>
+    <div class="mobile_account account account--fixedLarge accountAddress">
+        <div class="account-body">
+            {{#if customer.error}}
+                {{>components/common/alert/alert-error customer.error}}
+            {{/if}}
+            {{#if customer.success}}
+                {{>components/common/alert/alert-success customer.success}}
+            {{/if}}
+            {{> components/account/address-list }}
+        </div>
+    </div>
+{{/partial}}
+{{> layout/base}}
